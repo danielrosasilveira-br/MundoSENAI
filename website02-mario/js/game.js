@@ -129,6 +129,20 @@ class Game {
                 if (window.soundFX) window.soundFX.init();
             } catch (err) {}
 
+            // Início rápido pelo teclado
+            if (this.state === 'START' && (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W')) {
+                e.preventDefault();
+                this.startGame();
+                return;
+            }
+
+            // Reinício rápido pelo teclado
+            if ((this.state === 'GAMEOVER' || this.state === 'VICTORY') && (e.key === 'Enter' || e.key === ' ' || e.key === 'r' || e.key === 'R')) {
+                e.preventDefault();
+                this.restartGame();
+                return;
+            }
+
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
                 e.preventDefault();
             }
@@ -186,17 +200,29 @@ class Game {
             if (!btn) return;
 
             const startAction = (e) => {
-                e.preventDefault();
+                if (e && e.cancelable) e.preventDefault();
                 try {
                     if (window.soundFX) window.soundFX.init();
                 } catch (err) {}
+
+                // Tocar em Pular (A) ou Correr (B) na tela inicial inicia a partida
+                if (this.state === 'START' && (keyName === 'up' || keyName === 'run')) {
+                    this.startGame();
+                    return;
+                }
+                // Tocar em Pular (A) ou Correr (B) em Game Over ou Vitória reinicia
+                if ((this.state === 'GAMEOVER' || this.state === 'VICTORY') && (keyName === 'up' || keyName === 'run')) {
+                    this.restartGame();
+                    return;
+                }
+
                 this.keys[keyName] = true;
                 btn.classList.add('active');
                 if (keyName === 'up') this.player.jumpBuffered = 6;
             };
 
             const endAction = (e) => {
-                e.preventDefault();
+                if (e && e.cancelable) e.preventDefault();
                 this.keys[keyName] = false;
                 btn.classList.remove('active');
                 if (keyName === 'up' && this.player.vy < -4) {
@@ -217,9 +243,27 @@ class Game {
         bindTouch('touchJump', 'up');
         bindTouch('touchRun', 'run');
 
+        // Função utilitária para botões interativos (evita atraso de toque em celular e clique duplo)
+        const bindActionButton = (btn, action) => {
+            if (!btn) return;
+            let lastTrigger = 0;
+            const handler = (e) => {
+                if (e) {
+                    if (e.cancelable && e.type !== 'click') e.preventDefault();
+                    e.stopPropagation();
+                }
+                const now = Date.now();
+                if (now - lastTrigger < 300) return;
+                lastTrigger = now;
+                action();
+            };
+            btn.addEventListener('click', handler);
+            btn.addEventListener('touchend', handler, { passive: false });
+        };
+
         const btnTouchPause = document.getElementById('touchPause');
         if (btnTouchPause) {
-            btnTouchPause.addEventListener('click', () => this.togglePause());
+            bindActionButton(btnTouchPause, () => this.togglePause());
         }
 
         // Habilita controles de toque automaticamente em dispositivos com suporte a toque
@@ -229,25 +273,24 @@ class Game {
         }
 
         // Botões de Interface
-        if (this.dom.btnStart) {
-            this.dom.btnStart.addEventListener('click', () => this.startGame());
-        }
-        if (this.dom.btnRestartGame) {
-            this.dom.btnRestartGame.addEventListener('click', () => this.restartGame());
-        }
-        if (this.dom.btnPlayAgain) {
-            this.dom.btnPlayAgain.addEventListener('click', () => this.restartGame());
-        }
-        if (this.dom.btnResume) {
-            this.dom.btnResume.addEventListener('click', () => this.togglePause());
-        }
-        if (this.dom.btnRestartPause) {
-            this.dom.btnRestartPause.addEventListener('click', () => this.restartGame());
+        bindActionButton(this.dom.btnStart, () => this.startGame());
+        bindActionButton(this.dom.btnRestartGame, () => this.restartGame());
+        bindActionButton(this.dom.btnPlayAgain, () => this.restartGame());
+        bindActionButton(this.dom.btnResume, () => this.togglePause());
+        bindActionButton(this.dom.btnRestartPause, () => this.restartGame());
+
+        // Clicar no fundo escuro da tela inicial também inicia o jogo
+        if (this.dom.startScreen) {
+            this.dom.startScreen.addEventListener('click', (e) => {
+                if (e.target === this.dom.startScreen) {
+                    this.startGame();
+                }
+            });
         }
 
         // Alternadores de Som e Música
         if (this.dom.btnToggleSound) {
-            this.dom.btnToggleSound.addEventListener('click', () => {
+            bindActionButton(this.dom.btnToggleSound, () => {
                 if (window.soundFX) {
                     window.soundFX.soundEnabled = !window.soundFX.soundEnabled;
                     this.dom.btnToggleSound.innerHTML = window.soundFX.soundEnabled ? '🔊 Sons: ON' : '🔇 Sons: OFF';
@@ -257,7 +300,7 @@ class Game {
         }
 
         if (this.dom.btnToggleMusic) {
-            this.dom.btnToggleMusic.addEventListener('click', () => {
+            bindActionButton(this.dom.btnToggleMusic, () => {
                 if (window.soundFX) {
                     const isPlaying = window.soundFX.toggleBGM();
                     this.dom.btnToggleMusic.innerHTML = isPlaying ? '🎵 Música: ON' : '🎵 Música: OFF';

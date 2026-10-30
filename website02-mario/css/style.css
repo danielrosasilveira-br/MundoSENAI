@@ -30,6 +30,10 @@
     -webkit-touch-callout: none;
 }
 
+html, body {
+    overscroll-behavior: none;
+}
+
 body {
     background-color: var(--bg-dark);
     background-image: 
@@ -249,20 +253,25 @@ body {
     color: var(--senai-cyan);
 }
 
-/* Modais e Telas de Overlay (Start, Game Over, Vitória, Pause) */
+/* Modais e Telas de Overlay em Tela Cheia (Start, Game Over, Vitória, Pause) */
 .overlay-screen {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background: rgba(6, 10, 18, 0.88);
-    backdrop-filter: blur(8px);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(6, 10, 18, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
-    z-index: 20;
+    padding: 16px;
+    z-index: 1000;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
 }
 
 .overlay-screen.hidden,
@@ -275,15 +284,35 @@ body {
     background: var(--bg-panel);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    padding: 24px 32px;
+    padding: 24px 28px;
     max-width: 540px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    margin: auto; /* Garante rolagem perfeita sem corte de topo em flexbox */
+    max-height: 94vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom scrollbar para screen-card */
+.screen-card::-webkit-scrollbar,
+.overlay-screen::-webkit-scrollbar {
+    width: 6px;
+}
+.screen-card::-webkit-scrollbar-track,
+.overlay-screen::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+.screen-card::-webkit-scrollbar-thumb,
+.overlay-screen::-webkit-scrollbar-thumb {
+    background: rgba(237, 28, 36, 0.6);
+    border-radius: 3px;
 }
 
 .logo-banner-preview {
@@ -373,6 +402,7 @@ body {
     transition: all 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    touch-action: manipulation;
 }
 
 .btn-primary:hover {
@@ -382,6 +412,40 @@ body {
 
 .btn-primary:active {
     transform: translateY(1px) scale(0.98);
+}
+
+.btn-start-game {
+    font-size: 1.05rem;
+    padding: 14px 28px;
+    width: 100%;
+    max-width: 320px;
+    animation: pulseStartBtn 2s infinite ease-in-out;
+}
+
+@keyframes pulseStartBtn {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 18px var(--senai-red-glow), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 8px 26px rgba(237, 28, 36, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.4) inset;
+    }
+}
+
+.start-hint {
+    font-size: 0.8rem;
+    color: var(--senai-cyan);
+    margin-top: -6px;
+    text-shadow: 0 0 8px var(--senai-cyan-glow);
+}
+
+.pause-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
 }
 
 .btn-secondary {
@@ -581,9 +645,16 @@ body {
         display: flex;
     }
 
+    .overlay-screen {
+        padding: 10px 8px;
+    }
+
     .screen-card {
-        padding: 18px;
-        gap: 12px;
+        padding: 16px 14px;
+        gap: 10px;
+        max-width: 480px;
+        border-radius: 14px;
+        max-height: 96vh;
     }
 
     .game-title {
@@ -591,6 +662,70 @@ body {
     }
 
     .controls-guide {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .control-item {
+        padding: 6px 8px;
+        font-size: 0.7rem;
+    }
+
+    .btn-start-game {
+        font-size: 0.95rem;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .controls-guide {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+    body {
+        padding: 2px;
+    }
+    .game-header {
+        padding: 4px 8px;
+    }
+    .brand-badge img {
+        height: 20px;
+    }
+    .brand-badge span {
+        font-size: 0.75rem;
+    }
+    .btn-header {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    .canvas-container {
+        max-height: 68vh;
+    }
+    .touch-controls {
+        padding: 4px 8px;
+    }
+    .touch-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 0.9rem;
+    }
+    .touch-btn.jump-btn {
+        width: 50px;
+        height: 50px;
+    }
+    .game-footer {
+        display: none;
+    }
+    .screen-card {
+        padding: 12px 14px;
+        gap: 8px;
+    }
+    .logo-banner-preview {
+        max-height: 32px;
+    }
+    .game-title {
+        font-size: 0.95rem;
     }
 }
