@@ -1,0 +1,376 @@
+/* ==========================================================================
+   WEBSITE 04 — HARDWARE DO COMPUTADOR INTERATIVO (css/hardware.css)
+   Gabinete Aberto Interativo, Simulador de Ciclo, Comparador e PC Builder
+   ========================================================================== */
+
+/* Cores de Destaque para Hardware */
+:root {
+  --hw-red: #e30613;
+  --hw-red-dark: #b8050f;
+  --hw-blue: #005caa;
+  --hw-gold: #f59e0b;
+}
+
+/* Palco Gráfico do Gabinete Desktop Aberto */
+.open-case-container {
+  background: #09111e;
+  border: 2px solid #1a2e4c;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .open-case-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.case-svg-wrap {
+  width: 100%;
+  position: relative;
+  background: radial-gradient(circle at center, #112038 0%, #060b14 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid #1f375a;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.case-svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  display: block;
+}
+
+/* Hotspots Clicáveis no Diagrama SVG */
+.hw-hotspot {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hw-hotspot:hover, .hw-hotspot.active {
+  filter: drop-shadow(0 0 10px #00d2ff);
+  stroke: #00d2ff !important;
+  stroke-width: 2.5px !important;
+}
+
+/* Painel Lateral com Detalhes do Componente */
+.component-details-card {
+  background: #0f1d33;
+  border: 1px solid #203a63;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  color: #f8fafc;
+}
+
+.comp-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #1e365b;
+}
+
+.comp-icon-box {
+  width: 52px;
+  height: 52px;
+  background: #172c4e;
+  border: 1px solid #2a4c80;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.comp-title {
+  font-family: var(--font-tech);
+  font-size: 1.35rem;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.comp-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.comp-prop-group {
+  margin-bottom: 0.85rem;
+}
+
+.comp-prop-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.comp-prop-val {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+/* Simulador do Funcionamento do Computador */
+.flow-sim-container {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.flow-steps-tracker {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 1.5rem 0 2rem;
+}
+
+.flow-steps-tracker::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: var(--border-subtle);
+  z-index: 1;
+}
+
+.flow-step-circle {
+  width: 38px;
+  height: 38px;
+  background: #ffffff;
+  border: 2px solid var(--border-subtle);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-tech);
+  font-weight: 800;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.flow-step-circle.active {
+  background: var(--senai-blue);
+  border-color: var(--senai-blue);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--senai-blue-glow);
+  transform: scale(1.15);
+}
+
+.flow-step-circle.done {
+  background: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+}
+
+.flow-card-display {
+  background: var(--bg-alt);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.flow-card-icon {
+  width: 72px;
+  height: 72px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.flow-card-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--senai-blue-deep);
+  margin-bottom: 0.35rem;
+}
+
+.flow-card-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Seção Comparadora de Componentes */
+.comparator-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.comp-tab-btn {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.comp-tab-btn:hover {
+  background: var(--bg-alt);
+  color: var(--senai-blue);
+}
+
+.comp-tab-btn.active {
+  background: var(--senai-blue);
+  color: #ffffff;
+  border-color: var(--senai-blue);
+}
+
+.comparator-card-content {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.comp-columns-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .comp-columns-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comp-col-box {
+  background: var(--bg-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.comp-col-box h4 {
+  font-family: var(--font-tech);
+  font-size: 1.2rem;
+  color: var(--senai-blue-deep);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Simulador de Montagem (PC Builder) */
+.builder-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .builder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.builder-selection-panel {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.builder-item-row {
+  margin-bottom: 1.25rem;
+}
+
+.builder-item-row label {
+  display: block;
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.builder-select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background: #ffffff;
+}
+
+.builder-summary-card {
+  background: #0d1b30;
+  border: 1px solid #1e3557;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+}
+
+.compat-alert-box {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  margin: 1.25rem 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.compat-alert-box.ok {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  color: #34d399;
+}
+
+.compat-alert-box.warning {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  color: #f87171;
+}
+
+.builder-total-price {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #38bdf8;
+  margin: 0.5rem 0 1rem;
+}

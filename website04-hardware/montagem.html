@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Laboratório de Montagem Virtual | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag" style="background-color: var(--verde-lima); color: var(--verde-floresta);">Desafio Prático</span>
+          </a>
+          <div class="site-subtitle">Laboratório de Montagem: Construa seu Próprio Computador</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link active destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Bancada Dinâmica de Montagem (Etapa 1 e Etapa 2 via JS) -->
+      <div id="assembly-app" role="region" aria-label="Simulador de Montagem">
+        <!-- Renderizado dinamicamente por js/assembly.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Laboratório de Montagem de Hardware</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/assembly.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

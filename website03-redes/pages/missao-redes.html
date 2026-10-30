@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Missão 1: Conectando o Mundo | Missão: Mundo das Redes</title>
+  <meta name="description" content="Missão 1 do jogo educativo Missão: Mundo das Redes - Aprenda o que são redes de computadores, dispositivos conectados e simule o envio de dados.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/missions.css">
+</head>
+<body class="cyber-grid-bg" id="mission1Section">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Missão 1</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="mapa.html" class="nav-link-btn">
+          <span>🗺️</span> Voltar ao Mapa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DA MISSÃO 1 -->
+  <main class="mission-page-container">
+    
+    <!-- BARRA SUPERIOR DA MISSÃO -->
+    <section class="mission-top-bar" aria-label="Identificação da missão atual">
+      <div class="mission-badge-group">
+        <span class="mission-step-tag">Missão 1</span>
+        <h1 style="font-size: 1.35rem; color: #ffffff;">Conectando o Mundo</h1>
+      </div>
+      <div class="mission-objective-text">
+        <span style="color: var(--primary); font-weight: 700;">Objetivo:</span> Descobrir como diferentes dispositivos podem trocar informações.
+      </div>
+    </section>
+
+    <!-- INTRODUÇÃO E ANALOGIA DA CIDADE -->
+    <section class="concept-hero-card">
+      <h2 style="font-size: 1.8rem; margin-bottom: 0.75rem;">O que é uma Rede de Computadores?</h2>
+      <p style="font-size: 1.05rem; margin-bottom: 1rem;">
+        Pense em como você conversa com seus amigos ou joga online. Se o seu computador ou celular estivesse <strong>isolado</strong>, ele não conseguiria trocar fotos, receber mensagens ou pesquisar na internet.
+      </p>
+
+      <div class="city-analogy-box">
+        <strong>🏙️ A Comparação da Cidade Inteligente:</strong><br>
+        “Imagine que os computadores são casas de uma cidade. A rede funciona como um conjunto de caminhos que permite que as informações cheguem de um lugar ao outro.”
+      </div>
+
+      <p style="font-size: 1rem; color: #cbd5e1;">
+        Em uma casa, escola ou empresa, os dispositivos se conectam para <strong>compartilhar arquivos</strong>, <strong>imprimir na mesma impressora</strong> e <strong>dividir o acesso à internet</strong>.
+      </p>
+    </section>
+
+    <!-- EXPLORADOR INTERATIVO DE DISPOSITIVOS -->
+    <section class="device-explorer-section" aria-label="Explorador de equipamentos conectados">
+      <div class="section-title-wrap">
+        <h2><span>🔍</span> Conheça os Equipamentos da Rede</h2>
+        <span class="hint-pill">Toque em qualquer aparelho para ver seus segredos!</span>
+      </div>
+
+      <div class="devices-interactive-grid">
+        <!-- 1. PC 1 -->
+        <button type="button" class="device-card-btn active" data-device="pc1">
+          <div class="device-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+          </div>
+          <span class="device-card-name">Computador 1</span>
+          <span class="device-card-tag">Computador Desktop</span>
+        </button>
+
+        <!-- 2. Notebook -->
+        <button type="button" class="device-card-btn" data-device="notebook">
+          <div class="device-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+          </div>
+          <span class="device-card-name">Notebook</span>
+          <span class="device-card-tag">Portátil com Wi-Fi</span>
+        </button>
+
+        <!-- 3. Smartphone -->
+        <button type="button" class="device-card-btn" data-device="smartphone">
+          <div class="device-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+          </div>
+          <span class="device-card-name">Smartphone</span>
+          <span class="device-card-tag">Dispositivo Móvel</span>
+        </button>
+
+        <!-- 4. Roteador -->
+        <button type="button" class="device-card-btn" data-device="router">
+          <div class="device-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.2 5.9l.8-.8C19.6 3.7 17.8 3 16 3s-3.6.7-5 2.1l.8.8C13 4.6 14.5 4 16 4s3 .6 4.2 1.9zm-1.6 1.6l.8-.8C18.4 5.7 17.2 5 16 5s-2.4.7-3.4 1.7l.8.8c.7-.7 1.6-1.5 2.6-1.5s1.9.8 2.6 1.5zM16 8c-1.1 0-2 .9-2 2 0 .7.4 1.4 1 1.7V17h2v-5.3c.6-.3 1-1 1-1.7 0-1.1-.9-2-2-2zM4 17h16c1.1 0 2 .9 2 2s-.9 2-2 2H4c-1.1 0-2-.9-2-2s.9-2 2-2z"/></svg>
+          </div>
+          <span class="device-card-name">Roteador</span>
+          <span class="device-card-tag">Maestro da Rede</span>
+        </button>
+
+        <!-- 5. PC 2 -->
+        <button type="button" class="device-card-btn" data-device="pc2">
+          <div class="device-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+          </div>
+          <span class="device-card-name">Computador 2</span>
+          <span class="device-card-tag">Laboratório Escolar</span>
+        </button>
+      </div>
+
+      <!-- Detalhes do Dispositivo Selecionado -->
+      <div class="device-detail-box" id="deviceDetailBox">
+        <div class="device-detail-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        </div>
+        <div class="device-detail-content">
+          <h4>Computador Principal — <span style="font-size: 0.85rem; color: #94a3b8;">Dispositivo Conectado (Desktop)</span></h4>
+          <p>Um computador de mesa que se conecta à rede por cabo ou Wi-Fi. Permite enviar estudos, fotos e documentos para outros computadores da casa ou da escola com máxima velocidade e estabilidade.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR INTERATIVO DE ENVIO DE PACOTES DE REDE -->
+    <section class="simulator-section" aria-label="Simulador de transmissão de dados na rede local">
+      <div>
+        <h2 style="font-size: 1.5rem; color: #ffffff; margin-bottom: 0.35rem;">
+          <span>⚡</span> Simulador: Transmitindo Dados na Rede Local
+        </h2>
+        <p style="font-size: 0.95rem; color: #cbd5e1;">
+          Escolha quem vai enviar, quem vai receber e o tipo de mensagem. Depois clique em <strong>ENVIAR PACOTE</strong> para ver o trajeto!
+        </p>
+      </div>
+
+      <!-- Barra de Configuração da Mensagem -->
+      <div class="sim-controls-bar">
+        <div class="sim-control-group">
+          <label for="simOrigin">Dispositivo de Origem (Quem envia):</label>
+          <select id="simOrigin" class="sim-select">
+            <option value="pc1">Computador Principal</option>
+            <option value="notebook">Notebook Sem Fio</option>
+            <option value="smartphone">Smartphone</option>
+            <option value="pc2">Computador do Laboratório</option>
+          </select>
+        </div>
+
+        <div class="sim-control-group">
+          <label for="simDest">Dispositivo de Destino (Quem recebe):</label>
+          <select id="simDest" class="sim-select">
+            <option value="pc2" selected>Computador do Laboratório</option>
+            <option value="pc1">Computador Principal</option>
+            <option value="notebook">Notebook Sem Fio</option>
+            <option value="smartphone">Smartphone</option>
+          </select>
+        </div>
+
+        <div class="sim-control-group">
+          <label for="simPacketType">Conteúdo do Pacote:</label>
+          <select id="simPacketType" class="sim-select">
+            <option value="foto">Foto de um Robô (2 MB)</option>
+            <option value="trabalho">Trabalho Escolar de Ciências</option>
+            <option value="musica">Música Favorita (Áudio)</option>
+            <option value="projeto">Código do Projeto SENAI</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Arena Visual de Simulação da Transmissão -->
+      <div class="sim-visual-arena" id="simArena">
+        
+        <!-- Cabos SVG -->
+        <svg class="sim-cables-svg" viewBox="0 0 800 240" preserveAspectRatio="none">
+          <line x1="160" y1="120" x2="400" y2="120" stroke="#00d2ff" stroke-width="4" stroke-dasharray="6 4" class="flow-cable"/>
+          <line x1="400" y1="120" x2="640" y2="120" stroke="#00f5d4" stroke-width="4" stroke-dasharray="6 4" class="flow-cable"/>
+        </svg>
+
+        <!-- Nó 1: Origem -->
+        <div class="sim-node-visual" id="simNodeOrigin">
+          <div class="sim-node-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+          </div>
+          <span class="sim-node-label" id="simLabelOrigin">Origem</span>
+        </div>
+
+        <!-- Nó Central: Roteador -->
+        <div class="sim-node-visual is-router" id="simNodeRouter">
+          <div class="sim-node-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.2 5.9l.8-.8C19.6 3.7 17.8 3 16 3s-3.6.7-5 2.1l.8.8C13 4.6 14.5 4 16 4s3 .6 4.2 1.9zm-1.6 1.6l.8-.8C18.4 5.7 17.2 5 16 5s-2.4.7-3.4 1.7l.8.8c.7-.7 1.6-1.5 2.6-1.5s1.9.8 2.6 1.5zM16 8c-1.1 0-2 .9-2 2 0 .7.4 1.4 1 1.7V17h2v-5.3c.6-.3 1-1 1-1.7 0-1.1-.9-2-2-2zM4 17h16c1.1 0 2 .9 2 2s-.9 2-2 2H4c-1.1 0-2-.9-2-2s.9-2 2-2z"/></svg>
+          </div>
+          <span class="sim-node-label" style="color: var(--accent-neon);">Roteador Central</span>
+        </div>
+
+        <!-- Nó 2: Destino -->
+        <div class="sim-node-visual" id="simNodeDest">
+          <div class="sim-node-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+          </div>
+          <span class="sim-node-label" id="simLabelDest">Destino</span>
+        </div>
+
+        <!-- Pacote Físico Animado -->
+        <div class="data-packet-token" id="dataPacketToken">📦</div>
+      </div>
+
+      <!-- Feedback e Disparo -->
+      <div style="display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary btn-lg" id="btnSendPacket">
+          <span>🚀</span> ENVIAR PACOTE DE DADOS
+        </button>
+
+        <div class="sim-status-feedback" id="simFeedback" style="flex: 1; min-width: 260px;">
+          <span class="sim-status-icon">💡</span>
+          <span>Pronto para transmitir. Clique no botão para disparar o pacote de dados!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESAFIO PEDAGÓGICO DE COMPREENSÃO DA MISSÃO 1 -->
+    <section class="challenge-card" aria-label="Desafio de fixação da Missão 1">
+      <div class="challenge-header">
+        <span style="font-size: 1.6rem;">🎯</span>
+        <h3>Desafio da Missão: Teste Seus Conhecimentos</h3>
+      </div>
+
+      <p class="challenge-question-text">
+        Qual é a principal função de uma rede de computadores?
+      </p>
+
+      <div class="challenge-options-list" id="mission1Options">
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">A)</strong> Apenas ligar as lâmpadas e o ar-condicionado de uma sala.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="true">
+          <strong style="color: var(--primary);">B)</strong> Permitir que múltiplos aparelhos troquem informações e compartilhem arquivos e recursos.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">C)</strong> Impedir que os computadores conversem entre si para não gastar memória.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">D)</strong> Substituir a tomada elétrica para que os aparelhos nunca precisem de energia.
+        </button>
+      </div>
+
+      <!-- Caixa de Feedback da Resposta -->
+      <div class="challenge-feedback-box" id="mission1Feedback"></div>
+
+      <!-- Banner de Sucesso ao Concluir a Missão -->
+      <div class="mission-success-banner" id="mission1SuccessBanner">
+        <span style="font-size: 3rem;">🎉</span>
+        <h3>Missão 1 Concluída com Sucesso!</h3>
+        <p style="font-size: 1.1rem; max-width: 600px; color: #e2e8f0;">
+          Você descobriu como os computadores se conectam e como os pacotes de dados viajam pelo roteador. A sua cidade inteligente está mais conectada!
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem;">
+          <a href="missao-internet.html" class="btn btn-accent btn-lg">
+            <span>🌐</span> AVANÇAR PARA MISSÃO 2
+          </a>
+          <a href="mapa.html" class="btn btn-secondary btn-lg">
+            <span>🗺️</span> Voltar ao Mapa
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/missions.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

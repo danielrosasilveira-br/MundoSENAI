@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 3: Placa-Mãe | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 03</span>
+          </a>
+          <div class="site-subtitle">A Placa-Mãe: O Centro de Conexões e Estradas de Dados</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link active">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="mobo-title">
+        <div>
+          <span class="header-badge">Módulo 03 • Conectividade Total</span>
+          <h1 id="mobo-title">A Placa-Mãe (Motherboard)</h1>
+          <p>
+            A placa-mãe é o grande circuito integrado que conecta todos os órgãos do computador. Sem ela, processador, memórias, placas de vídeo e discos seriam peças isoladas incapazes de conversar.
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          🖲️
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre a Placa-Mãe">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            A Cidade dos Barramentos e Conexões
+          </h2>
+          <p>
+            Pense na <strong>placa-mãe</strong> como uma cidade inteligente projetada sobre várias camadas finas de fibra de vidro e cobre. Ela possui milhares de estradas microscópicas chamadas <strong>barramentos</strong> (bus lines), que conduzem pulsos elétricos de dados de um canto ao outro.
+          </p>
+          <p>
+            Nela encontramos encaixes especializados para cada peça:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--cor-texto);">
+            <li><strong>Soquete:</strong> onde o processador repousa e trava firmemente.</li>
+            <li><strong>Slots DIMM:</strong> onde os pentes de memória RAM são espetados.</li>
+            <li><strong>Slots PCI Express:</strong> para placas de vídeo dedicadas ou de rede.</li>
+            <li><strong>Portas SATA e M.2:</strong> onde o SSD e HD são ligados.</li>
+          </ul>
+
+          <!-- A Importância da Compatibilidade -->
+          <div class="box-curiosidade" style="border-left-color: var(--turquesa);">
+            <div class="box-curiosidade-header" style="color: #17655B;">
+              <span>🧩</span>
+              <h4>Atenção à Compatibilidade!</h4>
+            </div>
+            <p>
+              Nem todo processador encaixa em qualquer placa-mãe! Cada fabricante (como Intel ou AMD) cria padrões diferentes de soquetes físicos e de pinos. Na hora de montar uma máquina real, é preciso verificar se a placa-mãe suporta o modelo exato do processador e o tipo de memória RAM (DDR4 ou DDR5).
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="memoria-ram.html" class="btn btn-outline btn-sm">⬅️ RAM</a>
+            <a href="armazenamento.html" class="btn btn-turquesa btn-sm">Próximo: Armazenamento ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa da Placa-Mãe -->
+        <section class="interactive-stage" aria-labelledby="mobo-sim-title">
+          <h2 id="mobo-sim-title" class="stage-title">
+            <span>🔬</span> Explorador Interativo da Placa-Mãe
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1rem;">
+            Clique nas diferentes áreas destacadas da placa para inspecionar seus soquetes e portas:
+          </p>
+
+          <!-- Tabuleiro Interativo da Placa-Mãe -->
+          <div class="mobo-interactive-board" role="region" aria-label="Diagrama da Placa-Mãe">
+            <!-- Zona 1: CPU Socket -->
+            <button type="button" class="mobo-zone active" data-zone-key="cpu_socket" aria-label="Inspecionar Soquete da CPU">
+              <span style="font-size: 2rem;">⚡</span>
+              <div class="mobo-zone-title">Soquete da CPU</div>
+              <div class="mobo-zone-hint">Encaixe do Processador</div>
+            </button>
+
+            <!-- Zona 2: Slots RAM -->
+            <button type="button" class="mobo-zone" data-zone-key="ram_slots" aria-label="Inspecionar Slots de Memória RAM">
+              <span style="font-size: 2rem;">💾</span>
+              <div class="mobo-zone-title">Slots de RAM (DIMM)</div>
+              <div class="mobo-zone-hint">Trilhos verticais de memória</div>
+            </button>
+
+            <!-- Zona 3: PCI Express -->
+            <button type="button" class="mobo-zone" data-zone-key="pcie_slots" aria-label="Inspecionar Slots PCIe">
+              <span style="font-size: 2rem;">🎮</span>
+              <div class="mobo-zone-title">Slots PCI Express</div>
+              <div class="mobo-zone-hint">Placa de Vídeo Gamer</div>
+            </button>
+
+            <!-- Zona 4: Armazenamento SATA & M.2 -->
+            <button type="button" class="mobo-zone" data-zone-key="storage_ports" aria-label="Inspecionar Conexões de Armazenamento">
+              <span style="font-size: 2rem;">💽</span>
+              <div class="mobo-zone-title">Portas M.2 e SATA</div>
+              <div class="mobo-zone-hint">Conexão SSD e HD</div>
+            </button>
+
+            <!-- Zona 5: Conector ATX 24 Pinos -->
+            <button type="button" class="mobo-zone" data-zone-key="power_atx" aria-label="Inspecionar Entrada de Energia ATX">
+              <span style="font-size: 2rem;">🔌</span>
+              <div class="mobo-zone-title">Conector ATX 24 Pinos</div>
+              <div class="mobo-zone-hint">Entrada de Energia da Fonte</div>
+            </button>
+
+            <!-- Zona 6: Painel Traseiro I/O -->
+            <button type="button" class="mobo-zone" data-zone-key="back_io" aria-label="Inspecionar Painel Traseiro I/O">
+              <span style="font-size: 2rem;">🖥️</span>
+              <div class="mobo-zone-title">Painel Traseiro (I/O)</div>
+              <div class="mobo-zone-hint">USB, HDMI, Áudio e Rede</div>
+            </button>
+          </div>
+
+          <!-- Painel de Detalhes da Região Selecionada -->
+          <div class="mobo-detail-pane" aria-live="polite">
+            <h3 id="mobo-info-title" style="color: var(--verde-floresta); font-size: 1.15rem; margin-bottom: 0.4rem;">
+              Soquete do Processador (CPU Socket)
+            </h3>
+            <p id="mobo-info-desc" style="font-size: 0.95rem; color: var(--cor-texto); margin: 0;">
+              Conector de alta precisão com centenas de minúsculos pinos metálicos onde a CPU é encaixada com segurança. Possui trava de retenção e precisa ser compatível com a geração do processador.
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Placa-Mãe</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

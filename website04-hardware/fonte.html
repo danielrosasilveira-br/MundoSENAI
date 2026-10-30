@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 5: Fonte de Alimentação | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 05</span>
+          </a>
+          <div class="site-subtitle">A Estação de Energia: Alimentação Limpa e Estável</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link active">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="psu-title">
+        <div>
+          <span class="header-badge">Módulo 05 • O Coração Energético</span>
+          <h1 id="psu-title">A Fonte de Alimentação (PSU)</h1>
+          <p>
+            Sem energia nada funciona! A fonte de alimentação converte a eletricidade bruta da tomada em correntes contínuas e seguras para cada circuito do computador.
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          🔌
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre a Fonte de Alimentação">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            O Que Faz a Fonte de Alimentação?
+          </h2>
+          <p>
+            A eletricidade que sai da tomada da parede é <strong>Corrente Alternada (AC)</strong> de alta voltagem (geralmente 110V ou 220V). Essa energia é oscilante e queimaria os minúsculos chips do computador em milissegundos se entrasse diretamente neles!
+          </p>
+          <p>
+            A <strong>fonte de alimentação (PSU — Power Supply Unit)</strong> atua como um transformador e regulador de precisão: ela filtra, retifica e converte a energia para <strong>Corrente Contínua (DC)</strong> em tensões exatas:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; color: var(--cor-texto);">
+            <li><strong>+12 Volts:</strong> para motores de ventoinhas, discos mecânicos e reguladores da CPU e GPU.</li>
+            <li><strong>+5 Volts:</strong> para portas USB e circuitos de dados lógicos.</li>
+            <li><strong>+3.3 Volts:</strong> para módulos de memória e microcontroladores sensíveis.</li>
+          </ul>
+
+          <!-- Energia Elétrica vs Fluxo de Dados -->
+          <div class="box-cotidiano">
+            <div class="box-cotidiano-header">
+              <span>⚡</span>
+              <h4>Alimentação Elétrica vs Dados: Não Confunda!</h4>
+            </div>
+            <p>
+              Os cabos da fonte de alimentação conduzem apenas <strong>energia pura</strong> para manter os chips funcionando. Eles não transportam suas fotos, textos ou comandos de jogo: quem transporta as informações são os barramentos de dados da placa-mãe!
+            </p>
+          </div>
+
+          <!-- Alerta de Segurança Obrigatório -->
+          <div class="box-curiosidade" style="border-left-color: var(--coral);">
+            <div class="box-curiosidade-header" style="color: var(--cor-erro);">
+              <span>🛡️</span>
+              <h4>Segurança em Primeiro Lugar!</h4>
+            </div>
+            <p>
+              <strong>Nunca abra a caixa de metal de uma fonte de alimentação!</strong> Ela contém capacitores grandes que armazenam cargas elétricas muito perigosas mesmo horas depois de ser retirada da tomada. Manutenções de fontes devem ser feitas apenas em assistências técnicas profissionais autorizadas.
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="armazenamento.html" class="btn btn-outline btn-sm">⬅️ Armazenamento</a>
+            <a href="perifericos.html" class="btn btn-turquesa btn-sm">Próximo: Periféricos ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa de Distribuição de Energia -->
+        <section class="interactive-stage" aria-labelledby="psu-sim-title">
+          <h2 id="psu-sim-title" class="stage-title">
+            <span>🔬</span> Simulador da Rede Elétrica Interna
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1rem;">
+            Acione o interruptor principal da fonte e acompanhe o fornecimento de energia contínua para os componentes do computador:
+          </p>
+
+          <div class="power-stage-grid">
+            <!-- Unidade Principal da Fonte -->
+            <div class="psu-main-unit">
+              <span style="font-size: 2.8rem; display: block; margin-bottom: 0.5rem;">🔌</span>
+              <h3 style="font-size: 1.15rem; color: var(--verde-lima);">Fonte Gamer 650W</h3>
+              <p style="font-size: 0.8rem; color: #D4E0D7; margin: 0.5rem 0 1rem;">
+                Entrada: 110V/220V AC<br>
+                Saídas: +12V, +5V, +3.3V DC
+              </p>
+
+              <button id="psu-btn-switch" class="btn btn-primary btn-lima" style="width: 100%;">
+                Ligar Chave Geral ⚡
+              </button>
+
+              <div id="psu-status-indicator" class="indicador" style="font-size: 0.75rem; margin-top: 0.75rem; color: #B2C6BA;">
+                FONTE DESLIGADA (Em Repouso)
+              </div>
+            </div>
+
+            <!-- Lista de Componentes Energizados -->
+            <div class="power-components-list">
+              <div class="power-target-item">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.4rem;">🖲️</span>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: var(--verde-floresta);">Placa-Mãe (ATX 24 Pinos)</strong>
+                    <div style="font-size: 0.75rem; color: var(--cor-texto-suave);">Energização da placa principal</div>
+                  </div>
+                </div>
+                <span class="badge badge-modulo">Alimentação</span>
+              </div>
+
+              <div class="power-target-item">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.4rem;">⚡</span>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: var(--verde-floresta);">Processador (Conector EPS 12V)</strong>
+                    <div style="font-size: 0.75rem; color: var(--cor-texto-suave);">Energia de alta precisão para a CPU</div>
+                  </div>
+                </div>
+                <span class="badge badge-modulo">+12V Dedicado</span>
+              </div>
+
+              <div class="power-target-item">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.4rem;">💽</span>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: var(--verde-floresta);">Armazenamento SSD / HD</strong>
+                    <div style="font-size: 0.75rem; color: var(--cor-texto-suave);">Cabo SATA de força</div>
+                  </div>
+                </div>
+                <span class="badge badge-modulo">+5V / +12V</span>
+              </div>
+
+              <div class="power-target-item">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span style="font-size: 1.4rem;">🌀</span>
+                  <div>
+                    <strong style="font-size: 0.95rem; color: var(--verde-floresta);">Coolers e Refrigeração</strong>
+                    <div style="font-size: 0.75rem; color: var(--cor-texto-suave);">Giro das ventoinhas de resfriamento</div>
+                  </div>
+                </div>
+                <span class="badge badge-modulo">Ventilação</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Fonte de Alimentação</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 4: Armazenamento SSD e HD | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 04</span>
+          </a>
+          <div class="site-subtitle">Armazenamento Persistente: O Cofre Seguro dos Seus Dados</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link active">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="storage-title">
+        <div>
+          <span class="header-badge">Módulo 04 • Memória Permanente</span>
+          <h1 id="storage-title">Armazenamento: SSD e HD</h1>
+          <p>
+            Onde vivem suas fotos, músicas, jogos e o sistema operacional mesmo quando o computador está desligado da tomada? No cofre de armazenamento permanente!
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          💽
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre Armazenamento">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            O Que é Armazenamento Permanente?
+          </h2>
+          <p>
+            Diferente da memória RAM, que é volátil e se apaga no escuro, os dispositivos de <strong>armazenamento secundário (SSD e HD)</strong> são não-voláteis. Eles são projetados para guardar seus arquivos intactos por anos.
+          </p>
+          <p>
+            Existem duas grandes tecnologias que você precisa conhecer:
+          </p>
+
+          <!-- O HD Magnético -->
+          <div class="box-cotidiano" style="border-left-color: var(--amarelo-manga);">
+            <div class="box-cotidiano-header" style="color: #997400;">
+              <span>💿</span>
+              <h4>O Disco Rígido Tradicional (HD)</h4>
+            </div>
+            <p>
+              O HD (Hard Disk) funciona como uma vitrola moderna em miniatura: possui discos de metal com revestimento magnético que giram a milhares de rotações por minuto e um braço mecânico com uma cabeça de leitura que "flutua" sobre eles. Por ter partes mecânicas que se movem, é mais lento e sensível a pancadas.
+            </p>
+          </div>
+
+          <!-- O SSD Eletrônico -->
+          <div class="box-curiosidade" style="border-left-color: var(--verde-lima);">
+            <div class="box-curiosidade-header" style="color: var(--cor-sucesso);">
+              <span>⚡</span>
+              <h4>A Revolução do SSD (Solid State Drive)</h4>
+            </div>
+            <p>
+              O SSD não tem nenhum disco girando nem motor! Ele é feito inteiramente de chips eletrônicos de memória flash (silício). Por isso, não faz barulho, resiste melhor a quedas e lê/grava dados muito mais rapidamente, fazendo o computador inicializar em poucos segundos.
+            </p>
+          </div>
+
+          <!-- Exemplo do Cotidiano -->
+          <div class="box-cotidiano">
+            <div class="box-cotidiano-header">
+              <span>📁</span>
+              <h4>Exemplo do Dia a Dia: Salvar aquele Trabalho</h4>
+            </div>
+            <p>
+              Enquanto você está digitando um texto escolar, as palavras estão vivas na memória RAM. No momento em que você clica em <strong>"Salvar"</strong>, uma cópia permanente é escrita nas células do seu SSD ou na trilha magnética do HD!
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="placa-mae.html" class="btn btn-outline btn-sm">⬅️ Placa-Mãe</a>
+            <a href="fonte.html" class="btn btn-turquesa btn-sm">Próximo: Fonte de Energia ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa SSD vs HD -->
+        <section class="interactive-stage" aria-labelledby="storage-sim-title">
+          <h2 id="storage-sim-title" class="stage-title">
+            <span>🔬</span> Comparador Prático: SSD vs HD
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1rem;">
+            Selecione uma das tecnologias para comparar suas características físicas e teste uma gravação simulada de arquivo:
+          </p>
+
+          <!-- Botões de Troca de Tecnologia -->
+          <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <button id="storage-toggle-ssd" class="btn btn-primary btn-lima" style="flex: 1;">
+              ⚡ SSD (Memória Flash)
+            </button>
+            <button id="storage-toggle-hd" class="btn btn-outline" style="flex: 1;">
+              💿 HD (Discos Mecânicos)
+            </button>
+          </div>
+
+          <!-- Cartão Detalhado de Inspeção -->
+          <div id="storage-detail-card" class="card-educativo" style="text-align: center; padding: 1.5rem;" aria-live="polite">
+            <!-- Conteúdo inserido dinamicamente via JS -->
+          </div>
+
+          <!-- Simulação Prática de Velocidade -->
+          <div style="margin-top: 1.25rem; background-color: #F8FAF9; border: 2px solid var(--cor-borda); border-radius: var(--raio-medio); padding: 1.25rem;">
+            <strong style="color: var(--verde-floresta); font-size: 0.95rem; display: block; margin-bottom: 0.5rem;">
+              Simulação: Gravar um Arquivo de Jogo (500 MB)
+            </strong>
+            <button id="storage-btn-simulate" class="btn btn-turquesa btn-sm" style="width: 100%;">
+              💾 Testar Velocidade de Gravação
+            </button>
+
+            <div id="storage-write-feedback" style="margin-top: 0.75rem; font-size: 0.85rem; min-height: 24px; display: none;" aria-live="polite"></div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Armazenamento (SSD & HD)</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

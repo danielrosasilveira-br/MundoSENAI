@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Jogo clássico do Pac-Man desenvolvido em Vanilla JavaScript, HTML5 Canvas e CSS3 retrô moderno com velocidade balanceada e design totalmente responsivo.">
+  <title>Pac-Man Arcade - Vanilla JavaScript</title>
+  
+  <!-- Fontes Arcade e UI Moderna do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-space: #070714;
+      --bg-card: rgba(15, 18, 38, 0.94);
+      --neon-cyan: #00e5ff;
+      --wall-blue: #1919a6;
+      --wall-stroke: #2e35ff;
+      --wall-glow: rgba(46, 53, 255, 0.45);
+      --pacman-yellow: #ffea00;
+      --blinky-red: #ff2b2b;
+      --pinky-pink: #ff85d0;
+      --inky-cyan: #00e5ff;
+      --clyde-orange: #ff9900;
+      --pellet-color: #ffb897;
+      --font-arcade: 'Press Start 2P', monospace;
+      --font-ui: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-space);
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(30, 35, 120, 0.4) 0%, transparent 60%),
+        radial-gradient(circle at 85% 85%, rgba(255, 0, 100, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 90%, rgba(0, 229, 255, 0.08) 0%, transparent 50%);
+      color: #ffffff;
+      font-family: var(--font-ui);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: clamp(6px, 1.5vw, 16px);
+      box-sizing: border-box;
+    }
+
+    /* Gabinete / Card Arcade Responsivo */
+    .arcade-cabinet {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 2px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 
+        0 0 35px rgba(0, 110, 255, 0.28),
+        inset 0 0 20px rgba(0, 229, 255, 0.08);
+      border-radius: clamp(12px, 2.5vw, 20px);
+      padding: clamp(10px, 2vw, 20px);
+      width: 100%;
+      max-width: min(500px, 98vw);
+      max-height: 98vh;
+      max-height: 98dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Cabeçalho */
+    .arcade-header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: clamp(6px, 1.2vh, 12px);
+    }
+
+    .arcade-title {
+      font-family: var(--font-arcade);
+      font-size: clamp(16px, 4vw, 22px);
+      color: var(--pacman-yellow);
+      text-shadow: 
+        0 0 10px rgba(255, 234, 0, 0.8),
+        0 0 20px rgba(255, 170, 0, 0.5);
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .title-ghost-icon {
+      display: inline-block;
+      width: clamp(12px, 3vw, 16px);
+      height: clamp(12px, 3vw, 16px);
+      border-radius: 8px 8px 0 0;
+      position: relative;
+    }
+
+    .title-ghost-red {
+      background: var(--blinky-red);
+      box-shadow: 0 0 8px var(--blinky-red);
+    }
+
+    .title-ghost-cyan {
+      background: var(--inky-cyan);
+      box-shadow: 0 0 8px var(--inky-cyan);
+    }
+
+    /* Placar Superior */
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: clamp(6px, 1.2vh, 10px) clamp(10px, 2.5vw, 16px);
+      margin-bottom: clamp(6px, 1.2vh, 12px);
+      font-family: var(--font-arcade);
+    }
+
+    .score-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .score-group.center {
+      align-items: center;
+    }
+
+    .score-group.right {
+      align-items: flex-end;
+    }
+
+    .score-title {
+      font-size: clamp(7px, 1.8vw, 9px);
+      color: #8fa0be;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .score-number {
+      font-size: clamp(11px, 2.8vw, 14px);
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .score-number.current {
+      color: var(--pacman-yellow);
+      text-shadow: 0 0 8px rgba(255, 234, 0, 0.7);
+    }
+
+    /* Vidas */
+    .lives-wrapper {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .life-sprite {
+      width: clamp(11px, 2.5vw, 14px);
+      height: clamp(11px, 2.5vw, 14px);
+      border-radius: 50%;
+      background: var(--pacman-yellow);
+      clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 50%);
+      transform: rotate(45deg);
+      box-shadow: 0 0 5px var(--pacman-yellow);
+    }
+
+    /* Moldura e Canvas do Jogo com auto-scaling */
+    .canvas-container {
+      position: relative;
+      border: 2px solid #1a1e70;
+      border-radius: 10px;
+      background: #02020a;
+      box-shadow: 
+        0 0 25px rgba(30, 35, 180, 0.5),
+        inset 0 0 15px rgba(0, 0, 0, 0.95);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 456px;
+      /* Ajusta perfeitamente para qualquer altura de tela (laptops ou celulares) */
+      max-height: min(504px, 54vh, 54dvh);
+      aspect-ratio: 19 / 21;
+      touch-action: none;
+    }
+
+    canvas#gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+
+    /* Linhas de Varredura Retrô (CRT scanlines) */
+    .crt-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.22) 50%
+      );
+      background-size: 100% 4px;
+      opacity: 0.65;
+    }
+
+    /* Barra de Status */
+    .status-panel {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: clamp(6px, 1.2vh, 12px);
+      padding: clamp(6px, 1vh, 8px) clamp(10px, 2vw, 14px);
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      font-size: clamp(8px, 2.2vw, 10px);
+      font-family: var(--font-arcade);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #00ffaa;
+      text-shadow: 0 0 6px rgba(0, 255, 170, 0.5);
+    }
+
+    .status-led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ffaa;
+      box-shadow: 0 0 6px #00ffaa;
+      animation: ledPulse 1.4s infinite ease-in-out;
+    }
+
+    @keyframes ledPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
+    .pellets-info {
+      color: #8da2c0;
+      font-size: clamp(7px, 2vw, 9px);
+    }
+
+    /* Botões da UI */
+    .controls-row {
+      display: flex;
+      gap: clamp(6px, 1.5vw, 10px);
+      margin-top: clamp(8px, 1.4vh, 14px);
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .retro-btn {
+      font-family: var(--font-arcade);
+      font-size: clamp(7px, 1.8vw, 9px);
+      padding: clamp(7px, 1.2vh, 10px) clamp(10px, 2vw, 14px);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .retro-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.6);
+    }
+
+    .retro-btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-restart {
+      background: linear-gradient(135deg, #e60049, #b30037);
+      border-color: #ff4d80;
+      box-shadow: 0 0 12px rgba(230, 0, 73, 0.4);
+    }
+
+    .btn-pause {
+      background: linear-gradient(135deg, #0077ee, #0055bb);
+      border-color: #55aaff;
+    }
+
+    .btn-audio {
+      background: #181d38;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-audio.muted {
+      color: #778;
+      border-color: #445;
+    }
+
+    .btn-speed {
+      background: #201a40;
+      border-color: #9d4edd;
+      color: #e0aaff;
+    }
+
+    /* D-Pad Virtual Touch para Mobile */
+    .touch-dpad {
+      margin-top: clamp(6px, 1vh, 10px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dpad-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dpad-key {
+      width: clamp(38px, 10vw, 46px);
+      height: clamp(38px, 10vw, 46px);
+      border-radius: 10px;
+      background: #191e3e;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-size: clamp(14px, 4vw, 18px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+      touch-action: manipulation;
+    }
+
+    .dpad-key:active {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    /* Guia de Teclas */
+    .instruction-footer {
+      margin-top: clamp(6px, 1vh, 10px);
+      font-size: clamp(8px, 2vw, 10px);
+      color: #7f90a6;
+      text-align: center;
+      line-height: 1.5;
+      width: 100%;
+    }
+
+    .key-tag {
+      display: inline-block;
+      background: #151a33;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--pacman-yellow);
+      font-family: var(--font-arcade);
+      font-size: clamp(6px, 1.8vw, 8px);
+      margin: 0 1px;
+    }
+
+    /* Logotipo Oficial SENAI no Canto da Tela */
+    .senai-corner-badge {
+      position: fixed;
+      top: clamp(10px, 2vh, 20px);
+      left: clamp(12px, 2.5vw, 24px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      background: rgba(10, 12, 28, 0.88);
+      border: 1.5px solid rgba(255, 30, 30, 0.6);
+      box-shadow: 
+        0 0 16px rgba(255, 0, 0, 0.35),
+        inset 0 0 8px rgba(255, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 4px 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .senai-corner-badge:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 24px rgba(255, 0, 0, 0.65);
+    }
+
+    .senai-logo-img {
+      height: clamp(18px, 3.2vw, 26px);
+      width: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* Suporte a Dispositivos Móveis e Telas Menores */
+    @media (max-width: 680px) {
+      .senai-corner-badge {
+        position: static;
+        margin-bottom: 6px;
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 600px), (max-height: 720px) {
+      .touch-dpad {
+        display: flex;
+      }
+      .instruction-footer {
+        display: none; /* Em telas compactas, esconde texto redundante para economizar espaço */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logotipo Oficial SENAI no canto superior da tela -->
+  <aside class="senai-corner-badge" aria-label="Logotipo SENAI">
+    <img src="./senai-logo.png" alt="Logotipo SENAI" class="senai-logo-img">
+  </aside>
+
+  <main class="arcade-cabinet">
+    <!-- Cabeçalho -->
+    <header class="arcade-header">
+      <h1 class="arcade-title">
+        <span class="title-ghost-icon title-ghost-red"></span>
+        PAC-MAN
+        <span class="title-ghost-icon title-ghost-cyan"></span>
+      </h1>
+    </header>
+
+    <!-- Placar Superior (Score, Recorde, Vidas) -->
+    <section class="scoreboard" aria-label="Placar">
+      <div class="score-group">
+        <span class="score-title">Pontos</span>
+        <span id="scoreDisplay" class="score-number current">00000</span>
+      </div>
+      <div class="score-group center">
+        <span class="score-title">Recorde</span>
+        <span id="highScoreDisplay" class="score-number">00000</span>
+      </div>
+      <div class="score-group right">
+        <span class="score-title">Vidas</span>
+        <div id="livesContainer" class="lives-wrapper">
+          <div class="life-sprite"></div>
+          <div class="life-sprite"></div>
+          <div class="life-sprite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Labirinto Canvas HTML5 (Suporta deslize por toque touch) -->
+    <div class="canvas-container" id="canvasWrapper">
+      <canvas id="gameCanvas" width="456" height="504"></canvas>
+      <div class="crt-lines"></div>
+    </div>
+
+    <!-- Barra de Status do Jogo -->
+    <div class="status-panel">
+      <div class="status-badge">
+        <span class="status-led" id="statusLed"></span>
+        <span id="statusMessage">Pressione uma seta para jogar</span>
+      </div>
+      <span id="pelletsLeftText" class="pellets-info">Pastilhas: 0</span>
+    </div>
+
+    <!-- Botões de Controle -->
+    <div class="controls-row">
+      <button id="btnRestart" class="retro-btn btn-restart" title="Reiniciar Partida">
+        ↺ Reiniciar
+      </button>
+      <button id="btnPause" class="retro-btn btn-pause" title="Pausar ou Continuar">
+        ⏸ Pausar
+      </button>
+      <button id="btnSpeed" class="retro-btn btn-speed" title="Ajustar Velocidade">
+        ⚡ Normal
+      </button>
+      <button id="btnAudio" class="retro-btn btn-audio" title="Ativar ou Desativar Som">
+        🔊 Som: On
+      </button>
+    </div>
+
+    <!-- D-Pad Virtual Touch para Mobile -->
+    <nav class="touch-dpad" aria-label="Controles Touch">
+      <div class="dpad-row">
+        <button class="dpad-key" id="touchUp" aria-label="Para Cima">▲</button>
+      </div>
+      <div class="dpad-row">
+        <button class="dpad-key" id="touchLeft" aria-label="Para Esquerda">◀</button>
+        <button class="dpad-key" id="touchDown" aria-label="Para Baixo">▼</button>
+        <button class="dpad-key" id="touchRight" aria-label="Para Direita">▶</button>
+      </div>
+    </nav>
+
+    <!-- Guia de Comandos do Teclado -->
+    <footer class="instruction-footer">
+      Controles: <span class="key-tag">▲</span> <span class="key-tag">▼</span> 
+      <span class="key-tag">◀</span> <span class="key-tag">▶</span> ou <span class="key-tag">W</span><span class="key-tag">A</span><span class="key-tag">S</span><span class="key-tag">D</span> &bull; 
+      <span class="key-tag">Espaço</span> Pausa &bull; <span class="key-tag">R</span> Reiniciar
+    </footer>
+  </main>
+
+  <script>
+    /**
+     * =========================================================================
+     * PAC-MAN ENGINE - VANILLA JAVASCRIPT
+     * =========================================================================
+     * - Fixed Timestep Loop (Física a 60 Hz exatos, independente do monitor)
+     * - Velocidade balanceada, suave e autêntica aos arcades clássicos
+     * - Suporte completo a tela responsiva, touch swipe e D-Pad virtual
+     */
+
+    // --- 1. SINTETIZADOR DE ÁUDIO 8-BIT PROCEDURAL (WEB AUDIO API) ---
+    class AudioSynthesizer {
+      constructor() {
+        this.ctx = null;
+        this.isMuted = false;
+        this.wakaAlternator = false;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggleMute() {
+        this.isMuted = !this.isMuted;
+        return !this.isMuted;
+      }
+
+      playWaka() {
+        if (this.isMuted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+
+        const t = this.ctx.currentTime;
+        const f1 = this.wakaAlternator ? 440 : 310;
+        const f2 = this.wakaAlternator ? 270 : 520;
+        this.wakaAlternator = !this.wakaAlternator;
+
+        osc.frequency.setValueAtTime(f1, t);
+        osc.frequency.exponentialRampToValueAtTime(f2, t + 0.08);
+
+        gain.gain.setValueAtTime(0.07, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(t);
+        osc.stop(t + 0.08);
+      }
+
+      playPowerPellet() {
+        if (this.isMuted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+
+        const t = this.ctx.currentTime;
+        osc.frequency.setValueAtTime(500, t);
+        osc.frequency.exponentialRampToValueAtTime(900, t + 0.18);
+
+        gain.gain.setValueAtTime(0.1, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(t);
+        osc.stop(t + 0.18);
+      }
+
+      playEatGhost() {
+        if (this.isMuted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'square';
+
+        osc.frequency.setValueAtTime(260, t);
+        osc.frequency.linearRampToValueAtTime(700, t + 0.12);
+        osc.frequency.linearRampToValueAtTime(1200, t + 0.28);
+
+        gain.gain.setValueAtTime(0.11, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(t);
+        osc.stop(t + 0.3);
+      }
+
+      playDeath() {
+        if (this.isMuted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+
+        osc.frequency.setValueAtTime(600, t);
+        osc.frequency.exponentialRampToValueAtTime(70, t + 0.65);
+
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.linearRampToValueAtTime(0.01, t + 0.65);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(t);
+        osc.stop(t + 0.7);
+      }
+
+      playVictory() {
+        if (this.isMuted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const start = this.ctx.currentTime + idx * 0.11;
+
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(freq, start);
+          gain.gain.setValueAtTime(0.08, start);
+          gain.gain.exponentialRampToValueAtTime(0.001, start + 0.16);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(start);
+          osc.stop(start + 0.16);
+        });
+      }
+    }
+
+    // --- 2. CONFIGURAÇÕES DO GRID E CONSTANTES ---
+    const TILE_SIZE = 24;
+    const COLS = 19;
+    const ROWS = 21;
+
+    // 1: Parede, 0: Pastilha, 2: Energizer, 3: Vazio/Túnel, 4: Porta da Base
+    const DEFAULT_MAP = [
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,2,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,0,1],
+      [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1],
+      [1,1,1,1,0,1,1,1,3,1,3,1,1,1,0,1,1,1,1],
+      [1,1,1,1,0,1,3,3,3,3,3,3,3,1,0,1,1,1,1],
+      [1,1,1,1,0,1,3,1,1,4,1,1,3,1,0,1,1,1,1],
+      [3,3,3,3,0,3,3,1,4,4,4,1,3,3,0,3,3,3,3],
+      [1,1,1,1,0,1,3,1,1,1,1,1,3,1,0,1,1,1,1],
+      [1,1,1,1,0,1,3,3,3,3,3,3,3,1,0,1,1,1,1],
+      [1,1,1,1,0,1,3,1,1,1,1,1,3,1,0,1,1,1,1],
+      [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+      [1,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+      [1,2,0,1,0,0,0,0,0,3,0,0,0,0,0,1,0,2,1],
+      [1,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1,0,1,1],
+      [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1],
+      [1,0,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    ];
+
+    const DIRECTIONS = {
+      UP:    { x: 0,  y: -1, angle: 1.5 * Math.PI },
+      DOWN:  { x: 0,  y: 1,  angle: 0.5 * Math.PI },
+      LEFT:  { x: -1, y: 0,  angle: 1.0 * Math.PI },
+      RIGHT: { x: 1,  y: 0,  angle: 0.0 * Math.PI },
+      STOP:  { x: 0,  y: 0,  angle: 0.0 }
+    };
+
+    // --- 3. CLASSE PAC-MAN ---
+    class Pacman {
+      constructor(game) {
+        this.game = game;
+        this.reset();
+      }
+
+      reset() {
+        this.tileX = 9;
+        this.tileY = 16;
+        this.x = this.tileX * TILE_SIZE + TILE_SIZE / 2;
+        this.y = this.tileY * TILE_SIZE + TILE_SIZE / 2;
+        this.currentDir = DIRECTIONS.STOP;
+        this.requestedDir = DIRECTIONS.STOP;
+        this.mouthAngle = 0.2;
+        this.mouthSpeed = 0.018;
+        this.mouthMax = 0.28;
+        this.mouthMin = 0.04;
+        this.isDying = false;
+        this.deathProgress = 0;
+      }
+
+      get speed() {
+        // Velocidade suave baseada no perfil configurado
+        return this.game.speedSettings.pacman;
+      }
+
+      setRequestedDirection(dir) {
+        this.requestedDir = dir;
+        // Meia-volta imediata sem esperar pelo alinhamento
+        if (
+          (dir.x !== 0 && dir.x === -this.currentDir.x) ||
+          (dir.y !== 0 && dir.y === -this.currentDir.y)
+        ) {
+          this.currentDir = dir;
+        }
+      }
+
+      update() {
+        if (this.isDying) {
+          this.deathProgress += 0.02;
+          return;
+        }
+
+        const centerX = this.tileX * TILE_SIZE + TILE_SIZE / 2;
+        const centerY = this.tileY * TILE_SIZE + TILE_SIZE / 2;
+        const distX = Math.abs(this.x - centerX);
+        const distY = Math.abs(this.y - centerY);
+
+        // Curvas suaves com alinhamento tolerante ao centro
+        if (this.requestedDir !== DIRECTIONS.STOP && this.requestedDir !== this.currentDir) {
+          const nextTileX = this.tileX + this.requestedDir.x;
+          const nextTileY = this.tileY + this.requestedDir.y;
+
+          if (this.game.isWalkable(nextTileX, nextTileY, false)) {
+            // Tolerância generosa de 6px para curvas responsivas
+            if (distX <= 6.0 && distY <= 6.0) {
+              this.x = centerX;
+              this.y = centerY;
+              this.currentDir = this.requestedDir;
+            }
+          }
+        }
+
+        // Movimentação
+        if (this.currentDir !== DIRECTIONS.STOP) {
+          const nextTileX = this.tileX + this.currentDir.x;
+          const nextTileY = this.tileY + this.currentDir.y;
+          const canMoveForward = this.game.isWalkable(nextTileX, nextTileY, false);
+
+          if (!canMoveForward) {
+            // Para no centro do tile se houver colisão com parede
+            if (this.currentDir.x > 0 && this.x >= centerX) { this.x = centerX; this.currentDir = DIRECTIONS.STOP; }
+            if (this.currentDir.x < 0 && this.x <= centerX) { this.x = centerX; this.currentDir = DIRECTIONS.STOP; }
+            if (this.currentDir.y > 0 && this.y >= centerY) { this.y = centerY; this.currentDir = DIRECTIONS.STOP; }
+            if (this.currentDir.y < 0 && this.y <= centerY) { this.y = centerY; this.currentDir = DIRECTIONS.STOP; }
+          }
+
+          if (this.currentDir !== DIRECTIONS.STOP) {
+            this.x += this.currentDir.x * this.speed;
+            this.y += this.currentDir.y * this.speed;
+
+            // Animação da boca
+            this.mouthAngle += this.mouthSpeed;
+            if (this.mouthAngle > this.mouthMax || this.mouthAngle < this.mouthMin) {
+              this.mouthSpeed = -this.mouthSpeed;
+            }
+          }
+        }
+
+        // Túnel warp lateral
+        const totalWidth = COLS * TILE_SIZE;
+        if (this.x < 0) {
+          this.x = totalWidth - 1;
+        } else if (this.x >= totalWidth) {
+          this.x = 0;
+        }
+
+        this.tileX = Math.floor(this.x / TILE_SIZE);
+        this.tileY = Math.floor(this.y / TILE_SIZE);
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+
+        if (this.isDying) {
+          ctx.beginPath();
+          const angle = Math.min(Math.PI, this.deathProgress * Math.PI);
+          ctx.arc(0, 0, TILE_SIZE * 0.46, -Math.PI / 2 + angle, 1.5 * Math.PI - angle);
+          ctx.lineTo(0, 0);
+          ctx.fillStyle = '#ffea00';
+          ctx.fill();
+          ctx.restore();
+          return;
+        }
+
+        ctx.rotate(this.currentDir.angle);
+
+        ctx.beginPath();
+        const start = this.mouthAngle * Math.PI;
+        const end = (2 - this.mouthAngle) * Math.PI;
+        ctx.arc(0, 0, TILE_SIZE * 0.46, start, end);
+        ctx.lineTo(0, 0);
+        ctx.fillStyle = '#ffea00';
+        ctx.shadowColor = 'rgba(255, 234, 0, 0.6)';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    // --- 4. CLASSE GHOST (FANTASMAS) ---
+    class Ghost {
+      constructor(game, name, color, startTileX, startTileY, exitDelayTicks) {
+        this.game = game;
+        this.name = name;
+        this.color = color;
+        this.startTileX = startTileX;
+        this.startTileY = startTileY;
+        this.exitDelayTicks = exitDelayTicks;
+        this.reset();
+      }
+
+      reset() {
+        this.tileX = this.startTileX;
+        this.tileY = this.startTileY;
+        this.x = this.tileX * TILE_SIZE + TILE_SIZE / 2;
+        this.y = this.tileY * TILE_SIZE + TILE_SIZE / 2;
+        this.currentDir = DIRECTIONS.UP;
+        this.state = 'CHASE'; // 'CHASE', 'FRIGHTENED', 'EATEN'
+        this.animTimer = 0;
+        this.exitTimer = this.exitDelayTicks;
+        this.isOutside = (this.startTileY <= 8);
+        this.lastTileX = -1;
+        this.lastTileY = -1;
+      }
+
+      get speed() {
+        if (this.state === 'FRIGHTENED') {
+          return this.game.speedSettings.ghostFrightened;
+        }
+        if (this.state === 'EATEN') {
+          return this.game.speedSettings.ghostEaten;
+        }
+        return this.game.speedSettings.ghostChase;
+      }
+
+      update() {
+        this.animTimer += 0.1;
+
+        // Controle de saída da base central
+        if (!this.isOutside && this.state !== 'EATEN') {
+          if (this.exitTimer > 0) {
+            this.exitTimer--;
+            // Flutua calmamente esperando sua vez
+            this.y = (this.startTileY * TILE_SIZE + TILE_SIZE / 2) + Math.sin(this.animTimer * 1.5) * 3;
+            return;
+          }
+
+          const exitX = 9 * TILE_SIZE + TILE_SIZE / 2;
+          const exitY = 8 * TILE_SIZE + TILE_SIZE / 2;
+
+          if (Math.abs(this.x - exitX) > 1.0) {
+            this.x += (exitX > this.x ? 1 : -1) * this.speed;
+            this.currentDir = exitX > this.x ? DIRECTIONS.RIGHT : DIRECTIONS.LEFT;
+          } else {
+            this.x = exitX;
+            this.y -= this.speed;
+            this.currentDir = DIRECTIONS.UP;
+            if (this.y <= exitY) {
+              this.y = exitY;
+              this.isOutside = true;
+              this.tileX = 9;
+              this.tileY = 8;
+              this.lastTileX = -1;
+              this.lastTileY = -1;
+            }
+          }
+          return;
+        }
+
+        const centerX = this.tileX * TILE_SIZE + TILE_SIZE / 2;
+        const centerY = this.tileY * TILE_SIZE + TILE_SIZE / 2;
+
+        // Decisão de direção ao chegar ao centro de um novo tile
+        if (this.lastTileX !== this.tileX || this.lastTileY !== this.tileY) {
+          const dist = Math.hypot(this.x - centerX, this.y - centerY);
+          const passedCenterX = (this.currentDir.x > 0 && this.x >= centerX) || (this.currentDir.x < 0 && this.x <= centerX);
+          const passedCenterY = (this.currentDir.y > 0 && this.y >= centerY) || (this.currentDir.y < 0 && this.y <= centerY);
+
+          if (dist <= 3.0 || passedCenterX || passedCenterY) {
+            this.x = centerX;
+            this.y = centerY;
+            this.lastTileX = this.tileX;
+            this.lastTileY = this.tileY;
+            this.chooseNextDirection();
+          }
+        }
+
+        this.x += this.currentDir.x * this.speed;
+        this.y += this.currentDir.y * this.speed;
+
+        // Túnel warp
+        const totalWidth = COLS * TILE_SIZE;
+        if (this.x < 0) this.x = totalWidth - 1;
+        else if (this.x >= totalWidth) this.x = 0;
+
+        this.tileX = Math.floor(this.x / TILE_SIZE);
+        this.tileY = Math.floor(this.y / TILE_SIZE);
+
+        // Se estiver comido e retornar à casa, renasce
+        if (this.state === 'EATEN' && this.tileX >= 8 && this.tileX <= 10 && this.tileY >= 9 && this.tileY <= 11) {
+          this.state = 'CHASE';
+          this.isOutside = true;
+          this.currentDir = DIRECTIONS.UP;
+        }
+      }
+
+      chooseNextDirection() {
+        const possibleDirs = [DIRECTIONS.UP, DIRECTIONS.LEFT, DIRECTIONS.DOWN, DIRECTIONS.RIGHT];
+        const validDirs = [];
+
+        let targetX = this.game.pacman.tileX;
+        let targetY = this.game.pacman.tileY;
+
+        if (this.state === 'EATEN') {
+          targetX = 9;
+          targetY = 9;
+        } else if (this.state === 'FRIGHTENED') {
+          targetX = Math.floor(Math.random() * COLS);
+          targetY = Math.floor(Math.random() * ROWS);
+        } else {
+          // IA clássica por personalidade
+          if (this.name === 'Pinky') {
+            targetX += this.game.pacman.currentDir.x * 3;
+            targetY += this.game.pacman.currentDir.y * 3;
+          } else if (this.name === 'Inky') {
+            targetX += (this.tileX % 4) - 2;
+            targetY += (this.tileY % 4) - 2;
+          } else if (this.name === 'Clyde') {
+            const dist = Math.hypot(this.tileX - targetX, this.tileY - targetY);
+            if (dist < 5) {
+              targetX = 1;
+              targetY = 19;
+            }
+          }
+        }
+
+        const oppositeDir = { x: -this.currentDir.x, y: -this.currentDir.y };
+
+        for (const dir of possibleDirs) {
+          if (dir.x === oppositeDir.x && dir.y === oppositeDir.y) continue;
+
+          const nextTileX = this.tileX + dir.x;
+          const nextTileY = this.tileY + dir.y;
+
+          const allowGate = (this.state === 'EATEN' || !this.isOutside);
+          if (this.game.isWalkable(nextTileX, nextTileY, allowGate)) {
+            validDirs.push(dir);
+          }
+        }
+
+        if (validDirs.length === 0) {
+          validDirs.push(oppositeDir);
+        }
+
+        let bestDir = validDirs[0];
+        let minDist = Infinity;
+
+        for (const dir of validDirs) {
+          const testX = this.tileX + dir.x;
+          const testY = this.tileY + dir.y;
+          const dist = Math.hypot(testX - targetX, testY - targetY);
+          if (dist < minDist) {
+            minDist = dist;
+            bestDir = dir;
+          }
+        }
+
+        this.currentDir = bestDir;
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+
+        const r = TILE_SIZE * 0.44;
+
+        if (this.state === 'EATEN') {
+          this.drawEyes(ctx, r);
+          ctx.restore();
+          return;
+        }
+
+        let bodyColor = this.color;
+        if (this.state === 'FRIGHTENED') {
+          const isFlashing = this.game.frightenedTimer < 120 && Math.floor(this.game.frightenedTimer / 10) % 2 === 0;
+          bodyColor = isFlashing ? '#ffffff' : '#1f37ff';
+        }
+
+        ctx.beginPath();
+        ctx.arc(0, -2, r, Math.PI, 0, false);
+        ctx.lineTo(r, r * 0.85);
+
+        const waveStep = (r * 2) / 3;
+        const waveOffset = Math.sin(this.animTimer) * 2;
+
+        for (let i = 0; i < 3; i++) {
+          const startX = r - i * waveStep;
+          const endX = startX - waveStep;
+          const midX = (startX + endX) / 2;
+          const peakY = (i % 2 === 0) ? (r * 0.85 + waveOffset) : (r * 0.85 - waveOffset);
+          ctx.quadraticCurveTo(midX, peakY + 3.5, endX, r * 0.85);
+        }
+
+        ctx.closePath();
+        ctx.fillStyle = bodyColor;
+        ctx.shadowColor = bodyColor;
+        ctx.shadowBlur = (this.state === 'FRIGHTENED') ? 10 : 5;
+        ctx.fill();
+
+        if (this.state !== 'FRIGHTENED') {
+          this.drawEyes(ctx, r);
+        } else {
+          ctx.fillStyle = '#ffea00';
+          ctx.beginPath();
+          ctx.arc(-4, -2, 2, 0, Math.PI * 2);
+          ctx.arc(4, -2, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      drawEyes(ctx, r) {
+        const offset = 2.5;
+        const eyeX = this.currentDir.x * offset;
+        const eyeY = this.currentDir.y * offset;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowBlur = 0;
+        ctx.beginPath();
+        ctx.ellipse(-4 + eyeX * 0.5, -3 + eyeY * 0.5, 3.5, 4.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(4 + eyeX * 0.5, -3 + eyeY * 0.5, 3.5, 4.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#0026ff';
+        ctx.beginPath();
+        ctx.arc(-4 + eyeX, -3 + eyeY, 2, 0, Math.PI * 2);
+        ctx.arc(4 + eyeX, -3 + eyeY, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // --- 5. CONTROLADOR GERAL DO JOGO (GAME ENGINE) ---
+    class GameEngine {
+      constructor() {
+        this.canvas = document.getElementById('gameCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.sound = new AudioSynthesizer();
+
+        // Elementos do DOM
+        this.scoreDisplay = document.getElementById('scoreDisplay');
+        this.highScoreDisplay = document.getElementById('highScoreDisplay');
+        this.livesContainer = document.getElementById('livesContainer');
+        this.statusMessage = document.getElementById('statusMessage');
+        this.statusLed = document.getElementById('statusLed');
+        this.pelletsLeftText = document.getElementById('pelletsLeftText');
+        this.btnRestart = document.getElementById('btnRestart');
+        this.btnPause = document.getElementById('btnPause');
+        this.btnAudio = document.getElementById('btnAudio');
+        this.btnSpeed = document.getElementById('btnSpeed');
+        this.canvasWrapper = document.getElementById('canvasWrapper');
+
+        // Configuração de Velocidade (Normal, Relaxado, Rápido)
+        this.speedModes = [
+          { name: 'Normal', pacman: 1.25, ghostChase: 1.05, ghostFrightened: 0.70, ghostEaten: 2.2 },
+          { name: 'Relaxado', pacman: 0.95, ghostChase: 0.78, ghostFrightened: 0.55, ghostEaten: 1.8 },
+          { name: 'Rápido', pacman: 1.55, ghostChase: 1.30, ghostFrightened: 0.85, ghostEaten: 2.6 }
+        ];
+        this.currentSpeedIndex = 0; // Inicia no modo Normal balanceado
+
+        // Fixed Timestep Engine
+        this.fixedDelta = 1000 / 60; // 16.666 ms (60 atualizações exatas por segundo)
+        this.accumulator = 0;
+        this.lastTime = 0;
+
+        // Estado do Jogo
+        this.score = 0;
+        this.highScore = parseInt(localStorage.getItem('pacman_highscore_val')) || 0;
+        this.lives = 3;
+        this.state = 'READY'; // 'READY', 'PLAYING', 'PAUSED', 'DYING', 'GAMEOVER', 'VICTORY'
+        this.frightenedTimer = 0;
+        this.totalPellets = 0;
+        this.remainingPellets = 0;
+        this.ghostCombo = 1;
+        this.floatingTexts = [];
+        this.particles = [];
+
+        // Inicializa mapa e personagens
+        this.map = JSON.parse(JSON.stringify(DEFAULT_MAP));
+        this.pacman = new Pacman(this);
+
+        this.ghosts = [
+          new Ghost(this, 'Blinky', '#ff2b2b', 9, 8, 0),
+          new Ghost(this, 'Pinky',  '#ff85d0', 9, 10, 80),
+          new Ghost(this, 'Inky',   '#00e5ff', 8, 10, 240),
+          new Ghost(this, 'Clyde',  '#ff9900', 10, 10, 420)
+        ];
+
+        this.initEventListeners();
+        this.resetGame(true);
+
+        requestAnimationFrame((t) => this.gameLoop(t));
+      }
+
+      get speedSettings() {
+        return this.speedModes[this.currentSpeedIndex];
+      }
+
+      pad(n, width = 5) {
+        return (n + '').padStart(width, '0');
+      }
+
+      initEventListeners() {
+        // Teclado
+        window.addEventListener('keydown', (e) => {
+          this.sound.init();
+
+          if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+            e.preventDefault();
+          }
+
+          if (this.state === 'READY') {
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd', 'W', 'A', 'S', 'D'].includes(e.key)) {
+              this.state = 'PLAYING';
+              this.setStatus('Jogando', '#00ffaa');
+            }
+          }
+
+          switch (e.key) {
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+              this.pacman.setRequestedDirection(DIRECTIONS.UP);
+              break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+              this.pacman.setRequestedDirection(DIRECTIONS.DOWN);
+              break;
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+              this.pacman.setRequestedDirection(DIRECTIONS.LEFT);
+              break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+              this.pacman.setRequestedDirection(DIRECTIONS.RIGHT);
+              break;
+            case ' ':
+              this.togglePause();
+              break;
+            case 'r':
+            case 'R':
+              this.resetGame(false);
+              break;
+            case 'm':
+            case 'M':
+              this.toggleAudio();
+              break;
+          }
+        });
+
+        // Botões UI
+        this.btnRestart.addEventListener('click', () => {
+          this.sound.init();
+          this.resetGame(false);
+        });
+
+        this.btnPause.addEventListener('click', () => {
+          this.sound.init();
+          this.togglePause();
+        });
+
+        this.btnAudio.addEventListener('click', () => {
+          this.toggleAudio();
+        });
+
+        this.btnSpeed.addEventListener('click', () => {
+          this.currentSpeedIndex = (this.currentSpeedIndex + 1) % this.speedModes.length;
+          this.btnSpeed.textContent = `⚡ ${this.speedSettings.name}`;
+        });
+
+        // D-Pad Touch para Dispositivos Móveis
+        const setupTouch = (id, dir) => {
+          const btn = document.getElementById(id);
+          if (!btn) return;
+          const trigger = (e) => {
+            e.preventDefault();
+            this.sound.init();
+            if (this.state === 'READY') {
+              this.state = 'PLAYING';
+              this.setStatus('Jogando', '#00ffaa');
+            }
+            this.pacman.setRequestedDirection(dir);
+          };
+          btn.addEventListener('touchstart', trigger, { passive: false });
+          btn.addEventListener('mousedown', trigger);
+        };
+
+        setupTouch('touchUp', DIRECTIONS.UP);
+        setupTouch('touchDown', DIRECTIONS.DOWN);
+        setupTouch('touchLeft', DIRECTIONS.LEFT);
+        setupTouch('touchRight', DIRECTIONS.RIGHT);
+
+        // Suporte a Deslize (Swipe) touch direto no Canvas
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        this.canvasWrapper.addEventListener('touchstart', (e) => {
+          if (e.touches.length > 0) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            this.sound.init();
+            if (this.state === 'READY') {
+              this.state = 'PLAYING';
+              this.setStatus('Jogando', '#00ffaa');
+            }
+          }
+        }, { passive: true });
+
+        this.canvasWrapper.addEventListener('touchend', (e) => {
+          if (e.changedTouches.length > 0) {
+            const diffX = e.changedTouches[0].clientX - touchStartX;
+            const diffY = e.changedTouches[0].clientY - touchStartY;
+            const minSwipe = 14;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+              if (Math.abs(diffX) >= minSwipe) {
+                this.pacman.setRequestedDirection(diffX > 0 ? DIRECTIONS.RIGHT : DIRECTIONS.LEFT);
+              }
+            } else {
+              if (Math.abs(diffY) >= minSwipe) {
+                this.pacman.setRequestedDirection(diffY > 0 ? DIRECTIONS.DOWN : DIRECTIONS.UP);
+              }
+            }
+          }
+        }, { passive: true });
+      }
+
+      togglePause() {
+        if (this.state === 'PLAYING') {
+          this.state = 'PAUSED';
+          this.btnPause.textContent = '▶ Continuar';
+          this.setStatus('Pausado', '#ffea00');
+        } else if (this.state === 'PAUSED') {
+          this.state = 'PLAYING';
+          this.btnPause.textContent = '⏸ Pausar';
+          this.setStatus('Jogando', '#00ffaa');
+        }
+      }
+
+      toggleAudio() {
+        const isSoundOn = this.sound.toggleMute();
+        if (isSoundOn) {
+          this.btnAudio.textContent = '🔊 Som: On';
+          this.btnAudio.classList.remove('muted');
+        } else {
+          this.btnAudio.textContent = '🔇 Som: Off';
+          this.btnAudio.classList.add('muted');
+        }
+      }
+
+      setStatus(text, color) {
+        this.statusMessage.textContent = text;
+        this.statusMessage.style.color = color;
+        this.statusLed.style.background = color;
+        this.statusLed.style.boxShadow = `0 0 8px ${color}`;
+      }
+
+      isWalkable(tileX, tileY, allowGate = false) {
+        if (tileY < 0 || tileY >= ROWS) return false;
+        if (tileX < 0 || tileX >= COLS) return true;
+
+        const tile = this.map[tileY][tileX];
+        if (tile === 1) return false;
+        if (tile === 4 && !allowGate) return false;
+        return true;
+      }
+
+      countPellets() {
+        let count = 0;
+        for (let r = 0; r < ROWS; r++) {
+          for (let c = 0; c < COLS; c++) {
+            if (this.map[r][c] === 0 || this.map[r][c] === 2) count++;
+          }
+        }
+        return count;
+      }
+
+      resetGame(fullReset = true) {
+        if (fullReset) {
+          this.score = 0;
+          this.lives = 3;
+          this.map = JSON.parse(JSON.stringify(DEFAULT_MAP));
+          this.totalPellets = this.countPellets();
+          this.remainingPellets = this.totalPellets;
+        }
+
+        this.pacman.reset();
+        this.ghosts.forEach(g => g.reset());
+        this.frightenedTimer = 0;
+        this.ghostCombo = 1;
+        this.floatingTexts = [];
+        this.particles = [];
+        this.state = 'READY';
+        this.btnPause.textContent = '⏸ Pausar';
+
+        this.updateUI();
+        this.setStatus('Pressione qualquer seta', '#ffea00');
+      }
+
+      updateUI() {
+        this.scoreDisplay.textContent = this.pad(this.score);
+        this.highScoreDisplay.textContent = this.pad(this.highScore);
+        this.pelletsLeftText.textContent = `Pastilhas: ${this.remainingPellets}`;
+
+        this.livesContainer.innerHTML = '';
+        for (let i = 0; i < this.lives; i++) {
+          const sprite = document.createElement('div');
+          sprite.className = 'life-sprite';
+          this.livesContainer.appendChild(sprite);
+        }
+      }
+
+      addScore(pts, x = null, y = null) {
+        this.score += pts;
+        if (this.score > this.highScore) {
+          this.highScore = this.score;
+          localStorage.setItem('pacman_highscore_val', this.highScore);
+        }
+        if (x !== null && y !== null) {
+          this.floatingTexts.push({
+            text: `+${pts}`,
+            x: x,
+            y: y,
+            alpha: 1.0
+          });
+        }
+        this.updateUI();
+      }
+
+      spawnVictoryParticles() {
+        const colors = ['#ffea00', '#00e5ff', '#ff85d0', '#ff2b2b', '#00ffaa'];
+        for (let i = 0; i < 70; i++) {
+          this.particles.push({
+            x: this.canvas.width / 2,
+            y: this.canvas.height / 2,
+            vx: (Math.random() - 0.5) * 8,
+            vy: (Math.random() - 0.5) * 8 - 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: Math.random() * 4 + 2,
+            alpha: 1.0
+          });
+        }
+      }
+
+      handleCollisions() {
+        const pTileX = this.pacman.tileX;
+        const pTileY = this.pacman.tileY;
+
+        // Coleta de pastilhas normais
+        if (pTileX >= 0 && pTileX < COLS && pTileY >= 0 && pTileY < ROWS) {
+          if (this.map[pTileY][pTileX] === 0) {
+            this.map[pTileY][pTileX] = 3;
+            this.addScore(10);
+            this.remainingPellets--;
+            this.sound.playWaka();
+
+            if (this.remainingPellets <= 0) {
+              this.handleVictory();
+              return;
+            }
+          }
+          // Coleta de energizador (Power Pellet)
+          else if (this.map[pTileY][pTileX] === 2) {
+            this.map[pTileY][pTileX] = 3;
+            this.addScore(50, this.pacman.x, this.pacman.y - 12);
+            this.remainingPellets--;
+            this.sound.playPowerPellet();
+
+            this.frightenedTimer = 420; // 7 segundos cravados (60 ticks/s)
+            this.ghostCombo = 1;
+            this.ghosts.forEach(g => {
+              if (g.state !== 'EATEN') g.state = 'FRIGHTENED';
+            });
+
+            if (this.remainingPellets <= 0) {
+              this.handleVictory();
+              return;
+            }
+          }
+        }
+
+        // Colisão com Fantasmas
+        for (const ghost of this.ghosts) {
+          const dist = Math.hypot(this.pacman.x - ghost.x, this.pacman.y - ghost.y);
+          if (dist < TILE_SIZE * 0.70) {
+            if (ghost.state === 'FRIGHTENED') {
+              ghost.state = 'EATEN';
+              const pts = 200 * this.ghostCombo;
+              this.addScore(pts, ghost.x, ghost.y - 10);
+              this.ghostCombo *= 2;
+              this.sound.playEatGhost();
+            } else if (ghost.state === 'CHASE') {
+              this.handlePlayerDeath();
+              break;
+            }
+          }
+        }
+      }
+
+      handlePlayerDeath() {
+        this.pacman.isDying = true;
+        this.state = 'DYING';
+        this.sound.playDeath();
+        this.setStatus('Perdeu uma vida!', '#ff2b2b');
+
+        setTimeout(() => {
+          this.lives--;
+          this.updateUI();
+
+          if (this.lives <= 0) {
+            this.state = 'GAMEOVER';
+            this.setStatus('GAME OVER', '#ff2b2b');
+          } else {
+            this.pacman.reset();
+            this.ghosts.forEach(g => g.reset());
+            this.state = 'READY';
+            this.setStatus('Pressione qualquer seta', '#ffea00');
+          }
+        }, 1200);
+      }
+
+      handleVictory() {
+        this.state = 'VICTORY';
+        this.sound.playVictory();
+        this.spawnVictoryParticles();
+        this.setStatus('VOCÊ VENCEU! PARABÉNS!', '#00ffaa');
+      }
+
+      // Atualização de física a 60 Hz constantes
+      updatePhysics() {
+        if (this.state === 'PLAYING') {
+          this.pacman.update();
+
+          if (this.frightenedTimer > 0) {
+            this.frightenedTimer--;
+            if (this.frightenedTimer === 0) {
+              this.ghosts.forEach(g => {
+                if (g.state === 'FRIGHTENED') g.state = 'CHASE';
+              });
+            }
+          }
+
+          this.ghosts.forEach(g => g.update());
+          this.handleCollisions();
+        } else if (this.state === 'DYING') {
+          this.pacman.update();
+        }
+      }
+
+      drawMap() {
+        for (let r = 0; r < ROWS; r++) {
+          for (let c = 0; c < COLS; c++) {
+            const tile = this.map[r][c];
+            const x = c * TILE_SIZE;
+            const y = r * TILE_SIZE;
+
+            if (tile === 1) {
+              this.ctx.fillStyle = '#0b0e2b';
+              this.ctx.strokeStyle = '#2b33ea';
+              this.ctx.lineWidth = 2;
+              this.ctx.shadowColor = 'rgba(43, 51, 234, 0.4)';
+              this.ctx.shadowBlur = 4;
+
+              this.ctx.fillRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+              this.ctx.strokeRect(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+              this.ctx.shadowBlur = 0;
+            } else if (tile === 4) {
+              this.ctx.fillStyle = 'rgba(255, 133, 208, 0.7)';
+              this.ctx.fillRect(x, y + TILE_SIZE / 2 - 2, TILE_SIZE, 4);
+            } else if (tile === 0) {
+              this.ctx.fillStyle = '#ffb897';
+              this.ctx.beginPath();
+              this.ctx.arc(x + TILE_SIZE / 2, y + TILE_SIZE / 2, 2.7, 0, Math.PI * 2);
+              this.ctx.fill();
+            } else if (tile === 2) {
+              const pulse = Math.sin(Date.now() / 140) * 1.5;
+              this.ctx.fillStyle = '#ffffff';
+              this.ctx.shadowColor = '#ffffff';
+              this.ctx.shadowBlur = 8;
+              this.ctx.beginPath();
+              this.ctx.arc(x + TILE_SIZE / 2, y + TILE_SIZE / 2, 5.8 + pulse, 0, Math.PI * 2);
+              this.ctx.fill();
+              this.ctx.shadowBlur = 0;
+            }
+          }
+        }
+      }
+
+      drawEffects() {
+        for (let i = this.floatingTexts.length - 1; i >= 0; i--) {
+          const ft = this.floatingTexts[i];
+          this.ctx.save();
+          this.ctx.font = '10px "Press Start 2P"';
+          this.ctx.fillStyle = `rgba(0, 229, 255, ${ft.alpha})`;
+          this.ctx.textAlign = 'center';
+          this.ctx.fillText(ft.text, ft.x, ft.y);
+          this.ctx.restore();
+
+          ft.y -= 0.6;
+          ft.alpha -= 0.02;
+          if (ft.alpha <= 0) this.floatingTexts.splice(i, 1);
+        }
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          this.ctx.save();
+          this.ctx.globalAlpha = p.alpha;
+          this.ctx.fillStyle = p.color;
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          this.ctx.fill();
+          this.ctx.restore();
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.15;
+          p.alpha -= 0.012;
+          if (p.alpha <= 0) this.particles.splice(i, 1);
+        }
+      }
+
+      drawOverlays() {
+        if (this.state === 'READY') {
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.ctx.font = '14px "Press Start 2P"';
+          this.ctx.fillStyle = '#ffea00';
+          this.ctx.textAlign = 'center';
+          this.ctx.shadowColor = 'rgba(255, 234, 0, 0.8)';
+          this.ctx.shadowBlur = 10;
+          this.ctx.fillText('PRONTO!', this.canvas.width / 2, this.canvas.height / 2 - 15);
+
+          this.ctx.font = '9px "Press Start 2P"';
+          this.ctx.fillStyle = '#ffffff';
+          this.ctx.shadowBlur = 4;
+          this.ctx.fillText('USE AS SETAS', this.canvas.width / 2, this.canvas.height / 2 + 15);
+        } else if (this.state === 'PAUSED') {
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.72)';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.ctx.font = '15px "Press Start 2P"';
+          this.ctx.fillStyle = '#00e5ff';
+          this.ctx.textAlign = 'center';
+          this.ctx.shadowColor = 'rgba(0, 229, 255, 0.9)';
+          this.ctx.shadowBlur = 12;
+          this.ctx.fillText('JOGO PAUSADO', this.canvas.width / 2, this.canvas.height / 2);
+        } else if (this.state === 'GAMEOVER') {
+          this.ctx.fillStyle = 'rgba(10, 0, 0, 0.82)';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.ctx.font = '18px "Press Start 2P"';
+          this.ctx.fillStyle = '#ff2b2b';
+          this.ctx.textAlign = 'center';
+          this.ctx.shadowColor = 'rgba(255, 43, 43, 0.9)';
+          this.ctx.shadowBlur = 15;
+          this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 20);
+
+          this.ctx.font = '8px "Press Start 2P"';
+          this.ctx.fillStyle = '#ffffff';
+          this.ctx.shadowBlur = 5;
+          this.ctx.fillText('PRESSIONE [R] OU REINICIAR', this.canvas.width / 2, this.canvas.height / 2 + 15);
+        } else if (this.state === 'VICTORY') {
+          this.ctx.fillStyle = 'rgba(0, 20, 10, 0.82)';
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.ctx.font = '16px "Press Start 2P"';
+          this.ctx.fillStyle = '#00ffaa';
+          this.ctx.textAlign = 'center';
+          this.ctx.shadowColor = 'rgba(0, 255, 170, 0.9)';
+          this.ctx.shadowBlur = 15;
+          this.ctx.fillText('VOCÊ VENCEU!', this.canvas.width / 2, this.canvas.height / 2 - 20);
+
+          this.ctx.font = '9px "Press Start 2P"';
+          this.ctx.fillStyle = '#ffea00';
+          this.ctx.shadowBlur = 6;
+          this.ctx.fillText(`PONTOS: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 12);
+        }
+      }
+
+      gameLoop(currentTime) {
+        if (!this.lastTime) this.lastTime = currentTime;
+        let delta = currentTime - this.lastTime;
+        this.lastTime = currentTime;
+
+        // Limita a 100ms para evitar saltos ao trocar de aba
+        if (delta > 100) delta = 100;
+
+        this.accumulator += delta;
+
+        // Fixed Timestep: garante exatos 60 ticks de física/segundo independente da taxa de atualização do monitor
+        while (this.accumulator >= this.fixedDelta) {
+          this.updatePhysics();
+          this.accumulator -= this.fixedDelta;
+        }
+
+        // Renderização suave no frame rate do monitor
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.drawMap();
+        this.ghosts.forEach(g => g.draw(this.ctx));
+        this.pacman.draw(this.ctx);
+        this.drawEffects();
+        this.drawOverlays();
+
+        requestAnimationFrame((t) => this.gameLoop(t));
+      }
+    }
+
+    // Inicialização ao carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+      new GameEngine();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado Final &amp; Medalha | Missão: Mundo das Redes</title>
+  <meta name="description" content="Resultado final do questionário e conquista de medalha no jogo educativo Missão: Mundo das Redes.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body class="cyber-grid-bg">
+
+  <!-- Canvas Leve de Confetes -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Resultado Final</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="mapa.html" class="nav-link-btn">
+          <span>🗺️</span> Ir para o Mapa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL: RESULTADO E CONQUISTA DE MEDALHA -->
+  <main class="results-page-wrapper">
+    
+    <section class="result-card-main">
+
+      <!-- ÁREA DA MEDALHA COM BRILHO ANIMADO -->
+      <div class="medal-display-area" aria-live="polite">
+        <div class="medal-sunburst-bg medal-sunburst" aria-hidden="true"></div>
+        <div id="resMedalDisplay">
+          <!-- SVG da Medalha injetado dinamicamente via js/results.js -->
+        </div>
+      </div>
+
+      <!-- NOTA FINAL EM DESTAQUE -->
+      <div class="score-highlight-box">
+        <span class="score-number" id="resScoreVal">100</span>
+        <span class="score-title-label">Pontos Conquistados</span>
+      </div>
+
+      <!-- MENSAGEM PEDAGÓGICA E MEDALHA -->
+      <div class="result-message-box">
+        <h2 id="resMedalTitle" style="font-size: 1.6rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          MEDALHA DE OURO
+        </h2>
+        <p id="resMedalSubtitle" style="font-size: 1.15rem; color: #e2e8f0;">
+          Fantástico! Você dominou os conceitos básicos das redes de computadores!
+        </p>
+      </div>
+
+      <!-- ESTATÍSTICAS DETALHADAS -->
+      <div class="result-stats-grid">
+        <div class="stat-box stat-correct">
+          <span class="stat-val" id="resCountCorrect">5/5</span>
+          <span class="stat-lbl">Acertos</span>
+        </div>
+        <div class="stat-box stat-wrong">
+          <span class="stat-val" id="resCountWrong">0/5</span>
+          <span class="stat-lbl">Erros</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="resBestScoreVal" style="color: var(--accent-neon);">100/100</span>
+          <span class="stat-lbl">Melhor Nota Salva</span>
+        </div>
+      </div>
+
+      <!-- BOTÕES DE AÇÃO -->
+      <div class="result-actions-group">
+        <a href="quiz.html" class="btn btn-primary btn-lg" id="btnRetryQuiz">
+          <span>🔄</span> REFAZER QUESTIONÁRIO
+        </a>
+        <a href="mapa.html" class="btn btn-secondary btn-lg">
+          <span>🗺️</span> VOLTAR AO MAPA
+        </a>
+        <a href="missao-redes.html" class="btn btn-accent btn-lg">
+          <span>📚</span> REVISAR MISSÕES
+        </a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/results.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 2: Memória RAM | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 02</span>
+          </a>
+          <div class="site-subtitle">Torre da Memória RAM: A Mesa de Trabalho Ultrarrápida</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link active">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="ram-title">
+        <div>
+          <span class="header-badge">Módulo 02 • Memória Rápida e Volátil</span>
+          <h1 id="ram-title">A Memória RAM</h1>
+          <p>
+            A Random Access Memory (RAM) é a mesa de trabalho do computador: ela guarda temporariamente os programas e dados que estão em uso no momento exato em que você os utiliza.
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          💾
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre a Memória RAM">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            Por que a Memória RAM é Essencial?
+          </h2>
+          <p>
+            Imagine que o processador é um desenhista super-rápido. Se todos os lápis e réguas estivessem guardados no armário do outro lado da sala (o SSD ou HD), ele demoraria muito tempo para dar cada traço.
+          </p>
+          <p>
+            A <strong>Memória RAM</strong> é como a mesa de trabalho logo em frente ao desenhista: quando você abre um jogo ou um vídeo, o computador busca os dados no disco e espalha na RAM para que a CPU acesse quase que instantaneamente!
+          </p>
+
+          <!-- O Conceito de Volatilidade -->
+          <div class="box-curiosidade" style="border-left-color: var(--coral);">
+            <div class="box-curiosidade-header" style="color: var(--coral);">
+              <span>⚠️</span>
+              <h4>Atenção: A RAM é Volátil!</h4>
+            </div>
+            <p>
+              Volátil significa que ela <strong>depende de eletricidade viva</strong> para reter qualquer dado. Se faltar energia ou o computador for reiniciado, tudo o que estava apenas na RAM se apaga no mesmo instante! Por isso é fundamental salvar arquivos no SSD antes de desligar.
+            </p>
+          </div>
+
+          <!-- Exemplo do Cotidiano -->
+          <div class="box-cotidiano">
+            <div class="box-cotidiano-header">
+              <span>🌐</span>
+              <h4>Exemplo do Dia a Dia: Abas do Navegador</h4>
+            </div>
+            <p>
+              Sabe quando você abre 10 abas no navegador, entra no jogo e deixa uma música tocando ao mesmo tempo? Cada aba aberta ocupa alguns blocos da sua RAM. Quanto mais memória RAM seu computador tem (por exemplo, 8 GB ou 16 GB), mais tarefas ele faz juntas sem engasgar!
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="processador.html" class="btn btn-outline btn-sm">⬅️ CPU</a>
+            <a href="placa-mae.html" class="btn btn-turquesa btn-sm">Próximo: Placa-Mãe ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa da RAM -->
+        <section class="interactive-stage" aria-labelledby="ram-sim-title">
+          <h2 id="ram-sim-title" class="stage-title">
+            <span>🔬</span> Bancada de Alocação de Memória RAM
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1rem;">
+            Abra diferentes programas para ocupar os blocos da RAM e teste desligar a máquina para ver a volatilidade acontecer:
+          </p>
+
+          <div class="ram-stick-container">
+            <!-- Pente de Memória RAM Visual -->
+            <div class="ram-stick">
+              <div style="display: flex; justify-content: space-between; align-items: center; color: var(--creme-claro); font-family: var(--fonte-titulos); font-size: 0.85rem;">
+                <span>DDR5 HIGH SPEED 16GB</span>
+                <span id="ram-usage-counter" class="indicador" style="color: var(--verde-lima);">0 de 8 Blocos em Uso (0%)</span>
+              </div>
+
+              <!-- Grade com os 8 Blocos de Memória -->
+              <div id="ram-slots-board" class="ram-slots-grid" role="region" aria-label="Blocos da Memória RAM"></div>
+
+              <!-- Pinos Dourados de Conexão -->
+              <div class="ram-stick-pins"></div>
+            </div>
+
+            <!-- Menu de Abrir Aplicativos -->
+            <div>
+              <span style="font-weight: 700; font-size: 0.85rem; color: var(--verde-floresta); display: block; margin-bottom: 0.5rem;">
+                Escolha os programas para abrir na memória:
+              </span>
+              <div class="ram-apps-menu">
+                <button type="button" class="btn btn-outline btn-sm" data-ram-app="browser">
+                  🌐 Navegador (2 Blocos)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" data-ram-app="game">
+                  🎮 Jogo 3D (3 Blocos)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" data-ram-app="music">
+                  🎵 Música (1 Bloco)
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" data-ram-app="editor">
+                  🎨 Editor (2 Blocos)
+                </button>
+              </div>
+            </div>
+
+            <!-- Controles de Fechar / Desligar -->
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+              <button id="ram-btn-close" class="btn btn-outline btn-sm" style="flex: 1;">
+                ✖️ Fechar Último App
+              </button>
+              <button id="ram-btn-powercut" class="btn btn-coral btn-sm" style="flex: 1;">
+                🔌 Desligar da Tomada (Testar Volatilidade)
+              </button>
+            </div>
+          </div>
+
+          <div class="box-cotidiano" style="margin-top: 1.25rem;">
+            <p style="font-size: 0.85rem; margin: 0;">
+              <strong>Dica do Especialista:</strong> Fechar programas que você não está usando libera espaço na RAM para que o jogo ou aplicativo atual rode mais suave!
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Memória RAM</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

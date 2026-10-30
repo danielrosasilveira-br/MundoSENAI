@@ -1,0 +1,396 @@
+/* ==========================================================================
+   PORTAL PRINCIPAL — ESTILOS ESPECÍFICOS (css/index.css)
+   ========================================================================== */
+
+/* Hero Banner */
+.hero-section {
+  background: linear-gradient(135deg, #071329 0%, #0c234a 60%, #005caa 100%);
+  color: #ffffff;
+  padding: 4.5rem 1.5rem 6rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: 
+    radial-gradient(#00d2ff 1.5px, transparent 1.5px),
+    radial-gradient(#ffffff 1px, transparent 1px);
+  background-size: 40px 40px, 20px 20px;
+  background-position: 0 0, 20px 20px;
+}
+
+.hero-glow-1 {
+  position: absolute;
+  top: -100px;
+  left: 20%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 92, 170, 0.45) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  bottom: -120px;
+  right: 15%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(227, 6, 19, 0.25) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #38bdf8;
+  font-family: var(--font-tech);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-tech);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 40%, #cbe4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-title span {
+  color: #38bdf8;
+  -webkit-text-fill-color: #38bdf8;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  color: #cbd5e1;
+  font-weight: 400;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+.hero-highlights {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.highlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.highlight-badge strong {
+  color: #ffffff;
+}
+
+/* Container de Cards do Portal */
+.portal-main {
+  max-width: 1240px;
+  margin: -3.5rem auto 5rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  width: 100%;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 2rem;
+}
+
+/* Card Individual */
+.portal-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-slow);
+  position: relative;
+}
+
+.portal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--card-accent, var(--senai-blue));
+  transition: height var(--transition-fast);
+}
+
+.portal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 32px rgba(0, 30, 80, 0.16);
+  border-color: rgba(0, 92, 170, 0.3);
+}
+
+.portal-card:hover::before {
+  height: 8px;
+}
+
+/* Cores temáticas para cada card */
+.card-pacman {
+  --card-accent: #f59e0b;
+}
+
+.card-plataforma {
+  --card-accent: #10b981;
+}
+
+.card-redes {
+  --card-accent: #005caa;
+}
+
+.card-hardware {
+  --card-accent: #e30613;
+}
+
+/* Ilustração do Card */
+.card-visual-wrapper {
+  background: linear-gradient(180deg, var(--bg-alt) 0%, #ffffff 100%);
+  padding: 2rem 1.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-svg-illustration {
+  width: 100%;
+  max-width: 220px;
+  height: 140px;
+  transition: transform var(--transition-normal);
+}
+
+.portal-card:hover .card-svg-illustration {
+  transform: scale(1.06);
+}
+
+/* Conteúdo do Card */
+.card-body {
+  padding: 1.75rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-category {
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--card-accent, var(--senai-blue));
+  margin-bottom: 0.4rem;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.feat-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.card-action-btn {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.card-pacman .card-action-btn {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #ffffff;
+}
+.card-pacman:hover .card-action-btn {
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.4);
+  filter: brightness(1.1);
+}
+
+.card-plataforma .card-action-btn {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+}
+.card-plataforma:hover .card-action-btn {
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.4);
+  filter: brightness(1.1);
+}
+
+.card-redes .card-action-btn {
+  background: linear-gradient(135deg, var(--senai-blue) 0%, var(--senai-blue-deep) 100%);
+  color: #ffffff;
+}
+.card-redes:hover .card-action-btn {
+  box-shadow: 0 4px 14px var(--senai-blue-glow);
+  filter: brightness(1.1);
+}
+
+.card-hardware .card-action-btn {
+  background: linear-gradient(135deg, var(--senai-red) 0%, var(--senai-red-deep) 100%);
+  color: #ffffff;
+}
+.card-hardware:hover .card-action-btn {
+  box-shadow: 0 4px 14px var(--senai-red-glow);
+  filter: brightness(1.1);
+}
+
+/* Painel de Estatísticas / Conquistas Rápidas */
+.portal-stats-bar {
+  margin-top: 3.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.stats-intro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stats-icon-box {
+  width: 48px;
+  height: 48px;
+  background: var(--senai-blue-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--senai-blue);
+  font-size: 1.5rem;
+}
+
+.stats-intro h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.stats-intro p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.stats-items-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-metric-val {
+  font-family: var(--font-tech);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--senai-blue);
+  line-height: 1;
+}
+
+.stat-metric-lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1.25rem 4.5rem;
+  }
+  .portal-stats-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+}

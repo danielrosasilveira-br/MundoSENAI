@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa da Cidade Inteligente | Missão: Mundo das Redes</title>
+  <meta name="description" content="Mapa de fases interativo da Cidade Inteligente para o jogo educativo Missão: Mundo das Redes.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/map.css">
+</head>
+<body class="cyber-grid-bg">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Mapa da Cidade</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="../index.html" class="nav-link-btn">
+          <span>🏠</span> Início
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL: MAPA DA CIDADE INTELIGENTE -->
+  <main class="map-page-wrapper">
+    
+    <!-- PAINEL SUPERIOR DO MAPA (HUD) -->
+    <section class="map-hud" aria-label="Painel de controle do mapa e progresso do jogador">
+      <div class="map-hud-info">
+        <h1 class="map-hud-title">
+          <span>Mapa da Cidade Inteligente</span>
+          <span class="city-badge">Fases &amp; Missões</span>
+        </h1>
+        <p class="map-hud-desc">Escolha um ponto de exploração para cumprir missões e conectar a cidade!</p>
+      </div>
+
+      <!-- Barra de Progresso Geral -->
+      <div class="map-hud-progress-block">
+        <div class="hud-progress-container">
+          <div class="hud-progress-labels">
+            <span style="color: #cbd5e1; font-weight: 700;">Progresso Geral:</span>
+            <span class="hud-progress-percent-val" style="color: var(--accent-neon); font-weight: 900;">0%</span>
+          </div>
+          <div class="hud-progress-track">
+            <div class="hud-progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação do Mapa -->
+      <div class="map-hud-buttons">
+        <button type="button" class="btn btn-danger btn-sm" data-open-modal="modalResetConfirm" title="Apagar todo o progresso do navegador">
+          <span>🔄</span> Reiniciar Progresso
+        </button>
+      </div>
+    </section>
+
+    <!-- ÁREA DO MAPA INTERATIVO DA CIDADE INTELIGENTE -->
+    <div class="smart-city-canvas-container">
+      
+      <!-- Linhas SVG de Conexão entre Nós do Mapa (Visível em Desktop) -->
+      <svg class="city-connections-svg" viewBox="0 0 1100 550" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Conexão Central -> Bairro Conectado -->
+        <path d="M 230 110 C 320 110, 360 170, 450 170" fill="none" stroke="#00d2ff" stroke-width="3" stroke-dasharray="6 4" class="flow-cable"/>
+        <!-- Conexão Bairro Conectado -> Centro de Internet -->
+        <path d="M 640 170 C 720 170, 780 110, 870 110" fill="none" stroke="#00f5d4" stroke-width="3" stroke-dasharray="6 4" class="flow-cable"/>
+        <!-- Conexão Bairro Conectado -> Laboratório -->
+        <path d="M 450 240 C 380 320, 300 350, 260 400" fill="none" stroke="#ffbe0b" stroke-width="3" stroke-dasharray="6 4" class="flow-cable"/>
+        <!-- Conexão Centro de Internet -> Arena Final -->
+        <path d="M 870 180 C 870 280, 800 350, 780 400" fill="none" stroke="#00f5d4" stroke-width="3" stroke-dasharray="6 4" class="flow-cable"/>
+      </svg>
+
+      <!-- GRADE DE NÓS DE MISSÃO (5 LOCAIS ESTRATÉGICOS) -->
+      <div class="city-nodes-grid" id="cityNodesGrid">
+
+        <!-- NÓ 1: CENTRAL DE CONEXÕES (INTRODUÇÃO) -->
+        <article class="mission-node node-pos-1 status-completed" id="nodeCentralConexoes">
+          <div class="node-header">
+            <span class="node-number-badge"><span>📍</span> Local 1</span>
+            <span class="status-badge badge-completed"><span>✅</span> Concluído</span>
+          </div>
+          <div class="node-body">
+            <div class="node-icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+            <div class="node-content-info">
+              <h3>Central de Conexões</h3>
+              <p>O ponto de partida da aventura! Boas-vindas e introdução ao mundo digital.</p>
+            </div>
+          </div>
+          <div class="node-footer">
+            <a href="../index.html" class="btn btn-secondary btn-sm">Rever Introdução</a>
+          </div>
+        </article>
+
+        <!-- NÓ 2: BAIRRO CONECTADO (MISSÃO 1 - REDES DE COMPUTADORES) -->
+        <article class="mission-node node-pos-2 status-available" id="nodeMissao1">
+          <div class="node-header">
+            <span class="node-number-badge"><span>⭐</span> Missão 1</span>
+            <span class="status-badge badge-available" id="badgeMissao1"><span>⚡</span> Disponível</span>
+          </div>
+          <div class="node-body">
+            <div class="node-icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 6h16v10H4V6zm16-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>
+            </div>
+            <div class="node-content-info">
+              <h3>Bairro Conectado</h3>
+              <p>O que são redes de computadores? Descubra como computadores e celulares trocam informações.</p>
+            </div>
+          </div>
+          <div class="node-footer" id="footerMissao1">
+            <a href="missao-redes.html" class="btn btn-primary btn-sm">Iniciar Missão 1</a>
+          </div>
+        </article>
+
+        <!-- NÓ 3: CENTRO DE INTERNET (MISSÃO 2 - INTERNET E SERVIDORES) -->
+        <article class="mission-node node-pos-3 status-locked" id="nodeMissao2">
+          <div class="node-header">
+            <span class="node-number-badge"><span>🌐</span> Missão 2</span>
+            <span class="status-badge badge-locked" id="badgeMissao2"><span>🔒</span> Bloqueada</span>
+          </div>
+          <div class="node-body">
+            <div class="node-icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <div class="node-content-info">
+              <h3>Centro de Internet</h3>
+              <p>A Grande Rede Mundial! Como uma solicitação viaja até um servidor e abre um site.</p>
+            </div>
+          </div>
+          <div class="node-footer" id="footerMissao2">
+            <span class="unlock-hint"><span>🔒</span> Conclua a Missão 1 para liberar</span>
+          </div>
+        </article>
+
+        <!-- NÓ 4: LABORATÓRIO DE REDES (ATIVIDADE PRÁTICA INTERATIVA) -->
+        <article class="mission-node node-pos-4 status-available" id="nodeLab">
+          <div class="node-header">
+            <span class="node-number-badge"><span>🔬</span> Prática</span>
+            <span class="status-badge badge-available" id="badgeLab"><span>⚡</span> Disponível</span>
+          </div>
+          <div class="node-body">
+            <div class="node-icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 2h2v4h-2V5zm0 6h2v2h-2v-2zm-4 4h10v2H8v-2z"/></svg>
+            </div>
+            <div class="node-content-info">
+              <h3>Laboratório de Redes</h3>
+              <p>Atividade complementar: teste conexões com cabos de rede e transmissões sem fio por Wi-Fi.</p>
+            </div>
+          </div>
+          <div class="node-footer" id="footerLab">
+            <a href="laboratorio.html" class="btn btn-secondary btn-sm">Abrir Laboratório</a>
+          </div>
+        </article>
+
+        <!-- NÓ 5: ARENA DO CONHECIMENTO (QUESTIONÁRIO FINAL) -->
+        <article class="mission-node node-pos-5 status-locked" id="nodeQuiz">
+          <div class="node-header">
+            <span class="node-number-badge"><span>🏆</span> Desafio Final</span>
+            <span class="status-badge badge-locked" id="badgeQuiz"><span>🔒</span> Bloqueada</span>
+          </div>
+          <div class="node-body">
+            <div class="node-icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+            </div>
+            <div class="node-content-info">
+              <h3>Arena do Conhecimento</h3>
+              <p>Responda às 5 perguntas finais, conquiste sua nota e garanta sua Medalha de Ouro!</p>
+            </div>
+          </div>
+          <div class="node-footer" id="footerQuiz">
+            <span class="unlock-hint"><span>🔒</span> Conclua as Missões 1 e 2 para liberar</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DE CONFIRMAÇÃO DE RESET -->
+  <div class="modal-overlay" id="modalResetConfirm" role="dialog" aria-modal="true" aria-labelledby="modalResetTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="modalResetTitle" style="display: flex; align-items: center; gap: 0.5rem; color: #ef4444; font-size: 1.35rem;">
+          <span>⚠️</span> Reiniciar Progresso?
+        </h2>
+        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fechar modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza de que deseja <strong>apagar todas as missões concluídas e notas salvas</strong>?</p>
+        <p style="font-size: 0.9rem; color: #94a3b8;">Essa ação não pode ser desfeita. Você voltará ao início da aventura.</p>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary btn-sm" data-close-modal>Cancelar</button>
+        <button type="button" class="btn btn-danger btn-sm" id="btnConfirmReset">Sim, Reiniciar Progresso</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/navigation.js"></script>
+
+  <!-- Script Específico do Mapa para Sincronização dos Nós -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      function syncMapStates() {
+        if (!window.ProgressManager) return;
+        const states = window.ProgressManager.getMissionStates();
+
+        // 1. Missão 1
+        const nodeM1 = document.getElementById('nodeMissao1');
+        const badgeM1 = document.getElementById('badgeMissao1');
+        const footerM1 = document.getElementById('footerMissao1');
+        if (nodeM1 && badgeM1 && footerM1) {
+          nodeM1.className = `mission-node node-pos-2 status-${states.missao1}`;
+          if (states.missao1 === 'completed') {
+            badgeM1.className = 'status-badge badge-completed';
+            badgeM1.innerHTML = '<span>✅</span> Concluída';
+            footerM1.innerHTML = '<a href="missao-redes.html" class="btn btn-secondary btn-sm">Repetir Missão</a>';
+          } else {
+            badgeM1.className = 'status-badge badge-available';
+            badgeM1.innerHTML = '<span>⚡</span> Disponível';
+            footerM1.innerHTML = '<a href="missao-redes.html" class="btn btn-primary btn-sm">Iniciar Missão 1</a>';
+          }
+        }
+
+        // 2. Missão 2
+        const nodeM2 = document.getElementById('nodeMissao2');
+        const badgeM2 = document.getElementById('badgeMissao2');
+        const footerM2 = document.getElementById('footerMissao2');
+        if (nodeM2 && badgeM2 && footerM2) {
+          nodeM2.className = `mission-node node-pos-3 status-${states.missao2}`;
+          if (states.missao2 === 'completed') {
+            badgeM2.className = 'status-badge badge-completed';
+            badgeM2.innerHTML = '<span>✅</span> Concluída';
+            footerM2.innerHTML = '<a href="missao-internet.html" class="btn btn-secondary btn-sm">Repetir Missão</a>';
+          } else if (states.missao2 === 'available') {
+            badgeM2.className = 'status-badge badge-available';
+            badgeM2.innerHTML = '<span>⚡</span> Disponível';
+            footerM2.innerHTML = '<a href="missao-internet.html" class="btn btn-primary btn-sm">Iniciar Missão 2</a>';
+          } else {
+            badgeM2.className = 'status-badge badge-locked';
+            badgeM2.innerHTML = '<span>🔒</span> Bloqueada';
+            footerM2.innerHTML = '<span class="unlock-hint"><span>🔒</span> Conclua a Missão 1 para liberar</span>';
+          }
+        }
+
+        // 3. Laboratório
+        const nodeLab = document.getElementById('nodeLab');
+        const badgeLab = document.getElementById('badgeLab');
+        const footerLab = document.getElementById('footerLab');
+        if (nodeLab && badgeLab && footerLab) {
+          nodeLab.className = `mission-node node-pos-4 status-${states.lab}`;
+          if (states.lab === 'completed') {
+            badgeLab.className = 'status-badge badge-completed';
+            badgeLab.innerHTML = '<span>✅</span> Explorado';
+            footerLab.innerHTML = '<a href="laboratorio.html" class="btn btn-secondary btn-sm">Reabrir Laboratório</a>';
+          } else {
+            badgeLab.className = 'status-badge badge-available';
+            badgeLab.innerHTML = '<span>⚡</span> Disponível';
+            footerLab.innerHTML = '<a href="laboratorio.html" class="btn btn-secondary btn-sm">Abrir Laboratório</a>';
+          }
+        }
+
+        // 4. Arena do Conhecimento (Quiz)
+        const nodeQuiz = document.getElementById('nodeQuiz');
+        const badgeQuiz = document.getElementById('badgeQuiz');
+        const footerQuiz = document.getElementById('footerQuiz');
+        if (nodeQuiz && badgeQuiz && footerQuiz) {
+          nodeQuiz.className = `mission-node node-pos-5 status-${states.quiz}`;
+          if (states.quiz === 'completed') {
+            badgeQuiz.className = 'status-badge badge-completed';
+            badgeQuiz.innerHTML = '<span>✅</span> Concluído';
+            footerQuiz.innerHTML = '<a href="resultado.html" class="btn btn-accent btn-sm">Ver Minha Medalha</a>';
+          } else if (states.quiz === 'available') {
+            badgeQuiz.className = 'status-badge badge-available';
+            badgeQuiz.innerHTML = '<span>⚡</span> Disponível';
+            footerQuiz.innerHTML = '<a href="quiz.html" class="btn btn-accent btn-sm">Entrar na Arena</a>';
+          } else {
+            badgeQuiz.className = 'status-badge badge-locked';
+            badgeQuiz.innerHTML = '<span>🔒</span> Bloqueada';
+            footerQuiz.innerHTML = '<span class="unlock-hint"><span>🔒</span> Conclua as Missões 1 e 2 para liberar</span>';
+          }
+        }
+      }
+
+      syncMapStates();
+      window.addEventListener('gamestate:updated', syncMapStates);
+      window.addEventListener('gamestate:reset', syncMapStates);
+    });
+  </script>
+</body>
+</html>

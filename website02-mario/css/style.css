@@ -1,0 +1,596 @@
+/* ==========================================================================
+   Super Mario World - Edição Especial SENAI
+   Folha de Estilos Moderna, Responsiva e Temática de Jogos
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Press+Start+2P&display=swap');
+
+:root {
+    --senai-red: #ED1C24;
+    --senai-red-glow: rgba(237, 28, 36, 0.45);
+    --senai-blue: #002B7F;
+    --senai-cyan: #00E5FF;
+    --senai-cyan-glow: rgba(0, 229, 255, 0.4);
+    --gold: #FFD700;
+    --bg-dark: #0a0e17;
+    --bg-panel: rgba(16, 24, 40, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --text-main: #FFFFFF;
+    --text-muted: #94A3B8;
+    --font-retro: 'Press Start 2P', monospace;
+    --font-sans: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(237, 28, 36, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(0, 229, 255, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, #070a10 0%, #0d1320 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+/* Container do Jogo */
+.game-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Barra Superior / Cabeçalho */
+.game-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 14px;
+    background: var(--bg-panel);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.brand-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-badge img {
+    height: 26px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.brand-badge span {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #FFFFFF, #E2E8F0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-header {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-header:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+.btn-header.active {
+    border-color: var(--senai-cyan);
+    box-shadow: 0 0 10px var(--senai-cyan-glow);
+}
+
+/* Área do Canvas e HUD */
+.canvas-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 80vh;
+    background: #000000;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.7),
+        0 0 0 2px rgba(255, 255, 255, 0.1),
+        0 0 25px rgba(237, 28, 36, 0.2);
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* HUD Superior Overlay estilo Retro Arcade */
+.hud-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 10;
+    font-family: var(--font-retro);
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.75rem;
+}
+
+.hud-label {
+    color: #F8FAFC;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+.hud-value {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.hud-item.coins .hud-value {
+    color: #FFEB3B;
+}
+
+.hud-item.lives .hud-value {
+    color: #FF5252;
+}
+
+/* Badge de Superpoder SENAI no HUD */
+.senai-power-badge {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 15, 30, 0.9);
+    border: 2px solid var(--senai-cyan);
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 15px var(--senai-cyan-glow), inset 0 0 10px rgba(0, 229, 255, 0.2);
+    animation: pulseBorder 1.2s infinite alternate ease-in-out;
+    pointer-events: none;
+    z-index: 12;
+}
+
+@keyframes pulseBorder {
+    0% {
+        border-color: var(--senai-cyan);
+        box-shadow: 0 0 10px var(--senai-cyan-glow);
+    }
+    100% {
+        border-color: var(--senai-red);
+        box-shadow: 0 0 18px var(--senai-red-glow);
+    }
+}
+
+.senai-badge-text {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
+}
+
+.senai-power-bar {
+    width: 90px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.senai-power-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--senai-red), var(--senai-cyan));
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+.senai-power-time {
+    font-family: var(--font-retro);
+    font-size: 0.65rem;
+    color: var(--senai-cyan);
+}
+
+/* Modais e Telas de Overlay (Start, Game Over, Vitória, Pause) */
+.overlay-screen {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 10, 18, 0.88);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 20;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.overlay-screen.hidden,
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+.screen-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px 32px;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-banner-preview {
+    max-height: 44px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 10px var(--senai-red-glow));
+}
+
+.game-title {
+    font-family: var(--font-retro);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 0 #ED1C24, 4px 4px 0 #002B7F;
+}
+
+.game-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: -6px;
+}
+
+/* Caixas de Destaque / Instruções */
+.feature-box {
+    background: rgba(237, 28, 36, 0.1);
+    border: 1px solid rgba(237, 28, 36, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.feature-box-icon {
+    font-size: 1.6rem;
+}
+
+.feature-box-content h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #FF8080;
+    margin-bottom: 2px;
+}
+
+.feature-box-content p {
+    font-size: 0.75rem;
+    color: #E2E8F0;
+    line-height: 1.4;
+}
+
+.controls-guide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.control-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+}
+
+.control-item strong {
+    color: var(--senai-cyan);
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Botões Modernos com Efeito Glow */
+.btn-primary {
+    background: linear-gradient(135deg, #ED1C24 0%, #C41219 100%);
+    border: none;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--senai-red-glow), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(237, 28, 36, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.btn-primary:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Telas de Fim de Jogo e Vitória */
+.game-over-title {
+    font-family: var(--font-retro);
+    font-size: 1.5rem;
+    color: #FF4444;
+    text-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+}
+
+.victory-title {
+    font-family: var(--font-retro);
+    font-size: 1.4rem;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
+}
+
+.score-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.summary-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.summary-card span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+.summary-card strong {
+    font-family: var(--font-retro);
+    font-size: 1rem;
+    color: #FFFFFF;
+    margin-top: 4px;
+    display: block;
+}
+
+.rank-card {
+    grid-column: span 2;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(237, 28, 36, 0.1));
+    border-color: var(--senai-cyan);
+}
+
+.rank-card strong {
+    color: var(--senai-cyan);
+    font-size: 1.1rem;
+}
+
+/* Controles de Toque na Tela para Celular / Tablet */
+.touch-controls {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 12px;
+}
+
+.touch-dpad {
+    display: flex;
+    gap: 8px;
+}
+
+.touch-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.touch-btn {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(30, 41, 59, 0.75);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    touch-action: manipulation;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.1s ease, background 0.1s ease;
+}
+
+.touch-btn:active,
+.touch-btn.active {
+    background: var(--senai-cyan);
+    color: #000000;
+    transform: scale(0.92);
+}
+
+.touch-btn.jump-btn {
+    background: rgba(237, 28, 36, 0.8);
+    border-color: #FF6666;
+    width: 60px;
+    height: 60px;
+}
+
+.touch-btn.jump-btn:active,
+.touch-btn.jump-btn.active {
+    background: #FF4444;
+    transform: scale(0.92);
+}
+
+.touch-btn.run-btn {
+    background: rgba(0, 229, 255, 0.2);
+    border-color: var(--senai-cyan);
+}
+
+/* Rodapé com Informações */
+.game-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.game-footer a {
+    color: var(--senai-cyan);
+    text-decoration: none;
+}
+
+/* Responsividade para Smartphones e Tablets */
+@media (max-width: 1024px), (pointer: coarse) {
+    body {
+        padding: 4px;
+    }
+
+    .game-header {
+        padding: 6px 12px;
+    }
+
+    .brand-badge span {
+        font-size: 0.85rem;
+    }
+
+    .hud-overlay {
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+
+    .hud-item {
+        font-size: 0.7rem;
+    }
+
+    .hud-label {
+        font-size: 0.65rem;
+    }
+
+    .hud-value {
+        font-size: 0.8rem;
+    }
+
+    .senai-power-badge {
+        top: 44px;
+        padding: 4px 10px;
+    }
+
+    .senai-power-bar {
+        width: 70px;
+        height: 6px;
+    }
+
+    .touch-controls {
+        display: flex;
+    }
+
+    .screen-card {
+        padding: 18px;
+        gap: 12px;
+    }
+
+    .game-title {
+        font-size: 1.1rem;
+    }
+
+    .controls-guide {
+        grid-template-columns: 1fr;
+    }
+}

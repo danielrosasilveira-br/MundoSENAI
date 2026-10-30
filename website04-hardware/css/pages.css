@@ -1,0 +1,938 @@
+/* ===================================================================
+   MISSÃO HARDWARE — AVENTURA DENTRO DO COMPUTADOR
+   css/pages.css — Estilos Específicos para Mapa, Módulos, Montagem e Quiz
+   =================================================================== */
+
+/* ===================================================================
+   1. MAPA INTERATIVO (index.html)
+   =================================================================== */
+.hero-mission {
+  background: linear-gradient(135deg, var(--verde-floresta) 0%, #1d5043 100%);
+  color: var(--creme-claro);
+  border-radius: var(--raio-card);
+  padding: 2.25rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--sombra-card);
+  border: 3px solid rgba(67, 198, 183, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-mission::after {
+  content: '';
+  position: absolute;
+  right: -50px;
+  bottom: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(197, 240, 90, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-tag {
+  background-color: var(--verde-lima);
+  color: var(--verde-floresta);
+  font-family: var(--fonte-titulos);
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--raio-redondo);
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.hero-title {
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: #D4E0D7;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* O Mapa da Cidade Tecnológica */
+.map-section {
+  margin-bottom: 3rem;
+}
+
+.map-container {
+  background-color: #12342C;
+  border: 4px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  position: relative;
+  box-shadow: var(--sombra-pop);
+  overflow: hidden;
+}
+
+.map-svg-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 440px;
+  display: block;
+}
+
+.map-poi-group {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.map-poi-group:hover, .map-poi-group:focus-visible {
+  transform: translateY(-4px);
+  outline: none;
+}
+
+.map-poi-group:focus-visible circle.poi-ring {
+  stroke: var(--coral);
+  stroke-width: 4px;
+}
+
+/* Grade de Módulos (Cards do Mapa) */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.module-card {
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--sombra-card);
+  transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao), border-color var(--transicao-padrao);
+  position: relative;
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-pop);
+  border-color: var(--turquesa);
+}
+
+.module-card.visited {
+  border-color: var(--verde-lima);
+}
+
+.module-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.module-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--raio-medio);
+  background-color: rgba(67, 198, 183, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--verde-floresta);
+}
+
+.module-card-body h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.module-card-body p {
+  font-size: 0.925rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: 1.25rem;
+}
+
+.module-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* ===================================================================
+   2. PÁGINAS DE CONTEÚDO EDUCATIVO (Layout Dividido em 2 Colunas)
+   =================================================================== */
+.page-header-module {
+  background-color: var(--verde-floresta);
+  color: var(--creme-claro);
+  border-radius: var(--raio-card);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--sombra-card);
+  border-bottom: 5px solid var(--verde-lima);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.page-header-module .header-badge {
+  background-color: var(--coral);
+  color: #FFFFFF;
+  font-family: var(--fonte-titulos);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: var(--raio-redondo);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.page-header-module h1 {
+  color: #FFFFFF;
+}
+
+.page-header-module p {
+  color: #D4E0D7;
+  max-width: 650px;
+}
+
+.module-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .module-split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Área Interativa dos Módulos */
+.interactive-stage {
+  background-color: #FFFFFF;
+  border: 3px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  padding: 1.75rem;
+  box-shadow: var(--sombra-card);
+  position: relative;
+}
+
+.stage-title {
+  font-size: 1.15rem;
+  color: var(--verde-floresta);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===================================================================
+   3. SIMULADOR DO PROCESSADOR (CPU)
+   =================================================================== */
+.cpu-sim-box {
+  background-color: #173F35;
+  border-radius: var(--raio-medio);
+  padding: 1.5rem;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: 2px solid var(--turquesa);
+}
+
+.cpu-chip-visual {
+  background-color: #0E2922;
+  border: 4px solid var(--verde-lima);
+  border-radius: var(--raio-medio);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cpu-core-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.cpu-block {
+  background-color: rgba(67, 198, 183, 0.2);
+  border: 1px solid var(--turquesa);
+  border-radius: var(--raio-pequeno);
+  padding: 0.75rem 1rem;
+  text-align: center;
+  flex: 1;
+}
+
+.cpu-block-title {
+  font-family: var(--fonte-titulos);
+  font-size: 0.85rem;
+  color: var(--verde-lima);
+}
+
+.cpu-block-val {
+  font-family: var(--fonte-indicadores);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.cpu-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cpu-calc-inputs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cpu-input {
+  background-color: #FFFFFF;
+  color: var(--verde-floresta);
+  font-family: var(--fonte-indicadores);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: var(--raio-pequeno);
+  border: 2px solid var(--verde-lima);
+  width: 70px;
+  text-align: center;
+}
+
+.cpu-op {
+  font-family: var(--fonte-titulos);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--amarelo-manga);
+}
+
+/* ===================================================================
+   4. SIMULADOR DA MEMÓRIA RAM
+   =================================================================== */
+.ram-stick-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ram-stick {
+  background: linear-gradient(180deg, #1A4E42 0%, #0E2E27 100%);
+  border: 3px solid var(--turquesa);
+  border-radius: var(--raio-medio);
+  padding: 1.25rem;
+  position: relative;
+}
+
+.ram-stick-pins {
+  height: 12px;
+  background: repeating-linear-gradient(90deg, var(--amarelo-manga), var(--amarelo-manga) 4px, transparent 4px, transparent 8px);
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+.ram-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin: 1rem 0;
+}
+
+.ram-slot {
+  height: 54px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(67, 198, 183, 0.5);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte-indicadores);
+  font-size: 0.75rem;
+  color: #B2C6BA;
+  transition: all 0.3s ease;
+}
+
+.ram-slot.occupied {
+  background-color: var(--verde-lima);
+  color: var(--verde-floresta);
+  font-weight: 700;
+  border-style: solid;
+  border-color: #FFFFFF;
+}
+
+.ram-slot.occupied-game {
+  background-color: var(--coral);
+  color: #FFFFFF;
+}
+
+.ram-slot.occupied-music {
+  background-color: var(--amarelo-manga);
+  color: var(--verde-floresta);
+}
+
+.ram-apps-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ===================================================================
+   5. PLACA-MÃE INTERATIVA
+   =================================================================== */
+.mobo-interactive-board {
+  background-color: #173F35;
+  border: 4px solid #0D2620;
+  border-radius: var(--raio-card);
+  padding: 1.25rem;
+  position: relative;
+  min-height: 380px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.mobo-zone {
+  border: 2px dashed rgba(67, 198, 183, 0.5);
+  border-radius: var(--raio-medio);
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mobo-zone:hover, .mobo-zone.active {
+  background-color: rgba(197, 240, 90, 0.15);
+  border-color: var(--verde-lima);
+  border-style: solid;
+  transform: scale(1.02);
+}
+
+.mobo-zone-title {
+  font-family: var(--fonte-titulos);
+  font-size: 0.95rem;
+  color: var(--verde-lima);
+  margin-top: 0.4rem;
+}
+
+.mobo-zone-hint {
+  font-size: 0.75rem;
+  color: #D4E0D7;
+}
+
+.mobo-detail-pane {
+  background-color: var(--creme-claro);
+  border: 2px solid var(--verde-floresta);
+  border-radius: var(--raio-medio);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* ===================================================================
+   6. ARMAZENAMENTO (SSD vs HD)
+   =================================================================== */
+.storage-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .storage-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.storage-box {
+  background-color: #FFFFFF;
+  border: 3px solid var(--cor-borda);
+  border-radius: var(--raio-medio);
+  padding: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.storage-box.active {
+  border-color: var(--verde-lima);
+  box-shadow: 0 0 0 3px rgba(197, 240, 90, 0.3);
+}
+
+.storage-visual-rep {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+/* ===================================================================
+   7. FONTE DE ALIMENTAÇÃO (DISTRIBUIÇÃO DE ENERGIA)
+   =================================================================== */
+.power-stage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (max-width: 680px) {
+  .power-stage-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.psu-main-unit {
+  background-color: #173F35;
+  color: #FFFFFF;
+  border-radius: var(--raio-medio);
+  padding: 1.5rem;
+  text-align: center;
+  border: 3px solid var(--turquesa);
+}
+
+.power-components-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.power-target-item {
+  background-color: #FFFFFF;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-medio);
+  padding: 0.85rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.power-target-item.powered {
+  border-color: var(--verde-lima);
+  background-color: #F8FDF0;
+}
+
+/* ===================================================================
+   8. PERIFÉRICOS (CLASSIFICAÇÃO)
+   =================================================================== */
+.peripherals-bins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .peripherals-bins-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.peripheral-bin {
+  background-color: var(--cor-superficie);
+  border: 3px dashed var(--cor-borda-forte);
+  border-radius: var(--raio-medio);
+  padding: 1.25rem 1rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.peripheral-bin.drag-over {
+  border-color: var(--verde-lima);
+  background-color: #F4FDE5;
+  border-style: solid;
+}
+
+.peripheral-bin-title {
+  font-family: var(--fonte-titulos);
+  font-size: 1rem;
+  color: var(--verde-floresta);
+  text-align: center;
+  border-bottom: 2px solid var(--cor-borda);
+  padding-bottom: 0.5rem;
+}
+
+.peripherals-items-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--creme-claro);
+  padding: 1.25rem;
+  border-radius: var(--raio-medio);
+  border: 2px solid #EBDDC2;
+}
+
+.peripheral-draggable-card {
+  background-color: #FFFFFF;
+  border: 2px solid var(--verde-floresta);
+  border-radius: var(--raio-pequeno);
+  padding: 0.65rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 3px 0 var(--verde-floresta);
+  transition: transform 0.15s ease;
+}
+
+.peripheral-draggable-card:active {
+  cursor: grabbing;
+  transform: scale(0.97);
+}
+
+/* ===================================================================
+   9. MONTAGEM VIRTUAL DO COMPUTADOR (montagem.html)
+   =================================================================== */
+.assembly-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .assembly-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.assembly-parts-shelf {
+  background-color: var(--cor-superficie);
+  border: 3px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-card);
+}
+
+.parts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.part-item {
+  background-color: var(--creme-claro);
+  border: 2px solid var(--cor-borda-forte);
+  border-radius: var(--raio-medio);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.part-item:hover {
+  border-color: var(--verde-floresta);
+  background-color: #FFFFFF;
+}
+
+.part-item.placed {
+  opacity: 0.45;
+  pointer-events: none;
+  text-decoration: line-through;
+  background-color: #E2F8B7;
+  border-color: var(--verde-lima);
+}
+
+.assembly-workbench {
+  background-color: #173F35;
+  border: 4px solid #0E2922;
+  border-radius: var(--raio-card);
+  padding: 1.75rem;
+  color: #FFFFFF;
+  box-shadow: var(--sombra-pop);
+  position: relative;
+  min-height: 480px;
+}
+
+.case-chassis {
+  background-color: #0E2922;
+  border: 3px solid var(--turquesa);
+  border-radius: var(--raio-medio);
+  padding: 1.5rem;
+  min-height: 420px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .case-chassis {
+    grid-template-columns: 1fr;
+  }
+}
+
+.drop-slot {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(67, 198, 183, 0.6);
+  border-radius: var(--raio-medio);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 110px;
+  transition: all 0.2s ease;
+}
+
+.drop-slot.drag-hover {
+  background-color: rgba(197, 240, 90, 0.25);
+  border-color: var(--verde-lima);
+  border-style: solid;
+}
+
+.drop-slot.filled {
+  background-color: rgba(35, 106, 69, 0.4);
+  border-color: var(--verde-lima);
+  border-style: solid;
+}
+
+/* ===================================================================
+   10. ARENA DO QUIZ (quiz.html)
+   =================================================================== */
+.quiz-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quiz-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--verde-floresta);
+  color: var(--creme-claro);
+  border-radius: var(--raio-medio);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 4px solid var(--coral);
+}
+
+.quiz-card {
+  background-color: #FFFFFF;
+  border: 3px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  padding: 2.25rem;
+  box-shadow: var(--sombra-card);
+  margin-bottom: 1.5rem;
+}
+
+.question-text {
+  font-family: var(--fonte-titulos);
+  font-size: 1.35rem;
+  color: var(--verde-floresta);
+  margin-bottom: 1.75rem;
+  line-height: 1.4;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.quiz-option-btn {
+  background-color: var(--creme-claro);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-medio);
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-family: var(--fonte-textos);
+  font-size: 1.05rem;
+  color: var(--cor-texto);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  border-color: var(--turquesa);
+  background-color: #FFFFFF;
+  transform: translateX(4px);
+}
+
+.quiz-option-btn.selected {
+  border-color: var(--verde-floresta);
+  background-color: #EBF8F5;
+  font-weight: 700;
+}
+
+.quiz-option-btn.correct {
+  border-color: var(--verde-lima);
+  background-color: #EDFBD8;
+  color: var(--cor-sucesso);
+  font-weight: 700;
+}
+
+.quiz-option-btn.incorrect {
+  border-color: var(--coral);
+  background-color: #FFECE8;
+  color: var(--cor-erro);
+}
+
+.opt-letter {
+  font-family: var(--fonte-indicadores);
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--raio-pequeno);
+  background-color: #FFFFFF;
+  border: 2px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-feedback-box {
+  background-color: #F8FAF9;
+  border-left: 6px solid var(--turquesa);
+  border-radius: 0 var(--raio-medio) var(--raio-medio) 0;
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  display: none;
+}
+
+.quiz-feedback-box.show {
+  display: block;
+}
+
+.quiz-feedback-box.feedback-correct {
+  border-left-color: var(--verde-lima);
+  background-color: #F4FDE5;
+}
+
+.quiz-feedback-box.feedback-incorrect {
+  border-left-color: var(--coral);
+  background-color: #FFF2EE;
+}
+
+/* ===================================================================
+   11. TELA DE RESULTADO / CAMPEÃO (resultado.html)
+   =================================================================== */
+.results-card {
+  background-color: #FFFFFF;
+  border: 4px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--sombra-pop);
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.results-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: linear-gradient(90deg, var(--coral), var(--amarelo-manga), var(--verde-lima), var(--turquesa));
+}
+
+.trophy-visual {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-display-big {
+  font-family: var(--fonte-indicadores);
+  font-size: clamp(3rem, 2.5rem + 3vw, 4.5rem);
+  font-weight: 800;
+  color: var(--verde-floresta);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.score-badge-label {
+  font-family: var(--fonte-titulos);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.result-message-box {
+  background-color: var(--creme-claro);
+  border: 2px solid #EBDDC2;
+  border-radius: var(--raio-medio);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.results-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-val {
+  font-family: var(--fonte-indicadores);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--verde-floresta);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+

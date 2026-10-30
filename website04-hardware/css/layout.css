@@ -1,0 +1,364 @@
+/* ===================================================================
+   MISSÃO HARDWARE — AVENTURA DENTRO DO COMPUTADOR
+   css/layout.css — Cabeçalho Institucional SENAI, HUD, Container e Rodapé
+   =================================================================== */
+
+/* Container Principal */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Cabeçalho Principal (Verde-floresta) */
+.site-header {
+  background-color: var(--verde-floresta);
+  color: var(--cor-texto-inverso);
+  border-bottom: 4px solid var(--verde-lima);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(13, 39, 32, 0.25);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Marca Oficial SENAI - Integrada com respeito à identidade */
+.senai-brand-box {
+  background-color: #FFFFFF;
+  border-radius: var(--raio-pequeno);
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+  transition: transform var(--transicao-padrao);
+}
+
+.senai-brand-box:hover {
+  transform: translateY(-1px);
+}
+
+.senai-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Título e Subtítulo da Aventura */
+.header-titles {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.site-title {
+  font-family: var(--fonte-titulos);
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.65rem);
+  color: var(--verde-lima);
+  font-weight: 800;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.15;
+}
+
+.site-title .adventure-tag {
+  background-color: var(--coral);
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: var(--raio-redondo);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.site-subtitle {
+  font-size: 0.825rem;
+  color: #D4E0D7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* Controles de Topo: Som e Menu */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Barra HUD Gamer (Status de Progresso em Tempo Real) */
+.hud-bar {
+  background-color: rgba(13, 39, 32, 0.65);
+  border-top: 1px solid rgba(67, 198, 183, 0.2);
+  padding: 0.45rem 0;
+}
+
+.hud-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hud-items {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.hud-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--creme-claro);
+}
+
+.hud-item .hud-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.hud-item.stars .hud-icon {
+  fill: var(--amarelo-manga);
+}
+
+.hud-item.modules .hud-icon {
+  fill: var(--turquesa);
+}
+
+.hud-item.score .hud-icon {
+  fill: var(--verde-lima);
+}
+
+.hud-item strong {
+  color: #FFFFFF;
+}
+
+.hud-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 180px;
+  flex: 1;
+  max-width: 260px;
+}
+
+.hud-progress-bar {
+  flex: 1;
+  height: 9px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--raio-redondo);
+  overflow: hidden;
+  position: relative;
+}
+
+.hud-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--turquesa), var(--verde-lima));
+  border-radius: var(--raio-redondo);
+  transition: width 0.4s ease;
+}
+
+.hud-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Navegação Principal do Site */
+.main-nav {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--cor-borda);
+  padding: 0.5rem 0;
+}
+
+.nav-links-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.2rem 0;
+}
+
+.nav-links-list::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link-item {
+  flex-shrink: 0;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--raio-medio);
+  font-family: var(--fonte-titulos);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--verde-floresta);
+  background-color: transparent;
+  transition: var(--transicao-padrao);
+}
+
+.nav-link:hover {
+  background-color: rgba(67, 198, 183, 0.12);
+  color: var(--verde-floresta);
+}
+
+.nav-link.active {
+  background-color: var(--verde-floresta);
+  color: var(--verde-lima);
+  box-shadow: 0 2px 6px rgba(23, 63, 53, 0.2);
+}
+
+.nav-link.destaque-coral {
+  border: 1px solid var(--coral);
+  color: var(--coral);
+}
+
+.nav-link.destaque-coral:hover,
+.nav-link.destaque-coral.active {
+  background-color: var(--coral);
+  color: #FFFFFF;
+}
+
+/* Área de Conteúdo Principal */
+main.main-content {
+  flex-grow: 1;
+  padding-top: 1.75rem;
+  padding-bottom: 3.5rem;
+}
+
+/* Rodapé Institucional */
+.site-footer {
+  background-color: var(--verde-floresta);
+  color: var(--cor-texto-inverso);
+  border-top: 4px solid var(--turquesa);
+  padding: 2.5rem 0 1.5rem;
+  margin-top: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-col h3 {
+  color: var(--verde-lima);
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-col p {
+  color: #D4E0D7;
+  font-size: 0.925rem;
+  line-height: 1.6;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-links a {
+  color: #FFF6E5;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transicao-padrao);
+}
+
+.footer-links a:hover {
+  color: var(--verde-lima);
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #B2C6BA;
+}
+
+.footer-pwa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: rgba(67, 198, 183, 0.15);
+  border: 1px solid var(--turquesa);
+  color: var(--turquesa);
+  padding: 3px 10px;
+  border-radius: var(--raio-redondo);
+  font-size: 0.75rem;
+  font-family: var(--fonte-indicadores);
+}
+
+/* Responsividade de Layout */
+@media (max-width: 768px) {
+  .header-top {
+    flex-wrap: wrap;
+  }
+  
+  .header-titles {
+    order: 3;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .site-title {
+    font-size: 1.15rem;
+  }
+
+  .hud-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hud-progress-wrap {
+    width: 100%;
+    max-width: none;
+  }
+}
+

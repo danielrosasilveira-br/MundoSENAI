@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório Virtual de Redes | Missão: Mundo das Redes</title>
+  <meta name="description" content="Laboratório prático interativo para testar conexões cabeadas e Wi-Fi sem fio no jogo educativo Missão: Mundo das Redes.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/missions.css">
+</head>
+<body class="cyber-grid-bg">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Laboratório Virtual</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="mapa.html" class="nav-link-btn">
+          <span>🗺️</span> Voltar ao Mapa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DO LABORATÓRIO -->
+  <main class="mission-page-container">
+    
+    <!-- BARRA SUPERIOR -->
+    <section class="mission-top-bar" aria-label="Identificação do Laboratório">
+      <div class="mission-badge-group">
+        <span class="mission-step-tag" style="background: linear-gradient(135deg, #ffbe0b, #fb5607);">Prática</span>
+        <h1 style="font-size: 1.35rem; color: #ffffff;">Laboratório Virtual de Conexões</h1>
+      </div>
+      <div class="mission-objective-text">
+        <span style="color: var(--accent-gold); font-weight: 700;">Objetivo:</span> Comparar na prática conexões com cabo de rede e conexões sem fio por Wi-Fi.
+      </div>
+    </section>
+
+    <!-- NOTA PEDAGÓGICA SOBRE A SIMULAÇÃO -->
+    <div style="background: rgba(0, 210, 255, 0.08); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: var(--radius-sm); font-size: 0.95rem; color: #cbd5e1;">
+      ℹ️ <strong>Nota Educativa:</strong> Esta área é uma simulação interativa com fins pedagógicos para demonstrar conceitos de transmissão cabeada e sem fio, e não o funcionamento físico completo de uma rede corporativa real.
+    </div>
+
+    <!-- SELETOR DE MODOS DO LABORATÓRIO -->
+    <section aria-label="Seleção do modo de conexão">
+      <div class="lab-mode-tabs">
+        <button type="button" class="lab-tab-btn active" data-mode="cabeada">
+          <span>🔌</span> Demonstração A: Conexão Cabeada (Cabo de Rede)
+        </button>
+        <button type="button" class="lab-tab-btn" data-mode="wifi">
+          <span>📶</span> Demonstração B: Conexão Sem Fio (Wi-Fi)
+        </button>
+      </div>
+
+      <!-- ARENA SANDBOX INTERATIVA DO LABORATÓRIO -->
+      <div class="lab-sandbox-board mode-cabeada" id="labSandboxBoard">
+        
+        <!-- Elementos Gráficos em SVG: Cabos Físicos ou Ondas Wi-Fi -->
+        <svg style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;" viewBox="0 0 900 360" preserveAspectRatio="none">
+          
+          <!-- GRUPO CABEADO: Cabos Físicos de Rede Azul e Amarelo com Conector RJ-45 -->
+          <g id="labCablesGroup">
+            <!-- Cabo PC 1 -> Roteador Central -->
+            <path d="M 220 250 C 300 250, 360 120, 450 120" fill="none" stroke="#3a86ff" stroke-width="6"/>
+            <path d="M 220 250 C 300 250, 360 120, 450 120" fill="none" stroke="#00d2ff" stroke-width="3" stroke-dasharray="8 6" class="flow-cable"/>
+            <!-- Conector RJ-45 Ilustrado -->
+            <rect x="220" y="244" width="16" height="12" rx="2" fill="#ffd166" stroke="#3a86ff"/>
+            <rect x="434" y="114" width="16" height="12" rx="2" fill="#ffd166" stroke="#3a86ff"/>
+
+            <!-- Cabo Notebook -> Roteador Central -->
+            <path d="M 680 250 C 600 250, 540 120, 450 120" fill="none" stroke="#ffbe0b" stroke-width="6"/>
+            <path d="M 680 250 C 600 250, 540 120, 450 120" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="8 6" class="flow-cable"/>
+            <rect x="664" y="244" width="16" height="12" rx="2" fill="#3a86ff" stroke="#ffbe0b"/>
+            <rect x="450" y="114" width="16" height="12" rx="2" fill="#3a86ff" stroke="#ffbe0b"/>
+          </g>
+
+          <!-- GRUPO WI-FI: Ondas Eletromagnéticas Concêntricas -->
+          <g id="labWifiWavesGroup" style="display: none;">
+            <!-- Centro no Roteador (450, 110) -->
+            <circle cx="450" cy="110" r="15" fill="none" stroke="#00f5d4" stroke-width="3" class="wifi-pulse-circle"/>
+            <circle cx="450" cy="110" r="35" fill="none" stroke="#00f5d4" stroke-width="2.5" class="wifi-pulse-circle" style="animation-delay: 0.6s;"/>
+            <circle cx="450" cy="110" r="60" fill="none" stroke="#00f5d4" stroke-width="2" class="wifi-pulse-circle" style="animation-delay: 1.2s;"/>
+            <!-- Ondas direcionais -->
+            <path d="M 390 140 A 80 80 0 0 0 350 200" fill="none" stroke="#00f5d4" stroke-width="3" stroke-dasharray="4 4"/>
+            <path d="M 510 140 A 80 80 0 0 1 550 200" fill="none" stroke="#00f5d4" stroke-width="3" stroke-dasharray="4 4"/>
+          </g>
+        </svg>
+
+        <!-- DISPOSITIVO CENTRAL: ROTEADOR / SWITCH -->
+        <div style="display: flex; flex-direction: column; align-items: center; z-index: 5; margin-top: 1rem;">
+          <div class="sim-node-icon" style="width: 86px; height: 86px; border-color: var(--accent-neon); background: #070d1e;">
+            <svg viewBox="0 0 24 24" style="width: 48px; height: 48px; fill: var(--accent-neon);"><path d="M20.2 5.9l.8-.8C19.6 3.7 17.8 3 16 3s-3.6.7-5 2.1l.8.8C13 4.6 14.5 4 16 4s3 .6 4.2 1.9zm-1.6 1.6l.8-.8C18.4 5.7 17.2 5 16 5s-2.4.7-3.4 1.7l.8.8c.7-.7 1.6-1.5 2.6-1.5s1.9.8 2.6 1.5zM16 8c-1.1 0-2 .9-2 2 0 .7.4 1.4 1 1.7V17h2v-5.3c.6-.3 1-1 1-1.7 0-1.1-.9-2-2-2zM4 17h16c1.1 0 2 .9 2 2s-.9 2-2 2H4c-1.1 0-2-.9-2-2s.9-2 2-2z"/></svg>
+          </div>
+          <span style="font-weight: 800; font-size: 0.95rem; color: #ffffff; margin-top: 0.4rem;">Roteador / Switch Central</span>
+          <span style="font-size: 0.75rem; color: var(--accent-neon);">Distribuidor de Pacotes</span>
+        </div>
+
+        <!-- LINHA DE DISPOSITIVOS CONECTADOS -->
+        <div class="lab-devices-row">
+          <!-- Dispositivo 1: PC com Placa de Rede -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+            <div class="sim-node-icon" style="width: 72px; height: 72px;">
+              <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+            </div>
+            <span style="font-weight: 700; font-size: 0.9rem; color: #ffffff;">Computador Desktop</span>
+            <span style="font-size: 0.75rem; color: #94a3b8;">Porta de Rede Ethernet</span>
+          </div>
+
+          <!-- Dispositivo 2: Notebook Portátil -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.4rem;">
+            <div class="sim-node-icon" style="width: 72px; height: 72px;">
+              <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+            </div>
+            <span style="font-weight: 700; font-size: 0.9rem; color: #ffffff;">Notebook Portátil</span>
+            <span style="font-size: 0.75rem; color: #94a3b8;">Antena Wi-Fi Interna</span>
+          </div>
+        </div>
+
+        <!-- Token de Pacote de Teste do Lab -->
+        <div class="data-packet-token" id="labPacketToken">⚡</div>
+      </div>
+
+      <!-- PAINEL DE CONTROLES DO LABORATÓRIO -->
+      <div style="display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 1.25rem;">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary btn-lg" id="btnStartLabTest">
+            <span>⚡</span> INICIAR TESTE DE TRANSMISSÃO
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btnResetLab">
+            <span>🔄</span> REINICIAR SIMULAÇÃO
+          </button>
+        </div>
+
+        <div class="sim-status-feedback" id="labTestFeedback" style="flex: 1; min-width: 280px;">
+          <span class="sim-status-icon">💡</span>
+          <span>Selecione a demonstração e clique em <strong>Iniciar Teste</strong> para emitir dados!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARAÇÃO DE ESPECIFICAÇÕES DO MODO SELECIONADO -->
+    <section class="card-glass">
+      <h3 id="labSpecTitle" style="font-size: 1.35rem; color: #ffffff; margin-bottom: 0.5rem;">Modo Conexão Cabeada (Ethernet)</h3>
+      <p id="labSpecDesc" style="font-size: 1rem; color: #cbd5e1; margin-bottom: 1.25rem;">
+        Os dispositivos são ligados fisicamente por cabos de rede de cobre ou fibra óptica. Oferece altíssima estabilidade, menor interferência e velocidade constante para jogos e grandes transferências.
+      </p>
+
+      <div class="lab-features-comparison">
+        <div class="feature-box">
+          <h4><span>⚙️</span> Meio Físico de Transmissão</h4>
+          <p id="labSpecAdvantage" style="font-size: 0.95rem; color: #e2e8f0;">Sinal blindado e sem perda por paredes</p>
+        </div>
+        <div class="feature-box">
+          <h4><span>🚀</span> Velocidade Típica</h4>
+          <p id="labSpecSpeed" style="font-size: 0.95rem; color: #e2e8f0;">Até 1.000 Mbps ou mais (Gigabit)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSPETOR DE COMPONENTES DO LABORATÓRIO -->
+    <section class="card-glass" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div class="section-title-wrap">
+        <h3><span>🔬</span> Inspetor Técnico de Componentes</h3>
+        <span class="hint-pill">Clique em um componente para examinar suas funções!</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem;">
+        <button type="button" class="device-card-btn lab-inspect-item" 
+          data-name="Cabo de Rede (RJ-45)" 
+          data-role="Fio físico condutor com 8 filamentos de cobre trançados que transmitem pulsos elétricos ultrarrápidos."
+          data-note="Imune a interferências de sinal de rádio e oferece a menor latência (ping) para jogos.">
+          <span style="font-size: 1.8rem;">🔌</span>
+          <span class="device-card-name" style="font-size: 0.95rem;">Cabo de Rede</span>
+        </button>
+
+        <button type="button" class="device-card-btn lab-inspect-item" 
+          data-name="Roteador Wi-Fi" 
+          data-role="Converte os dados digitais em ondas eletromagnéticas de rádio emitidas pelas suas antenas."
+          data-note="O sinal pode perder força ao atravessar paredes grossas ou portas de metal.">
+          <span style="font-size: 1.8rem;">📶</span>
+          <span class="device-card-name" style="font-size: 0.95rem;">Antena Wi-Fi</span>
+        </button>
+
+        <button type="button" class="device-card-btn lab-inspect-item" 
+          data-name="Switch de Rede" 
+          data-role="Equipamento que multiplica as portas de rede cabeadas para conectar dezenas de computadores."
+          data-note="Muito utilizado em laboratórios do SENAI e empresas com muitos computadores no mesmo local.">
+          <span style="font-size: 1.8rem;">🔀</span>
+          <span class="device-card-name" style="font-size: 0.95rem;">Switch de Rede</span>
+        </button>
+
+        <button type="button" class="device-card-btn lab-inspect-item" 
+          data-name="Placa de Rede (NIC)" 
+          data-role="Chip dentro do computador responsável por traduzir os dados do processador para os cabos ou antena."
+          data-note="Possui um endereço físico único no mundo chamado endereço MAC.">
+          <span style="font-size: 1.8rem;">💳</span>
+          <span class="device-card-name" style="font-size: 0.95rem;">Placa de Rede</span>
+        </button>
+      </div>
+
+      <!-- Detalhe do Inspetor -->
+      <div id="labInspectDetail">
+        <div style="background: rgba(0, 210, 255, 0.08); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <h4 style="color: var(--accent-neon); font-size: 1.15rem; margin-bottom: 0.35rem;">Cabo de Rede (RJ-45)</h4>
+          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 0.5rem;"><strong>Papel na Rede:</strong> Fio físico condutor com 8 filamentos de cobre trançados que transmitem pulsos elétricos ultrarrápidos.</p>
+          <p style="font-size: 0.9rem; color: #94a3b8;"><strong>Dica de Especialista:</strong> Imune a interferências de sinal de rádio e oferece a menor latência (ping) para jogos.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/laboratory.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

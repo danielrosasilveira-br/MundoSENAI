@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 1: O Processador (CPU) | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 01</span>
+          </a>
+          <div class="site-subtitle">Central de Processamento: O Maestro dos Cálculos</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link active">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="cpu-title">
+        <div>
+          <span class="header-badge">Módulo 01 • Cérebro Digital</span>
+          <h1 id="cpu-title">O Processador (CPU)</h1>
+          <p>
+            A Unidade Central de Processamento (CPU) é responsável por executar instruções lógicas, tomar decisões e realizar os cálculos que dão vida aos seus programas e jogos.
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          ⚡
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre a CPU">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            O que faz o Processador?
+          </h2>
+          <p>
+            O processador (também conhecido pela sigla em inglês <strong>CPU — Central Processing Unit</strong>) é um chip de silício repleto de microscópicos transistores. Ele funciona como o cérebro matemático do computador.
+          </p>
+          <p>
+            Sempre que você clica no mouse, digita no teclado ou abre um aplicativo, instruções em código binário (zeros e uns) chegam até a CPU. Ela lê essas instruções, decodifica o que precisa ser feito, calcula a resposta e envia o resultado de volta.
+          </p>
+
+          <!-- Diferença entre Processamento e Armazenamento -->
+          <div class="box-cotidiano">
+            <div class="box-cotidiano-header">
+              <span>💡</span>
+              <h4>Processar NÃO é a mesma coisa que Guardar!</h4>
+            </div>
+            <p>
+              Muitas pessoas confundem processamento com memória. A CPU <strong>calcula e executa comandos na velocidade da luz</strong>, mas ela não serve para guardar seus arquivos de longo prazo. Quem guarda suas fotos e jogos para amanhã é o SSD ou HD!
+            </p>
+          </div>
+
+          <!-- Exemplo do Cotidiano -->
+          <div class="box-curiosidade">
+            <div class="box-curiosidade-header">
+              <span>🧮</span>
+              <h4>Exemplo do Dia a Dia: A Calculadora</h4>
+            </div>
+            <p>
+              Imagine abrir o aplicativo da calculadora e digitar <code>15 + 27</code>. A CPU recebe os números <code>15</code> e <code>27</code>, envia-os para sua <strong>ULA (Unidade Lógica e Aritmética)</strong> interna, realiza a soma em frações de bilionésimos de segundo e exibe <code>42</code> na tela!
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="index.html" class="btn btn-outline btn-sm">🗺️ Voltar ao Mapa</a>
+            <a href="memoria-ram.html" class="btn btn-turquesa btn-sm">Próximo: Memória RAM ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa do Processador -->
+        <section class="interactive-stage" aria-labelledby="cpu-sim-title">
+          <h2 id="cpu-sim-title" class="stage-title">
+            <span>🔬</span> Simulador da ULA (Ciclo de Instruções da CPU)
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1.25rem;">
+            Experimente enviar uma instrução de cálculo para a CPU e observe as 4 etapas fundamentais da execução:
+          </p>
+
+          <div class="cpu-sim-box">
+            <!-- Entradas de Cálculo -->
+            <div class="cpu-calc-inputs">
+              <label for="cpu-input-n1" class="sr-only">Primeiro Número</label>
+              <input type="number" id="cpu-input-n1" class="cpu-input" value="15" min="0" max="999">
+
+              <label for="cpu-select-op" class="sr-only">Operação Matemática</label>
+              <select id="cpu-select-op" class="cpu-input" style="width: 60px; font-weight: 800;">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">×</option>
+              </select>
+
+              <label for="cpu-input-n2" class="sr-only">Segundo Número</label>
+              <input type="number" id="cpu-input-n2" class="cpu-input" value="27" min="0" max="999">
+            </div>
+
+            <!-- Visual do Chip da CPU -->
+            <div class="cpu-chip-visual">
+              <span style="font-family: var(--fonte-titulos); font-size: 0.8rem; color: var(--verde-lima); letter-spacing: 0.05em; text-transform: uppercase;">
+                NÚCLEO DO PROCESSADOR (CORE)
+              </span>
+
+              <!-- Fases do Ciclo de Instrução -->
+              <div class="cpu-core-indicator">
+                <div id="cpu-step-fetch" class="cpu-block">
+                  <div class="cpu-block-title">1. Busca</div>
+                  <div style="font-size: 0.75rem; color: #D4E0D7;">Busca Instrução</div>
+                </div>
+
+                <div id="cpu-step-decode" class="cpu-block">
+                  <div class="cpu-block-title">2. Decodifica</div>
+                  <div style="font-size: 0.75rem; color: #D4E0D7;">Interpreta Sinal</div>
+                </div>
+
+                <div id="cpu-step-exec" class="cpu-block">
+                  <div class="cpu-block-title">3. ULA Executa</div>
+                  <div style="font-size: 0.75rem; color: #D4E0D7;">Calcula na ULA</div>
+                </div>
+
+                <div id="cpu-step-result" class="cpu-block">
+                  <div class="cpu-block-title">4. Gravação</div>
+                  <div class="cpu-block-val" id="cpu-reg-result">42</div>
+                </div>
+              </div>
+            </div>
+
+            <button id="cpu-btn-run" class="btn btn-primary btn-lima btn-lg" style="width: 100%;">
+              ⚡ Executar Missão no Processador!
+            </button>
+          </div>
+
+          <div class="box-curiosidade" style="margin-top: 1.25rem;">
+            <div class="box-curiosidade-header">
+              <span>🚀</span>
+              <h4>Você Sabia? (O Clock do Processador)</h4>
+            </div>
+            <p style="font-size: 0.85rem; margin: 0;">
+              Quando dizemos que um processador tem 3.5 GHz (Gigahertz), significa que ele é capaz de realizar 3 bilhões e 500 milhões de pulsos de ciclo a cada segundo!
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Processador (CPU)</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

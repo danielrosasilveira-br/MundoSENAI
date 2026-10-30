@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arena do Conhecimento | Missão: Mundo das Redes</title>
+  <meta name="description" content="Questionário final da Arena do Conhecimento do jogo educativo Missão: Mundo das Redes - Teste seus conhecimentos e conquiste medalhas.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body class="cyber-grid-bg">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Arena Final</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="mapa.html" class="nav-link-btn">
+          <span>🗺️</span> Voltar ao Mapa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DO QUESTIONÁRIO -->
+  <main class="quiz-page-container" id="quizContainer">
+    
+    <!-- BARRA SUPERIOR DO QUESTIONÁRIO -->
+    <section class="quiz-header-card" aria-label="Progresso do questionário">
+      <div class="quiz-header-top">
+        <div class="quiz-badge-title">
+          <span style="font-size: 1.8rem;">🏆</span>
+          <div>
+            <h1>Arena do Conhecimento</h1>
+            <p style="font-size: 0.88rem; color: #94a3b8;">Chegou a hora de mostrar o que você aprendeu!</p>
+          </div>
+        </div>
+        <div class="question-counter-pill" id="quizCounterPill">
+          Pergunta 1 de 5
+        </div>
+      </div>
+
+      <!-- Barra de Progresso do Quiz -->
+      <div class="hud-progress-track" style="height: 10px;">
+        <div class="hud-progress-bar" id="quizStepProgressBar" style="width: 20%;"></div>
+      </div>
+    </section>
+
+    <!-- CARTÃO DINÂMICO DA PERGUNTA -->
+    <article class="quiz-card" aria-live="polite">
+      
+      <!-- Enunciado da Pergunta -->
+      <h2 class="question-prompt" id="quizPrompt">
+        Carregando pergunta...
+      </h2>
+
+      <!-- Diagrama Ilustrativo Vetorial -->
+      <div class="question-illustration-box" id="quizIllustration" aria-hidden="true">
+        <!-- SVG injetado dinamicamente via js/quiz.js -->
+      </div>
+
+      <!-- Lista de 4 Alternativas Clicáveis -->
+      <div class="quiz-options-list" id="quizOptionsList">
+        <!-- Alternativas injetadas dinamicamente -->
+      </div>
+
+      <!-- Feedback Imediato da Resposta -->
+      <div class="quiz-feedback-box" id="quizFeedbackBox" role="status"></div>
+
+      <!-- Barra de Ações (Confirmar / Próxima) -->
+      <div class="quiz-actions-bar">
+        <button type="button" class="btn btn-primary btn-lg" id="btnSubmitAnswer" disabled>
+          <span>✅</span> CONFIRMAR RESPOSTA
+        </button>
+        <button type="button" class="btn btn-accent btn-lg" id="btnNextQuestion" style="display: none;">
+          <span>➡️</span> PRÓXIMA PERGUNTA
+        </button>
+      </div>
+
+    </article>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

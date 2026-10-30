@@ -1,0 +1,425 @@
+/* ===================================================================
+   MISSÃO HARDWARE — AVENTURA DENTRO DO COMPUTADOR
+   css/components.css — Botões Gamificados, Painéis, Modais e Controles
+   =================================================================== */
+
+/* --- Botões Gamificados --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-titulos);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1.4rem;
+  min-height: 44px;
+  border-radius: var(--raio-medio);
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.2s ease;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(3px);
+}
+
+/* Verde-Lima (Principal / Conclusão / Progresso) */
+.btn-primary, .btn-lima {
+  background-color: var(--verde-lima);
+  color: var(--verde-floresta);
+  box-shadow: var(--sombra-gamer-lima);
+}
+
+.btn-primary:hover, .btn-lima:hover {
+  background-color: #d1f576;
+}
+
+.btn-primary:active, .btn-lima:active {
+  box-shadow: 0 1px 0 #85aa2d;
+}
+
+/* Coral (Desafio / Ação de Risco / Chamada Forte) */
+.btn-coral {
+  background-color: var(--coral);
+  color: #FFFFFF;
+  box-shadow: var(--sombra-gamer-coral);
+}
+
+.btn-coral:hover {
+  background-color: #ff8c77;
+}
+
+.btn-coral:active {
+  box-shadow: 0 1px 0 #be4935;
+}
+
+/* Verde-Floresta (Estrutural) */
+.btn-floresta {
+  background-color: var(--verde-floresta);
+  color: var(--creme-claro);
+  box-shadow: var(--sombra-gamer-verde);
+}
+
+.btn-floresta:hover {
+  background-color: #215548;
+}
+
+.btn-floresta:active {
+  box-shadow: 0 1px 0 #0d2720;
+}
+
+/* Turquesa (Tecnológico / Circuitos) */
+.btn-turquesa {
+  background-color: var(--turquesa);
+  color: var(--verde-floresta);
+  box-shadow: 0 4px 0 #2ca194;
+}
+
+.btn-turquesa:hover {
+  background-color: #5ce0d2;
+}
+
+.btn-turquesa:active {
+  box-shadow: 0 1px 0 #2ca194;
+}
+
+/* Amarelo-Manga (Recompensas / Conquistas) */
+.btn-manga {
+  background-color: var(--amarelo-manga);
+  color: var(--verde-floresta);
+  box-shadow: var(--sombra-gamer-manga);
+}
+
+.btn-manga:hover {
+  background-color: #ffdc85;
+}
+
+.btn-manga:active {
+  box-shadow: 0 1px 0 #bfa044;
+}
+
+/* Botão Secundário / Contorno */
+.btn-outline {
+  background-color: #FFFFFF;
+  color: var(--verde-floresta);
+  border: 2px solid var(--cor-borda-forte);
+  box-shadow: 0 3px 0 var(--cor-borda-forte);
+}
+
+.btn-outline:hover {
+  border-color: var(--verde-floresta);
+  background-color: #F7FAF8;
+}
+
+.btn-outline:active {
+  box-shadow: 0 1px 0 var(--cor-borda-forte);
+}
+
+/* Tamanhos de Botão */
+.btn-sm {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.875rem;
+  min-height: 38px;
+}
+
+.btn-lg {
+  padding: 0.95rem 1.85rem;
+  font-size: 1.15rem;
+  min-height: 52px;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--raio-medio);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Controle de Áudio Integrado --- */
+.audio-control-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-sound-toggle {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--creme-claro);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--raio-medio);
+  padding: 6px 12px;
+  font-size: 0.825rem;
+  font-family: var(--fonte-titulos);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transicao-padrao);
+}
+
+.btn-sound-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+  border-color: var(--verde-lima);
+}
+
+.btn-sound-toggle.active {
+  background-color: var(--verde-lima);
+  color: var(--verde-floresta);
+  border-color: var(--verde-lima);
+}
+
+.audio-slider-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #FFFFFF;
+  border: 2px solid var(--verde-floresta);
+  border-radius: var(--raio-medio);
+  padding: 12px 16px;
+  box-shadow: var(--sombra-pop);
+  z-index: 200;
+  display: none;
+  min-width: 170px;
+}
+
+.audio-slider-popover.open {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.audio-slider-popover label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--verde-floresta);
+}
+
+.audio-slider-popover input[type="range"] {
+  width: 100%;
+  accent-color: var(--coral);
+}
+
+/* --- Cartões e Painéis Educativos (Creme-Claro & Superfície) --- */
+.card-educativo {
+  background-color: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-card);
+  padding: 1.75rem;
+  box-shadow: var(--sombra-card);
+  position: relative;
+  transition: transform var(--transicao-padrao), box-shadow var(--transicao-padrao);
+}
+
+.card-educativo:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-pop);
+}
+
+.card-educativo.creme {
+  background-color: var(--creme-claro);
+  border-color: #EBDDC2;
+}
+
+.card-educativo.destaque-verde {
+  border-color: var(--verde-lima);
+  border-width: 3px;
+}
+
+.card-educativo.destaque-turquesa {
+  border-color: var(--turquesa);
+  border-width: 3px;
+}
+
+/* Caixa de Curiosidade */
+.box-curiosidade {
+  background-color: #FFFDF7;
+  border-left: 6px solid var(--amarelo-manga);
+  border-radius: 0 var(--raio-medio) var(--raio-medio) 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.12);
+}
+
+.box-curiosidade-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-titulos);
+  font-weight: 700;
+  color: #997400;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.box-curiosidade p {
+  font-size: 0.95rem;
+  color: var(--cor-texto);
+  line-height: 1.55;
+}
+
+/* Caixa de Exemplo Cotidiano */
+.box-cotidiano {
+  background-color: #F0FAF8;
+  border-left: 6px solid var(--turquesa);
+  border-radius: 0 var(--raio-medio) var(--raio-medio) 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.box-cotidiano-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-titulos);
+  font-weight: 700;
+  color: #17655B;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+/* --- Badges e Indicadores --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--raio-redondo);
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-modulo {
+  background-color: rgba(67, 198, 183, 0.16);
+  color: #17655B;
+  border: 1px solid var(--turquesa);
+}
+
+.badge-concluido {
+  background-color: #E2F8B7;
+  color: #236A45;
+  border: 1px solid var(--verde-lima);
+}
+
+.badge-estrela {
+  background-color: #FFF2D1;
+  color: #9E7404;
+  border: 1px solid var(--amarelo-manga);
+}
+
+.badge-desafio {
+  background-color: #FFE6E1;
+  color: var(--coral);
+  border: 1px solid var(--coral);
+}
+
+/* --- Notificações Toast com Aria-Live --- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-msg {
+  background-color: var(--verde-floresta);
+  color: var(--creme-claro);
+  border: 2px solid var(--verde-lima);
+  border-radius: var(--raio-medio);
+  padding: 12px 20px;
+  font-family: var(--fonte-textos);
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: var(--sombra-pop);
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideToast 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  max-width: 360px;
+}
+
+.toast-msg.toast-success {
+  border-color: var(--verde-lima);
+}
+
+.toast-msg.toast-warning {
+  border-color: var(--amarelo-manga);
+}
+
+.toast-msg.toast-info {
+  border-color: var(--turquesa);
+}
+
+@keyframes slideToast {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Modal Acessível de Confirmação --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(23, 63, 53, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.modal-dialog {
+  background-color: var(--creme-claro);
+  border: 3px solid var(--verde-floresta);
+  border-radius: var(--raio-card);
+  padding: 2rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--sombra-pop);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  color: var(--verde-floresta);
+}
+
+.modal-body {
+  margin-bottom: 1.5rem;
+  color: var(--cor-texto);
+  font-size: 0.95rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+

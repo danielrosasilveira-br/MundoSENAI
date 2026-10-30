@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173F35">
+  <title>Módulo 6: Periféricos | Missão Hardware SENAI</title>
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-top">
+        <a href="index.html" class="senai-brand-box" title="Voltar ao início">
+          <img src="assets/images/logo-senai.png" alt="Logomarca oficial do SENAI" class="senai-logo-img">
+        </a>
+        <div class="header-titles">
+          <a href="index.html" class="site-title">
+            <span>Missão Hardware</span>
+            <span class="adventure-tag">Módulo 06</span>
+          </a>
+          <div class="site-subtitle">Zona dos Periféricos: As Portas de Entrada e Saída do Mundo Real</div>
+        </div>
+        <div class="header-actions">
+          <div class="audio-control-wrapper">
+            <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Ativar sons do jogo">
+              <span id="sound-icon">🔇</span>
+              <span id="sound-text">Som: OFF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Gamer -->
+    <div class="hud-bar" role="region" aria-label="Status da Missão">
+      <div class="container">
+        <div class="hud-content">
+          <div class="hud-items">
+            <div class="hud-item modules">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Módulos: <strong id="hud-modules-val" class="hud-val">0/6</strong></span>
+            </div>
+            <div class="hud-item stars">
+              <svg class="hud-icon" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span>Estrelas: <strong id="hud-stars-val" class="hud-val">0</strong></span>
+            </div>
+          </div>
+          <div class="hud-progress-wrap">
+            <div class="hud-progress-bar">
+              <div id="hud-progress-fill" class="hud-progress-fill"></div>
+            </div>
+            <span id="hud-progress-text" class="hud-val">0%</span>
+          </div>
+          <div class="hud-nav-links">
+            <a href="index.html" class="btn btn-sm btn-outline" style="padding: 3px 8px; font-size: 0.75rem;">🗺️ Ver Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="main-nav" aria-label="Navegação da Missão">
+      <div class="container">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="index.html" class="nav-link">🗺️ Mapa Geral</a></li>
+          <li class="nav-link-item"><a href="processador.html" class="nav-link">⚡ Processador</a></li>
+          <li class="nav-link-item"><a href="memoria-ram.html" class="nav-link">💾 Memória RAM</a></li>
+          <li class="nav-link-item"><a href="placa-mae.html" class="nav-link">🖲️ Placa-Mãe</a></li>
+          <li class="nav-link-item"><a href="armazenamento.html" class="nav-link">💽 Armazenamento</a></li>
+          <li class="nav-link-item"><a href="fonte.html" class="nav-link">🔌 Fonte</a></li>
+          <li class="nav-link-item"><a href="perifericos.html" class="nav-link active">🖱️ Periféricos</a></li>
+          <li class="nav-link-item"><a href="montagem.html" class="nav-link destaque-coral">🛠️ Montagem</a></li>
+          <li class="nav-link-item"><a href="quiz.html" class="nav-link destaque-coral">🎯 Quiz Arena</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo-principal" class="main-content">
+    <div class="container">
+
+      <!-- Header do Módulo -->
+      <section class="page-header-module" aria-labelledby="perif-title">
+        <div>
+          <span class="header-badge">Módulo 06 • Interação com o Usuário</span>
+          <h1 id="perif-title">Os Periféricos</h1>
+          <p>
+            Como nos comunicamos com a máquina? Por meio dos periféricos! Eles são os aparelhos externos responsáveis por enviar nossos comandos para o computador ou nos devolver respostas em forma de imagens, sons e papéis impressos.
+          </p>
+        </div>
+        <div style="font-size: 4rem;" class="anim-pulse" aria-hidden="true">
+          🖱️
+        </div>
+      </section>
+
+      <!-- Layout Dividido em Duas Colunas -->
+      <div class="module-split-layout">
+
+        <!-- Coluna da Esquerda: Explicações Pedagógicas -->
+        <article class="card-educativo creme" aria-label="Explicações sobre Periféricos">
+          <h2 style="font-size: 1.4rem; color: var(--verde-floresta); margin-bottom: 1rem;">
+            O Que São Dispositivos de Entrada e Saída?
+          </h2>
+          <p>
+            O computador sozinho é uma caixa de metal cheia de chips. Para que possamos usá-lo, precisamos de pontes entre o mundo humano e o mundo digital. Os <strong>periféricos</strong> são divididos em três grupos essenciais:
+          </p>
+
+          <div class="box-cotidiano" style="border-left-color: var(--verde-lima);">
+            <div class="box-cotidiano-header" style="color: var(--cor-sucesso);">
+              <span>📥</span>
+              <h4>1. Periféricos de Entrada (Input)</h4>
+            </div>
+            <p>
+              Enviam dados do usuário para DENTRO do computador.
+            </p>
+            <ul style="margin-left: 1.25rem; font-size: 0.9rem; color: var(--cor-texto);">
+              <li><strong>Teclado:</strong> envia letras, números e atalhos.</li>
+              <li><strong>Mouse:</strong> envia coordenadas de movimento e cliques.</li>
+              <li><strong>Webcam:</strong> captura luz e imagens reais e as converte em vídeo digital.</li>
+            </ul>
+          </div>
+
+          <div class="box-curiosidade" style="border-left-color: var(--coral);">
+            <div class="box-curiosidade-header" style="color: var(--coral);">
+              <span>📤</span>
+              <h4>2. Periféricos de Saída (Output)</h4>
+            </div>
+            <p>
+              Recebem os dados processados e os transformam em algo que nós conseguimos ver, ouvir ou tocar.
+            </p>
+            <ul style="margin-left: 1.25rem; font-size: 0.9rem; color: var(--cor-texto);">
+              <li><strong>Monitor:</strong> projeta imagens, jogos e interfaces visuais.</li>
+              <li><strong>Fones de Ouvido:</strong> transformam sinais elétricos em ondas sonoras para os ouvidos.</li>
+              <li><strong>Impressora:</strong> transfere textos e fotografias para o papel físico.</li>
+            </ul>
+          </div>
+
+          <div class="box-cotidiano" style="border-left-color: var(--turquesa);">
+            <div class="box-cotidiano-header" style="color: #17655B;">
+              <span>🔄</span>
+              <h4>3. Dispositivos Híbridos / Multifuncionais</h4>
+            </div>
+            <p>
+              São aqueles que realizam as duas funções ao mesmo tempo! Uma tela sensível ao toque (touchscreen) de um celular exibe a imagem (saída) e ao mesmo tempo registra o toque do seu dedo (entrada).
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="fonte.html" class="btn btn-outline btn-sm">⬅️ Fonte</a>
+            <a href="montagem.html" class="btn btn-coral btn-sm">Próximo: Montagem Virtual ➔</a>
+          </div>
+        </article>
+
+        <!-- Coluna da Direita: Atividade Interativa de Classificação -->
+        <section class="interactive-stage" aria-labelledby="perif-game-title">
+          <h2 id="perif-game-title" class="stage-title">
+            <span>🎯</span> Missão: Classificar os 6 Periféricos
+          </h2>
+          <p style="font-size: 0.9rem; color: var(--cor-texto-suave); margin-bottom: 1rem;">
+            Arraste ou <strong>clique no periférico</strong> e depois na caixa de classificação correta:
+          </p>
+
+          <!-- Itens Disponíveis para Classificar -->
+          <div id="peripherals-pool" class="peripherals-items-pool" role="region" aria-label="Periféricos para classificar">
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="teclado" tabindex="0" role="button" aria-label="Teclado">
+              <span>⌨️</span> Teclado
+            </div>
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="mouse" tabindex="0" role="button" aria-label="Mouse">
+              <span>🖱️</span> Mouse
+            </div>
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="monitor" tabindex="0" role="button" aria-label="Monitor de Vídeo">
+              <span>🖥️</span> Monitor
+            </div>
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="webcam" tabindex="0" role="button" aria-label="Webcam">
+              <span>📷</span> Webcam
+            </div>
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="fones" tabindex="0" role="button" aria-label="Fones de Ouvido">
+              <span>🎧</span> Fones de Ouvido
+            </div>
+            <div class="peripheral-draggable-card" draggable="true" data-perif-id="impressora" tabindex="0" role="button" aria-label="Impressora">
+              <span>🖨️</span> Impressora
+            </div>
+          </div>
+
+          <!-- As 3 Caixas de Classificação -->
+          <div class="peripherals-bins-grid">
+            <!-- Caixa Entrada -->
+            <div class="peripheral-bin" data-bin-category="entrada" role="region" aria-label="Caixa de Dispositivos de Entrada">
+              <div class="peripheral-bin-title">
+                <span>📥</span> Entrada (Input)
+              </div>
+            </div>
+
+            <!-- Caixa Saída -->
+            <div class="peripheral-bin" data-bin-category="saida" role="region" aria-label="Caixa de Dispositivos de Saída">
+              <div class="peripheral-bin-title">
+                <span>📤</span> Saída (Output)
+              </div>
+            </div>
+
+            <!-- Caixa Híbrida / Observação -->
+            <div class="peripheral-bin" data-bin-category="hibrido" role="region" aria-label="Caixa de Dispositivos Híbridos" style="opacity: 0.85;">
+              <div class="peripheral-bin-title">
+                <span>🔄</span> Entrada e Saída
+              </div>
+              <div style="font-size: 0.75rem; color: var(--cor-texto-suave); text-align: center; margin-top: auto; padding: 0.5rem;">
+                Exemplos: Telas Touchscreen e Impressoras Multifuncionais com Scanner
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© SENAI — Serviço Nacional de Aprendizagem Industrial.</div>
+        <div>Módulo Educativo: Periféricos</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

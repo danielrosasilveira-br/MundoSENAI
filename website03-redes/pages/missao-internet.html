@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Missão 2: A Grande Rede Mundial | Missão: Mundo das Redes</title>
+  <meta name="description" content="Missão 2 do jogo educativo Missão: Mundo das Redes - Entenda como funciona a internet, os servidores e simule uma requisição web passo a passo.">
+
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/missions.css">
+</head>
+<body class="cyber-grid-bg" id="mission2Section">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="../index.html" class="senai-logo-link" aria-label="Voltar para a Página Inicial - SENAI">
+          <img src="../assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Missão 2</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <a href="mapa.html" class="nav-link-btn">
+          <span>🗺️</span> Voltar ao Mapa
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DA MISSÃO 2 -->
+  <main class="mission-page-container">
+    
+    <!-- BARRA SUPERIOR DA MISSÃO -->
+    <section class="mission-top-bar" aria-label="Identificação da Missão 2">
+      <div class="mission-badge-group">
+        <span class="mission-step-tag">Missão 2</span>
+        <h1 style="font-size: 1.35rem; color: #ffffff;">A Grande Rede Mundial</h1>
+      </div>
+      <div class="mission-objective-text">
+        <span style="color: var(--primary); font-weight: 700;">Objetivo:</span> Entender como a internet conecta dispositivos e permite acessar informações.
+      </div>
+    </section>
+
+    <!-- INTRODUÇÃO À INTERNET -->
+    <section class="concept-hero-card">
+      <h2 style="font-size: 1.8rem; margin-bottom: 0.75rem;">O que é a Internet?</h2>
+      <p style="font-size: 1.05rem; margin-bottom: 1rem;">
+        Se uma rede local conecta os aparelhos da sua casa ou da sua escola, a <strong>Internet é a conexão de todas essas redes ao redor do mundo inteiro!</strong>
+      </p>
+
+      <div class="city-analogy-box">
+        <strong>🌍 Conectando o Planeta:</strong><br>
+        A internet permite que você envie uma mensagem para um amigo do outro lado da cidade ou assista a um vídeo gravado em outro continente em uma fração de segundo.
+      </div>
+
+      <p style="font-size: 1rem; color: #cbd5e1;">
+        No seu dia a dia, a internet está presente quando você:
+      </p>
+      
+      <!-- Cartões de Situações Familiares -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+          <span style="font-size: 1.8rem;">🔍</span>
+          <h4 style="font-size: 0.95rem; margin-top: 0.3rem;">Pesquisa Escolar</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Acessar sites de estudos</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+          <span style="font-size: 1.8rem;">🎬</span>
+          <h4 style="font-size: 0.95rem; margin-top: 0.3rem;">Vídeos Online</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Streaming em alta definição</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+          <span style="font-size: 1.8rem;">🎮</span>
+          <h4 style="font-size: 0.95rem; margin-top: 0.3rem;">Jogos em Rede</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Partidas com amigos</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); text-align: center;">
+          <span style="font-size: 1.8rem;">📞</span>
+          <h4 style="font-size: 0.95rem; margin-top: 0.3rem;">Chamada de Vídeo</h4>
+          <p style="font-size: 0.8rem; color: #94a3b8;">Conversas em tempo real</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULADOR PASSO A PASSO: COMO UM SITE É CARREGADO -->
+    <section class="simulator-section" aria-label="Simulador de requisição web e resposta do servidor">
+      <div>
+        <h2 style="font-size: 1.5rem; color: #ffffff; margin-bottom: 0.35rem;">
+          <span>🌐</span> A Viagem dos Dados: Como Acessamos um Site?
+        </h2>
+        <p style="font-size: 0.95rem; color: #cbd5e1;">
+          Veja o caminho de uma solicitação desde o seu celular até o servidor do site e a resposta que aparece na sua tela!
+        </p>
+      </div>
+
+      <!-- Rastreador Visual de Etapas (1 a 5) -->
+      <div class="timeline-steps-tracker" aria-hidden="true">
+        <button type="button" class="step-tracker-node active" data-step="0" aria-label="Passo 1: Pedido do Aluno">1</button>
+        <button type="button" class="step-tracker-node" data-step="1" aria-label="Passo 2: Empacotando Dados">2</button>
+        <button type="button" class="step-tracker-node" data-step="2" aria-label="Passo 3: Cruzando a Internet">3</button>
+        <button type="button" class="step-tracker-node" data-step="3" aria-label="Passo 4: O Servidor Encontra">4</button>
+        <button type="button" class="step-tracker-node" data-step="4" aria-label="Passo 5: Site Aparece">5</button>
+      </div>
+
+      <!-- Card Central do Passo Atual -->
+      <div class="step-display-card" id="stepDisplayCard">
+        <div class="step-display-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+        </div>
+        <div class="step-display-info">
+          <h3>1. O Pedido do Usuário</h3>
+          <p>Você abre o navegador no celular ou computador e digita o endereço de um site de estudos para pesquisar.</p>
+        </div>
+      </div>
+
+      <!-- Controles da Simulação -->
+      <div class="timeline-controls">
+        <button type="button" class="btn btn-primary" id="btnPlayTimeline">
+          <span>▶️</span> INICIAR DEMONSTRAÇÃO
+        </button>
+        <button type="button" class="btn btn-accent" id="btnPauseTimeline" style="display: none;">
+          <span>⏸️</span> PAUSAR DEMONSTRAÇÃO
+        </button>
+        <button type="button" class="btn btn-secondary" id="btnResetTimeline">
+          <span>🔄</span> REINICIAR DEMONSTRAÇÃO
+        </button>
+      </div>
+      
+      <p style="text-align: center; font-size: 0.85rem; color: #94a3b8;">
+        💡 <em>Dica:</em> Na internet real, os pacotes viajam em alta velocidade e podem percorrer diferentes cabos e caminhos até chegar ao mesmo servidor!
+      </p>
+    </section>
+
+    <!-- COMPARAÇÃO PEDAGÓGICA: REDE LOCAL VS INTERNET -->
+    <section class="card-glass" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <h3 style="font-size: 1.4rem; color: #ffffff;">Diferença: Rede Local vs Internet</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <div style="background: rgba(0, 210, 255, 0.08); border: 1px solid var(--primary); padding: 1.5rem; border-radius: var(--radius-md);">
+          <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>🏠</span> Rede Local (LAN)
+          </h4>
+          <p style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.5;">
+            Conecta aparelhos próximos, como os computadores de uma mesma sala, casa ou laboratório escolar. É ótima para transferir arquivos entre amigos na mesma sala sem precisar de conexão externa.
+          </p>
+        </div>
+
+        <div style="background: rgba(0, 245, 212, 0.08); border: 1px solid var(--accent-neon); padding: 1.5rem; border-radius: var(--radius-md);">
+          <h4 style="color: var(--accent-neon); font-size: 1.2rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>🌐</span> A Internet Mundial (WAN)
+          </h4>
+          <p style="font-size: 0.95rem; color: #e2e8f0; line-height: 1.5;">
+            Interliga milhões de redes locais do planeta todo através de grandes cabos de fibra óptica submarinos e provedores, permitindo acessar qualquer servidor público no mundo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESAFIO PEDAGÓGICO DA MISSÃO 2 -->
+    <section class="challenge-card" aria-label="Desafio de fixação da Missão 2">
+      <div class="challenge-header">
+        <span style="font-size: 1.6rem;">🎯</span>
+        <h3>Desafio da Missão: Acesso a Sites</h3>
+      </div>
+
+      <p class="challenge-question-text">
+        O que acontece quando você digita o endereço de um site de pesquisas e aperta Enter?
+      </p>
+
+      <div class="challenge-options-list" id="mission2Options">
+        <button type="button" class="challenge-option-btn" data-correct="true">
+          <strong style="color: var(--primary);">A)</strong> Seu aparelho envia solicitações em pacotes de rede até o servidor onde o site está hospedado.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">B)</strong> O computador inventa as informações na hora sem consultar ninguém na internet.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">C)</strong> O roteador desliga imediatamente a conexão para proteger o cabo de rede.
+        </button>
+        <button type="button" class="challenge-option-btn" data-correct="false">
+          <strong style="color: var(--primary);">D)</strong> A internet precisa imprimir o site em papel antes que você possa vê-lo na tela.
+        </button>
+      </div>
+
+      <!-- Caixa de Feedback -->
+      <div class="challenge-feedback-box" id="mission2Feedback"></div>
+
+      <!-- Banner de Sucesso ao Concluir a Missão 2 -->
+      <div class="mission-success-banner" id="mission2SuccessBanner">
+        <span style="font-size: 3rem;">🌟</span>
+        <h3>Missão 2 Concluída com Sucesso!</h3>
+        <p style="font-size: 1.1rem; max-width: 600px; color: #e2e8f0;">
+          Você compreendeu como funciona a grande rede mundial e os servidores. As duas missões principais estão concluídas e a <strong>Arena do Conhecimento</strong> está desbloqueada!
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem;">
+          <a href="quiz.html" class="btn btn-accent btn-lg">
+            <span>🏆</span> IR PARA ARENA FINAL (QUIZ)
+          </a>
+          <a href="laboratorio.html" class="btn btn-primary btn-lg">
+            <span>🔬</span> Visitar Laboratório
+          </a>
+          <a href="mapa.html" class="btn btn-secondary btn-lg">
+            <span>🗺️</span> Voltar ao Mapa
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados salvos localmente.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../js/storage.js"></script>
+  <script src="../js/progress.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/missions.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

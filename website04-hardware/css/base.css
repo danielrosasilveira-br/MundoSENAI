@@ -1,0 +1,195 @@
+/* ===================================================================
+   MISSÃO HARDWARE — AVENTURA DENTRO DO COMPUTADOR
+   css/base.css — Variáveis Globais, Reset, Tipografia e Acessibilidade
+   =================================================================== */
+
+@import url('../assets/fonts/fonts.css');
+
+:root {
+  /* Paleta Oficial Obrigatória */
+  --verde-floresta: #173F35;
+  --verde-lima: #C5F05A;
+  --coral: #FF765E;
+  --amarelo-manga: #FFD166;
+  --turquesa: #43C6B7;
+  --creme-claro: #FFF6E5;
+
+  /* Superfícies e Textos */
+  --cor-texto: #24332D;
+  --cor-texto-suave: #4A5E56;
+  --cor-texto-inverso: #FFF6E5;
+  --cor-superficie: #FFFFFF;
+  --cor-superficie-elevada: #F9FCF8;
+  --cor-borda: #D4E0D7;
+  --cor-borda-forte: #9EB5A5;
+  --cor-sucesso: #236A45;
+  --cor-erro: #A83232;
+  --cor-foco: #FF765E;
+
+  /* Tipografia Obrigatória */
+  --fonte-titulos: "Oxanium", "Segoe UI", sans-serif;
+  --fonte-textos: "Nunito Sans", system-ui, -apple-system, sans-serif;
+  --fonte-indicadores: "Space Mono", "Courier New", monospace;
+
+  /* Escala Tipográfica Fluida */
+  --tamanho-texto: clamp(0.95rem, 0.9rem + 0.25vw, 1.125rem);
+  --tamanho-h1: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+  --tamanho-h2: clamp(1.35rem, 1.1rem + 1vw, 2rem);
+  --tamanho-h3: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
+  --tamanho-destaque: clamp(2.2rem, 1.5rem + 3vw, 3.8rem);
+
+  /* Sombras e Estilização Gamificada */
+  --sombra-card: 0 10px 30px rgba(23, 63, 53, 0.08);
+  --sombra-pop: 0 14px 34px rgba(23, 63, 53, 0.16);
+  --sombra-gamer-lima: 0 4px 0 #85aa2d;
+  --sombra-gamer-coral: 0 4px 0 #be4935;
+  --sombra-gamer-verde: 0 4px 0 #0d2720;
+  --sombra-gamer-manga: 0 4px 0 #bfa044;
+
+  /* Raios e Espaçamentos */
+  --raio-card: 20px;
+  --raio-medio: 12px;
+  --raio-pequeno: 8px;
+  --raio-redondo: 9999px;
+  --transicao-padrao: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset Moderno */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--fonte-textos);
+  font-size: var(--tamanho-texto);
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background-color: var(--creme-claro);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(67, 198, 183, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(197, 240, 90, 0.08) 0%, transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Foco Acessível Obrigatório */
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Tipografia Estrutural */
+h1, h2, h3, h4, h5, h6,
+.titulo-missao, .titulo-modulo, .titulo-gamificado {
+  font-family: var(--fonte-titulos);
+  color: var(--verde-floresta);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--tamanho-h1);
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: var(--tamanho-h2);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: var(--tamanho-h3);
+  line-height: 1.35;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--verde-floresta);
+  text-decoration: none;
+  transition: color var(--transicao-padrao);
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Indicadores Gamificados - Space Mono */
+.indicador, .pontuacao, .contador-estrelas, .hud-val, .badge-mono, .timer, .step-number {
+  font-family: var(--fonte-indicadores);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Classes Acessíveis para Leitores de Tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  background: var(--verde-lima);
+  color: var(--verde-floresta);
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: var(--raio-medio);
+  z-index: 9999;
+  box-shadow: var(--sombra-pop);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 15px;
+}
+
+/* Suporte a Redução de Movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

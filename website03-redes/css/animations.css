@@ -1,0 +1,237 @@
+/* ==========================================================================
+   MISSÃO: MUNDO DAS REDES - ANIMAÇÕES E EFEITOS VISUAIS
+   Efeitos de videogame, pacotes de dados, ondas Wi-Fi e celebrações
+   ========================================================================== */
+
+/* Pulso de Ponto Cyber */
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+    box-shadow: 0 0 12px var(--accent-neon);
+  }
+}
+
+/* Brilho da Barra de Progresso */
+@keyframes shine-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Flutuação suave de equipamentos */
+@keyframes float-device {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float-device 4s ease-in-out infinite;
+}
+
+/* Ondas Wi-Fi */
+@keyframes wifi-wave {
+  0% {
+    r: 8px;
+    opacity: 1;
+    stroke-width: 3px;
+  }
+  100% {
+    r: 45px;
+    opacity: 0;
+    stroke-width: 1px;
+  }
+}
+
+.wifi-pulse-circle {
+  animation: wifi-wave 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  transform-origin: center;
+}
+
+.wifi-pulse-circle:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.wifi-pulse-circle:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+/* Pacote de dados percorrendo a linha (Dashoffset) */
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.flow-cable {
+  stroke-dasharray: 8 6;
+  animation: dash-flow 1.2s linear infinite;
+}
+
+/* Pacote de Dados Viajando */
+@keyframes packet-travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+/* Pulso de Conexão Ativa */
+@keyframes neon-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px var(--primary));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px var(--accent-neon));
+  }
+}
+
+.neon-glow {
+  animation: neon-glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* Animação de Entrada suave */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animação Pop de Conquista / Medalha */
+@keyframes pop-medal {
+  0% {
+    transform: scale(0.3) rotate(-15deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.animate-pop-medal {
+  animation: pop-medal 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Brilho Solar ao Redor da Medalha */
+@keyframes rotate-shine {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.medal-sunburst {
+  animation: rotate-shine 20s linear infinite;
+  transform-origin: center;
+}
+
+/* Shimmer para botões */
+@keyframes btn-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Grid de Fundo em Movimento */
+@keyframes grid-scroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+.cyber-grid-bg {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+  animation: grid-scroll 30s linear infinite;
+}
+
+/* Efeito de Ping / Radar */
+@keyframes radar-sweep {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.radar-ring {
+  animation: radar-sweep 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Suporte à redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .flow-cable {
+    animation: none !important;
+    stroke-dasharray: none !important;
+  }
+  
+  .animate-float {
+    animation: none !important;
+  }
+
+  .cyber-grid-bg {
+    animation: none !important;
+  }
+}

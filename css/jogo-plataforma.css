@@ -1,0 +1,240 @@
+/* ==========================================================================
+   WEBSITE 02 — AVENTURA DE PLATAFORMA (css/jogo-plataforma.css)
+   Estilos da Interface do Jogo de Plataforma, Controles Virtuais e Canvas
+   ========================================================================== */
+
+.platform-body {
+  background-color: #081220;
+  color: #f1f5f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.platform-main-container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* HUD do Jogo de Plataforma */
+.platform-hud {
+  width: 100%;
+  max-width: 800px;
+  background: #0f1e36;
+  border: 1px solid #1e3a6a;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.stage-badge {
+  background: #005caa;
+  color: #ffffff;
+  font-family: var(--font-tech);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
+}
+
+/* Moldura do Canvas com Proporção Panorâmica 16:9 */
+.platform-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  background-color: #7dd3fc;
+  border: 3px solid #005caa;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#platform-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Barra de Progresso da Fase */
+.stage-progress-bar-container {
+  width: 100%;
+  max-width: 800px;
+  height: 8px;
+  background: #17253d;
+  border-radius: var(--radius-full);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: 1px solid #1e3a6a;
+}
+
+.stage-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981 0%, #38bdf8 100%);
+  transition: width 0.1s linear;
+}
+
+/* Controles Virtuais por Toque (Mobile / Tablets) */
+.touch-controls-panel {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  justify-content: space-between;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+@media (pointer: coarse), (max-width: 820px) {
+  .touch-controls-panel {
+    display: flex;
+  }
+}
+
+.touch-dpad {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.touch-action-btn {
+  background: #1e3a6a;
+  border: 2px solid #38bdf8;
+  color: #ffffff;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  active: transform scale(0.92);
+}
+
+.touch-action-btn:active {
+  background: #005caa;
+  transform: scale(0.92);
+}
+
+.touch-btn-jump {
+  width: 72px;
+  height: 72px;
+  background: #059669;
+  border-color: #34d399;
+  font-weight: 700;
+  font-family: var(--font-tech);
+}
+
+.touch-btn-jump:active {
+  background: #047857;
+}
+
+/* Modais Sobrepostos do Jogo de Plataforma */
+.platform-overlay-screen {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 18, 32, 0.9);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  z-index: 25;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.platform-overlay-screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.summary-stats-box {
+  background: #0d1a2d;
+  border: 1px solid #1e3557;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 440px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-item span {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.summary-item strong {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: #38bdf8;
+}
+
+/* Cartões Informativos das 3 Fases */
+.stages-info-grid {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.stage-card-info {
+  background: #0f1d33;
+  border: 1px solid #1e3a66;
+  border-radius: var(--radius-md);
+  padding: 1.1rem;
+  position: relative;
+}
+
+.stage-card-info.current {
+  border-color: #10b981;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.stage-card-info h4 {
+  font-family: var(--font-tech);
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.stage-card-info p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}

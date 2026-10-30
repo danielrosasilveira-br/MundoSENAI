@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Super Mario World - Edição Especial SENAI</title>
+    <meta name="description" content="Jogo de plataforma 2D completo estilo Super Mario World em Vanilla JS e HTML5 Canvas com item especial e superpoderes da Logomarca SENAI.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="senai-logo.png">
+    
+    <!-- Estilização CSS3 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <!-- Barra de Cabeçalho Superior -->
+        <header class="game-header">
+            <div class="brand-badge">
+                <img src="senai-logo.png" alt="Logomarca SENAI" id="headerLogo">
+                <span>MUNDO SENAI • Super Mario World</span>
+            </div>
+            <div class="header-actions">
+                <button id="btnToggleSound" class="btn-header active" title="Ativar/Desativar Efeitos Sonoros">🔊 Sons: ON</button>
+                <button id="btnToggleMusic" class="btn-header" title="Ativar/Desativar Música Chiptune">🎵 Música: OFF</button>
+            </div>
+        </header>
+
+        <!-- Container do Jogo (Canvas + HUD + Modais) -->
+        <main class="canvas-container" id="canvasContainer">
+            <!-- Canvas Renderizador HTML5 -->
+            <canvas id="gameCanvas" width="960" height="540"></canvas>
+
+            <!-- HUD de Jogo em Tempo Real (Overlaid) -->
+            <div class="hud-overlay" id="hudOverlay">
+                <div class="hud-item score">
+                    <span class="hud-label">MARIO</span>
+                    <span class="hud-value" id="hudScore">000000</span>
+                </div>
+                <div class="hud-item coins">
+                    <span class="hud-label">MOEDAS</span>
+                    <span class="hud-value">🪙 x <span id="hudCoins">00</span></span>
+                </div>
+                <div class="hud-item world">
+                    <span class="hud-label">MUNDO</span>
+                    <span class="hud-value">SENAI 1-1</span>
+                </div>
+                <div class="hud-item time">
+                    <span class="hud-label">TEMPO</span>
+                    <span class="hud-value" id="hudTime">400</span>
+                </div>
+                <div class="hud-item lives">
+                    <span class="hud-label">VIDAS</span>
+                    <span class="hud-value">❤️ x <span id="hudLives">3</span></span>
+                </div>
+            </div>
+
+            <!-- Indicador de Superpoder Especial SENAI (Ativo via Item Coletável) -->
+            <div class="senai-power-badge hidden" id="senaiPowerBadge">
+                <span class="senai-badge-text">⚡ MODO TÉCNICO SENAI</span>
+                <div class="senai-power-bar">
+                    <div class="senai-power-fill" id="senaiPowerBarFill"></div>
+                </div>
+                <span class="senai-power-time" id="senaiPowerTime">15s</span>
+            </div>
+
+            <!-- Tela Inicial / Apresentação -->
+            <div class="overlay-screen" id="startScreen">
+                <div class="screen-card">
+                    <img src="senai-logo.png" alt="Logomarca SENAI" class="logo-banner-preview">
+                    <h1 class="game-title">SUPER MARIO WORLD<br><span style="color: var(--senai-cyan);">EDIÇÃO SENAI</span></h1>
+                    <p class="game-subtitle">Uma aventura de plataforma 2D na era da Indústria 4.0!</p>
+
+                    <!-- Destaque do Item Especial SENAI -->
+                    <div class="feature-box">
+                        <div class="feature-box-icon">⚡</div>
+                        <div class="feature-box-content">
+                            <h4>ITEM ESPECIAL: LOGOMARCA SENAI</h4>
+                            <p>Colete a logomarca do SENAI espalhada nas fases ou em blocos de interrogação [?] para ativar o <strong>Modo Técnico SENAI</strong>: Super Velocidade, Super Pulo, destruição de tijolos e Invencibilidade total contra inimigos!</p>
+                        </div>
+                    </div>
+
+                    <!-- Guia de Controles -->
+                    <div class="controls-guide">
+                        <div class="control-item">
+                            <strong>⬅️ ➡️ Setas Esquerda / Direita (ou A / D)</strong>
+                            <span>Mover o personagem</span>
+                        </div>
+                        <div class="control-item">
+                            <strong>⬆️ Seta para Cima (ou W / Espaço)</strong>
+                            <span>Saltar (pulo variável com gravidade)</span>
+                        </div>
+                        <div class="control-item">
+                            <strong>⬇️ Seta para Baixo (ou S)</strong>
+                            <span>Agachar</span>
+                        </div>
+                        <div class="control-item">
+                            <strong>🏃 Shift / X (ou Botão B)</strong>
+                            <span>Correr / Acelerar</span>
+                        </div>
+                    </div>
+
+                    <button id="btnStart" class="btn-primary" style="margin-top: 8px;">🎮 INICIAR AVENTURA</button>
+                </div>
+            </div>
+
+            <!-- Tela de Pausa -->
+            <div class="overlay-screen hidden" id="pauseScreen">
+                <div class="screen-card">
+                    <h2 class="game-title">JOGO PAUSADO</h2>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">Pressione <strong>P</strong> ou o botão abaixo para continuar.</p>
+                    <div style="display: flex; gap: 12px; margin-top: 10px;">
+                        <button id="btnResume" class="btn-primary">▶️ Continuar</button>
+                        <button id="btnRestartPause" class="btn-secondary">🔄 Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tela de Fim de Jogo (Game Over) -->
+            <div class="overlay-screen hidden" id="gameOverScreen">
+                <div class="screen-card">
+                    <h2 class="game-over-title">GAME OVER</h2>
+                    <p style="color: var(--text-muted);">Suas vidas acabaram ou o tempo esgotou!</p>
+                    
+                    <div class="score-summary-grid">
+                        <div class="summary-card" style="grid-column: span 2;">
+                            <span>PONTUAÇÃO FINAL</span>
+                            <strong id="finalScoreGameOver">000000</strong>
+                        </div>
+                    </div>
+
+                    <button id="btnRestartGame" class="btn-primary" style="margin-top: 10px;">🔄 TENTAR NOVAMENTE</button>
+                </div>
+            </div>
+
+            <!-- Tela de Vitória (Fase Concluída) -->
+            <div class="overlay-screen hidden" id="victoryScreen">
+                <div class="screen-card">
+                    <h2 class="victory-title">🎉 NÍVEL CONCLUÍDO!</h2>
+                    <p style="color: var(--text-muted);">Parabéns! Você alcançou o Mastro e o Portal do SENAI!</p>
+
+                    <div class="score-summary-grid">
+                        <div class="summary-card">
+                            <span>PONTUAÇÃO TOTAL</span>
+                            <strong id="finalScoreVictory">000000</strong>
+                        </div>
+                        <div class="summary-card">
+                            <span>MOEDAS COLETADAS</span>
+                            <strong id="finalCoinsVictory">0</strong>
+                        </div>
+                        <div class="summary-card rank-card">
+                            <span>CLASSIFICAÇÃO DO TÉCNICO</span>
+                            <strong id="finalRankVictory">S+ (Mestre SENAI)</strong>
+                        </div>
+                    </div>
+
+                    <button id="btnPlayAgain" class="btn-primary" style="margin-top: 10px;">🏆 JOGAR NOVAMENTE</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Controles Virtuais de Toque para Celular / Tablet -->
+        <nav class="touch-controls" id="touchControls" aria-label="Controles virtuais">
+            <div class="touch-dpad">
+                <button id="touchLeft" class="touch-btn" aria-label="Esquerda">◀</button>
+                <button id="touchRight" class="touch-btn" aria-label="Direita">▶</button>
+            </div>
+            <button id="touchPause" class="touch-btn" style="width: 44px; height: 44px; font-size: 0.9rem;" aria-label="Pausa">⏸</button>
+            <div class="touch-actions">
+                <button id="touchRun" class="touch-btn run-btn" aria-label="Correr">B</button>
+                <button id="touchJump" class="touch-btn jump-btn" aria-label="Pular">A</button>
+            </div>
+        </nav>
+
+        <!-- Rodapé com Informações -->
+        <footer class="game-footer">
+            <span>Desenvolvido com HTML5 Canvas, CSS3 e JavaScript Puro (Vanilla JS).</span>
+            <span>Edição Especial <strong>Mundo SENAI</strong></span>
+        </footer>
+    </div>
+
+    <!-- Módulos do Jogo (Áudio Procedural, Sprites/Gráficos, Mecânica/Física) -->
+    <script src="js/audio.js"></script>
+    <script src="js/sprites.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

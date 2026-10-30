@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Missão: Mundo das Redes | Jogo Educativo SENAI</title>
+  <meta name="description" content="Explore uma cidade inteligente e descubra como o mundo se conecta através das redes de computadores neste videogame educativo desenvolvido para alunos do SENAI.">
+  
+  <!-- Favicon e Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Folhas de Estilo -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="cyber-grid-bg">
+
+  <!-- CABEÇALHO INSTITUCIONAL SENAI -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-section">
+        <a href="index.html" class="senai-logo-link" aria-label="Página Inicial - SENAI">
+          <img src="assets/logo/senai-logo.png" alt="Logomarca Oficial SENAI" class="senai-logo-img">
+        </a>
+        <div class="game-title-badge">
+          <span class="title-main"><span class="cyber-dot" aria-hidden="true"></span> Mundo das Redes</span>
+          <span class="title-sub">Tecnologia Educacional</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="audio-toggle-btn" aria-label="Ativar ou desativar efeitos sonoros" id="btnAudioToggle">
+          <span class="audio-icon" aria-hidden="true">🔇</span>
+          <span class="label-text">Som: Mudo</span>
+        </button>
+        <button type="button" class="nav-link-btn" data-open-modal="modalComoJogar">
+          <span>❓</span> Como Jogar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL: ABERTURA DO VIDEOGAME EDUCATIVO -->
+  <main id="mainContent" class="hero-screen-wrapper" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem;">
+    <section class="card-glass hero-card-main" style="max-width: 960px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.75rem; border-color: var(--border-bright); box-shadow: var(--shadow-lg), 0 0 40px var(--primary-glow);">
+      
+      <!-- Selo de Jogo Educativo Interativo -->
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0, 245, 212, 0.12); border: 1px solid var(--accent-neon); padding: 0.4rem 1rem; border-radius: var(--radius-full); color: var(--accent-neon); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">
+        <span>🎮</span> Videogame Educativo Interativo
+      </div>
+
+      <!-- Título e Subtítulos Exigidos pelo Projeto -->
+      <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+        <h1 style="text-transform: uppercase; letter-spacing: -0.01em; background: linear-gradient(135deg, #ffffff 30%, #00d2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          MISSÃO: MUNDO DAS REDES
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 700; color: #00f5d4;">
+          “Explore uma cidade inteligente e descubra como o mundo se conecta!”
+        </p>
+        <p style="max-width: 680px; margin: 0 auto; font-size: 1.05rem; color: #cbd5e1;">
+          Prepare-se para cumprir missões, descobrir equipamentos e se tornar um explorador das redes!
+        </p>
+      </div>
+
+      <!-- CENÁRIO ILUSTRADO VETORIAL DA CIDADE INTELIGENTE CONECTADA -->
+      <div class="hero-city-illustration" style="position: relative; width: 100%; max-width: 720px; height: 220px; background: radial-gradient(circle at center, #0e1e47 0%, #060c1d 100%); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); overflow: hidden; display: flex; align-items: center; justify-content: center;" aria-label="Ilustração de uma cidade tecnológica com prédios conectados por cabos luminosos e pacotes de dados em movimento">
+        
+        <svg viewBox="0 0 700 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+          <!-- Grade de Linhas no Fundo -->
+          <defs>
+            <linearGradient id="glowLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#00f5d4" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#3a86ff" stop-opacity="0.2"/>
+            </linearGradient>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#070d1e" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Halo de Fundo -->
+          <circle cx="350" cy="100" r="140" fill="url(#sunGlow)"/>
+
+          <!-- Silhuetas de Prédios Tecnológicos da Cidade Inteligente -->
+          <!-- Prédio Escola/Laboratório Esquerda -->
+          <rect x="60" y="70" width="75" height="130" rx="3" fill="#0d1b3e" stroke="#00d2ff" stroke-width="1.5"/>
+          <rect x="75" y="85" width="14" height="18" fill="#00f5d4" opacity="0.8"/>
+          <rect x="105" y="85" width="14" height="18" fill="#ffbe0b" opacity="0.8"/>
+          <rect x="75" y="115" width="14" height="18" fill="#00d2ff" opacity="0.8"/>
+          <rect x="105" y="115" width="14" height="18" fill="#00f5d4" opacity="0.8"/>
+
+          <!-- Prédio Residencial Conectado -->
+          <rect x="160" y="90" width="65" height="110" rx="3" fill="#10224d" stroke="#3a86ff" stroke-width="1.5"/>
+          <rect x="175" y="105" width="12" height="14" fill="#00f5d4" opacity="0.7"/>
+          <rect x="198" y="105" width="12" height="14" fill="#00d2ff" opacity="0.7"/>
+          <rect x="175" y="130" width="12" height="14" fill="#ffbe0b" opacity="0.7"/>
+
+          <!-- Centro de Internet e Servidores (Central - Mais Alto) -->
+          <rect x="255" y="40" width="95" height="160" rx="4" fill="#091430" stroke="#00f5d4" stroke-width="2"/>
+          <line x1="255" y1="75" x2="350" y2="75" stroke="#00d2ff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="255" y1="110" x2="350" y2="110" stroke="#00d2ff" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="255" y1="145" x2="350" y2="145" stroke="#00d2ff" stroke-width="1" stroke-dasharray="3 3"/>
+          <!-- Antena Transmissora com Ondas -->
+          <line x1="302" y1="40" x2="302" y2="15" stroke="#00f5d4" stroke-width="2.5"/>
+          <circle cx="302" cy="15" r="4" fill="#ffbe0b"/>
+          <circle cx="302" cy="15" r="10" fill="none" stroke="#00f5d4" stroke-width="1.5" stroke-dasharray="3 2" class="wifi-pulse-circle"/>
+
+          <!-- Centro Tecnológico Direita -->
+          <rect x="380" y="80" width="80" height="120" rx="3" fill="#0d1b3e" stroke="#00d2ff" stroke-width="1.5"/>
+          <rect x="398" y="95" width="14" height="16" fill="#00f5d4" opacity="0.8"/>
+          <rect x="428" y="95" width="14" height="16" fill="#00d2ff" opacity="0.8"/>
+          <rect x="398" y="125" width="14" height="16" fill="#ffbe0b" opacity="0.8"/>
+
+          <!-- Empresa / Arena de Conhecimento -->
+          <rect x="490" y="60" width="85" height="140" rx="3" fill="#10224d" stroke="#3a86ff" stroke-width="1.5"/>
+          <rect x="510" y="75" width="15" height="18" fill="#00f5d4" opacity="0.9"/>
+          <rect x="540" y="75" width="15" height="18" fill="#00d2ff" opacity="0.9"/>
+          <rect x="510" y="105" width="15" height="18" fill="#00f5d4" opacity="0.9"/>
+
+          <!-- Torre de Telecomunicações -->
+          <line x1="610" y1="190" x2="630" y2="70" stroke="#00d2ff" stroke-width="2"/>
+          <line x1="650" y1="190" x2="630" y2="70" stroke="#00d2ff" stroke-width="2"/>
+          <line x1="615" y1="150" x2="645" y2="150" stroke="#00d2ff" stroke-width="1.5"/>
+          <line x1="620" y1="110" x2="640" y2="110" stroke="#00d2ff" stroke-width="1.5"/>
+          <circle cx="630" cy="68" r="5" fill="#e30613"/>
+
+          <!-- LINHAS DE CONEXÃO DE REDE ANIMADAS (CABOS LUMINOSOS) -->
+          <path d="M 97 120 Q 200 40 302 75" fill="none" stroke="#00f5d4" stroke-width="2" stroke-dasharray="6 4" class="flow-cable"/>
+          <path d="M 302 75 Q 400 30 532 90" fill="none" stroke="#00d2ff" stroke-width="2" stroke-dasharray="6 4" class="flow-cable"/>
+          <path d="M 192 120 Q 250 150 302 110" fill="none" stroke="#ffbe0b" stroke-width="2" stroke-dasharray="5 4" class="flow-cable"/>
+          <path d="M 302 110 Q 360 160 420 120" fill="none" stroke="#00f5d4" stroke-width="2" stroke-dasharray="6 4" class="flow-cable"/>
+          
+          <!-- Dispositivos Flutuando nos Extremos -->
+          <g class="animate-float" transform="translate(25, 45)">
+            <rect width="28" height="20" rx="2" fill="#070d1e" stroke="#00d2ff" stroke-width="1.5"/>
+            <text x="14" y="13" fill="#00f5d4" font-size="7" font-weight="bold" text-anchor="middle">PC</text>
+          </g>
+          <g class="animate-float" style="animation-delay: 1.5s;" transform="translate(645, 35)">
+            <rect width="18" height="28" rx="3" fill="#070d1e" stroke="#00f5d4" stroke-width="1.5"/>
+            <text x="9" y="16" fill="#ffbe0b" font-size="6" font-weight="bold" text-anchor="middle">WI-FI</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- BOTÕES DE AÇÃO PRINCIPAIS -->
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+        <a href="pages/mapa.html" class="btn btn-primary btn-lg" id="btnStartMission" style="min-width: 240px;">
+          <span>🚀</span> INICIAR MISSÃO
+        </a>
+        <button type="button" class="btn btn-secondary btn-lg" data-open-modal="modalComoJogar" style="min-width: 200px;">
+          <span>📘</span> COMO JOGAR
+        </button>
+      </div>
+
+      <!-- STATUS DA CIDADE CONECTADA E PROGRESSO SALVO -->
+      <div style="width: 100%; max-width: 500px; background: rgba(7, 13, 30, 0.6); padding: 1rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+        <div class="hud-progress-container">
+          <div class="hud-progress-labels">
+            <span style="color: #94a3b8; font-size: 0.82rem; text-transform: uppercase;">Avanço na Cidade Inteligente</span>
+            <span class="hud-progress-percent-val" style="color: var(--accent-neon); font-size: 0.88rem; font-weight: 800;">0%</span>
+          </div>
+          <div class="hud-progress-track">
+            <div class="hud-progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- MODAL ACESSÍVEL: COMO JOGAR -->
+  <div class="modal-overlay" id="modalComoJogar" role="dialog" aria-modal="true" aria-labelledby="modalComoJogarTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="modalComoJogarTitle" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.35rem; color: #ffffff;">
+          <span>🎮</span> Como Jogar e Aprender
+        </h2>
+        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fechar modal de instruções">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-rule-item">
+          <span class="modal-rule-icon">🗺️</span>
+          <div>
+            <strong style="color: #ffffff;">1. Explore o Mapa da Cidade:</strong>
+            <p>O mapa é dividido em 5 locais estratégicos. A Missão 1 já está aberta para você começar a desvendar as redes!</p>
+          </div>
+        </div>
+        <div class="modal-rule-item">
+          <span class="modal-rule-icon">💻</span>
+          <div>
+            <strong style="color: #ffffff;">2. Realize Missões e Simulações:</strong>
+            <p>Toque nos equipamentos (computadores, celulares e roteadores), faça testes de envio de pacotes e entenda como tudo funciona.</p>
+          </div>
+        </div>
+        <div class="modal-rule-item">
+          <span class="modal-rule-icon">🧪</span>
+          <div>
+            <strong style="color: #ffffff;">3. Experimente o Laboratório:</strong>
+            <p>Descubra a diferença prática entre uma conexão estável por cabos de rede e a liberdade sem fio do Wi-Fi.</p>
+          </div>
+        </div>
+        <div class="modal-rule-item">
+          <span class="modal-rule-icon">🏆</span>
+          <div>
+            <strong style="color: #ffffff;">4. Conquiste sua Medalha:</strong>
+            <p>Ao concluir as missões, teste seus conhecimentos na Arena Final (5 perguntas). Acerte todas para garantir a cobiçada Medalha de Ouro!</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <a href="pages/mapa.html" class="btn btn-primary btn-sm">Ir para o Mapa</a>
+        <button type="button" class="btn btn-secondary btn-sm" data-close-modal>Entendido!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ INSTITUCIONAL E EDUCACIONAL -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-content">
+      <p>Desenvolvido para o programa <span class="footer-highlight">SENAI — Tecnologia e Educação</span> para jovens estudantes.</p>
+      <p style="font-size: 0.78rem; color: #64748b;">Missão: Mundo das Redes &copy; 2026. Todos os dados e progressos são salvos localmente no seu navegador.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts do Jogo -->
+  <script src="js/storage.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>
