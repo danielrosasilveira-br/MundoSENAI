@@ -133,15 +133,15 @@ const PERGUNTAS = [
     tipo: "curso",
     descricaoEspecial: "Escolha a área que mais desperta o seu interesse no Mundo SENAI.",
     alternativas: [
-      { letra: "A", texto: "Alimentos.", curso: "Alimentos" },
-      { letra: "B", texto: "Construção Civil.", curso: "Construção Civil" },
-      { letra: "C", texto: "Eletroeletrônica.", curso: "Eletroeletrônica" },
-      { letra: "D", texto: "Faculdade SENAI.", curso: "Faculdade SENAI" },
-      { letra: "E", texto: "Gestão.", curso: "Gestão" },
-      { letra: "F", texto: "Máquinas Agrícolas e Veículos Pesados.", curso: "Máquinas Agrícolas e Veículos Pesados" },
-      { letra: "G", texto: "Metalmecânica.", curso: "Metalmecânica" },
-      { letra: "H", texto: "Segurança do Trabalho.", curso: "Segurança do Trabalho" },
-      { letra: "I", texto: "Tecnologia da Informação.", curso: "Tecnologia da Informação" }
+      { letra: "A", texto: "Alimentos", curso: "Alimentos" },
+      { letra: "B", texto: "Construção Civil", curso: "Construção Civil" },
+      { letra: "C", texto: "Eletroeletrônica", curso: "Eletroeletrônica" },
+      { letra: "D", texto: "Faculdade SENAI", curso: "Faculdade SENAI" },
+      { letra: "E", texto: "Gestão", curso: "Gestão" },
+      { letra: "F", texto: "Máquinas Agrícolas e Veículos Pesados", curso: "Máquinas Agrícolas e Veículos Pesados" },
+      { letra: "G", texto: "Metalmecânica", curso: "Metalmecânica" },
+      { letra: "H", texto: "Segurança do Trabalho", curso: "Segurança do Trabalho" },
+      { letra: "I", texto: "Tecnologia da Informação", curso: "Tecnologia da Informação" }
     ]
   }
 ];
@@ -339,7 +339,7 @@ function renderizarPergunta(index) {
         const opt = document.createElement('option');
         opt.value = alt.letra;
         opt.dataset.curso = alt.curso;
-        opt.textContent = `${alt.letra}) ${alt.curso}`;
+        opt.textContent = alt.curso;
         if (alternativaSelecionada === alt.letra) {
           opt.selected = true;
         }
@@ -351,7 +351,7 @@ function renderizarPergunta(index) {
         if (opcaoEscolhida && opcaoEscolhida.value) {
           estadoWizard.interesseProfissional = {
             alternativa: opcaoEscolhida.value,
-            curso: opcaoEscolhida.dataset.curso || opcaoEscolhida.textContent.replace(/^[A-I]\)\s*/, '')
+            curso: opcaoEscolhida.dataset.curso || opcaoEscolhida.textContent
           };
           if (elAvisoValidacao) elAvisoValidacao.classList.add('oculto');
         } else {
