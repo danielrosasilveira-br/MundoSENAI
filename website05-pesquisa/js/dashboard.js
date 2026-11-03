@@ -230,6 +230,16 @@ function inicializarRotacaoPaginas() {
     });
   }
 
+  // Toque/Clique no card de rotação para avançar imediatamente para a próxima tela
+  const cardRotacao = document.querySelector('.controle-rotacao-card');
+  if (cardRotacao) {
+    cardRotacao.style.cursor = 'pointer';
+    cardRotacao.addEventListener('click', () => {
+      const proximoIndex = (GERENCIADOR_ROTACAO.paginaIndex + 1) % GERENCIADOR_ROTACAO.paginas.length;
+      mudarPaginaDashboard(proximoIndex);
+    });
+  }
+
   // Timer com contagem regressiva de 1 segundo
   if (GERENCIADOR_ROTACAO.timerId) {
     clearInterval(GERENCIADOR_ROTACAO.timerId);
