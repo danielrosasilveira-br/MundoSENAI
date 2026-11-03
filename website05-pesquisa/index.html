@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundo SENAI – Diagnóstico de Conexão com a Tecnologia</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo-senai.png">
+  
+  <!-- Google Fonts (Poppins & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Folha de Estilos Principal -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fundo Tecnológico Imersivo: Cidade Digital e Grade em Perspectiva -->
+  <div class="fundo-cidade-futurista" aria-hidden="true">
+    <div class="grade-perspectiva"></div>
+    <div class="linhas-circuitos"></div>
+  </div>
+
+  <!-- Canvas para Confetes e Partículas de Celebração -->
+  <canvas id="canvas-celebracao"></canvas>
+
+  <!-- Cabeçalho Oficial -->
+  <header class="cabecalho-principal">
+    <div class="logomarca-area">
+      <img src="assets/logo-senai.png" alt="Logomarca Oficial do SENAI" class="logo-senai-img">
+      <div class="divisor-vertical"></div>
+      <div class="titulo-campanha">
+        <span class="subtitulo-evento">Diagnóstico de Tecnologia</span>
+        <span class="nome-evento">MUNDO SENAI</span>
+      </div>
+    </div>
+    <div class="acoes-cabecalho">
+      <a href="dashboard.html" class="link-painel-admin" title="Acessar o Painel Administrativo">
+        <span class="icone-painel">📊</span>
+        <span>Dashboard</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="conteudo-principal">
+
+    <!-- SEÇÃO 01: BOAS-VINDAS / APRESENTAÇÃO -->
+    <section id="secao-boas-vindas" class="secao-conteudo">
+      <div class="cartao-boas-vindas">
+        
+        <div class="banner-imagem-container">
+          <img src="assets/referencia-mundo-senai.jpg" alt="Campanha Mundo SENAI - Sua história começa aqui">
+        </div>
+
+        <span class="tag-destaque">DIAGNÓSTICO INTERATIVO</span>
+        <h1 class="chamada-boas-vindas">SUA HISTÓRIA NO MUNDO DA TECNOLOGIA COMEÇA AQUI.</h1>
+        <p class="descricao-boas-vindas">
+          Descubra o seu nível de conexão com as tecnologias do futuro e identifique qual das 9 áreas profissionais do SENAI mais combina com o seu talento e os seus objetivos!
+        </p>
+
+        <div class="destaques-grid">
+          <div class="item-destaque">
+            <div class="icone-destaque">⚡</div>
+            <strong>Maturidade Digital</strong>
+            <p>Avalie sua intimidade com ferramentas digitais e IA.</p>
+          </div>
+          <div class="item-destaque">
+            <div class="icone-destaque">🎯</div>
+            <strong>Áreas Profissionais</strong>
+            <p>Conheça os cursos e trilhas mais inovadores do SENAI.</p>
+          </div>
+          <div class="item-destaque">
+            <div class="icone-destaque">🏆</div>
+            <strong>Resultado Instantâneo</strong>
+            <p>Receba seu diagnóstico personalizado com pontuação.</p>
+          </div>
+        </div>
+
+        <button type="button" id="btn-comecar" class="btn-futurista btn-primario" onclick="iniciarDiagnostico()">
+          <span>INICIAR DIAGNÓSTICO</span>
+          <span class="icone-acao">🚀</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 02: WIZARD DE PERGUNTAS (1 A 10) -->
+    <section id="secao-wizard" class="secao-conteudo oculto">
+      <div class="container-wizard">
+        
+        <!-- Barra de Progresso e Indicador -->
+        <div class="cabecalho-wizard">
+          <div class="topo-progresso">
+            <span id="indicador-passo" class="indicador-passo">PERGUNTA 01 DE 10</span>
+            <span id="pergunta-categoria" class="categoria-tag">Utilização de tecnologia</span>
+          </div>
+          <div class="trilho-progresso" role="progressbar" aria-label="Progresso do questionário">
+            <div id="barra-progresso-preenchimento" class="barra-progresso-preenchimento"></div>
+          </div>
+        </div>
+
+        <!-- Cartão Central da Pergunta -->
+        <div id="cartao-pergunta" class="cartao-pergunta animar-entrada">
+          <h2 id="pergunta-titulo" class="pergunta-titulo">Carregando pergunta...</h2>
+
+          <!-- Container dinâmico das alternativas -->
+          <div id="opcoes-container" class="grade-opcoes grade-quatro-opcoes">
+            <!-- As alternativas são geradas dinamicamente via questionario.js -->
+          </div>
+
+          <!-- Mensagem de Validação Obrigatória -->
+          <div id="aviso-validacao" class="aviso-validacao oculto" role="alert">
+            <span>⚠ Por favor, selecione uma opção para continuar.</span>
+          </div>
+
+          <!-- Navegação Voltar e Avançar -->
+          <div class="navegacao-wizard">
+            <button type="button" id="btn-voltar" class="btn-futurista btn-voltar" onclick="retrocederPergunta()">
+              <i class="icone-seta-voltar">❮</i>
+              <span>VOLTAR</span>
+            </button>
+            <button type="button" id="btn-avancar" class="btn-futurista btn-avancar" onclick="avancarPergunta()">
+              <span>AVANÇAR</span>
+              <i class="icone-seta">➔</i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 03: TELA DE RESULTADO ESPECIAL (IMPACTO VISUAL) -->
+    <section id="secao-resultado" class="secao-conteudo oculto">
+      <div class="cartao-resultado">
+        
+        <!-- Troféu Dourado e Brilho Futurista -->
+        <div class="trofeu-container">
+          <div class="brilho-trofeu"></div>
+          <img src="assets/trofeu.png" alt="Troféu de Reconhecimento Digital" class="trofeu-img">
+        </div>
+
+        <p class="titulo-resultado-sucesso">Diagnóstico Concluído com Sucesso!</p>
+        <div id="resultado-classificacao" class="badge-classificacao-resultado badge-protagonista">
+          Protagonista Digital
+        </div>
+
+        <!-- Placar de Pontuação -->
+        <div class="grade-estatisticas-resultado">
+          <div class="card-metrica-resultado">
+            <span>Pontuação Total</span>
+            <strong><span id="resultado-pontos">25</span> <small>/ <span id="resultado-pontos-max">27</span></small></strong>
+          </div>
+          <div class="card-metrica-resultado">
+            <span>Aproveitamento</span>
+            <strong id="resultado-percentual">92.59%</strong>
+          </div>
+        </div>
+
+        <!-- Mensagem Motivacional -->
+        <div class="bloco-mensagem-motivacional">
+          <p id="resultado-mensagem" class="mensagem-texto">
+            "PARABÉNS! SUA HISTÓRIA NO MUNDO DA TECNOLOGIA ESTÁ APENAS COMEÇANDO!"
+          </p>
+        </div>
+
+        <!-- Curso de Interesse Selecionado na Pergunta 10 -->
+        <div class="curso-escolhido-container">
+          <span>Área Profissional Escolhida:</span>
+          <strong id="resultado-curso-interesse">Tecnologia da Informação</strong>
+        </div>
+
+        <!-- Status de Gravação no Banco -->
+        <div id="resultado-status-gravacao" class="status-gravacao-container">
+          <span class="status-sucesso">✔ Registrado no banco de dados com sucesso!</span>
+        </div>
+
+        <!-- Ações do Visitante -->
+        <div class="acoes-resultado">
+          <button type="button" id="btn-reiniciar" class="btn-futurista btn-secundario" onclick="reiniciarQuestionario()">
+            <span>NOVO DIAGNÓSTICO</span>
+            <span>🔄</span>
+          </button>
+          <a href="dashboard.html" class="btn-futurista btn-primario">
+            <span>VER DASHBOARD GERAL</span>
+            <span>📊</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="rodape-principal">
+    <p>Mundo SENAI &copy; 2026 – Serviço Nacional de Aprendizagem Industrial. A indústria cria. A indústria é mais.</p>
+  </footer>
+
+  <!-- Scripts Universais (Funcionam com protocolo file:// e http://) -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/questionario.js"></script>
+
+</body>
+</html>

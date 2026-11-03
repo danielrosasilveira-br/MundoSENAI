@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "avaliacoes": {
+      ".read": true,
+      "$avaliacaoId": {
+        ".write": "!data.exists() && newData.exists()",
+        ".validate": "newData.hasChildren(['dataCadastro', 'pontuacaoTotal', 'pontuacaoMaxima', 'percentual', 'classificacao', 'respostas', 'interesseProfissional'])",
+        "dataCadastro": {
+          ".validate": "newData.isNumber()"
+        },
+        "pontuacaoTotal": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 27"
+        },
+        "pontuacaoMaxima": {
+          ".validate": "newData.isNumber() && newData.val() === 27"
+        },
+        "percentual": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+        },
+        "classificacao": {
+          ".validate": "newData.isString() && (newData.val() === 'Explorador Digital Inicial' || newData.val() === 'Usuário Digital em Desenvolvimento' || newData.val() === 'Usuário Digital Conectado' || newData.val() === 'Protagonista Digital')"
+        },
+        "respostas": {
+          ".validate": "newData.hasChildren(['pergunta01', 'pergunta02', 'pergunta03', 'pergunta04', 'pergunta05', 'pergunta06', 'pergunta07', 'pergunta08', 'pergunta09'])"
+        },
+        "interesseProfissional": {
+          ".validate": "newData.hasChildren(['alternativa', 'curso']) && newData.child('curso').isString()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}

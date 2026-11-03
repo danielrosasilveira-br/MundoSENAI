@@ -1,0 +1,9 @@
+# Dependências e caches
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# Scripts temporários locais
+make-trophy.ps1
+test-dom.cjs

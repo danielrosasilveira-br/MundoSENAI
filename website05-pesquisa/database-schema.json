@@ -1,0 +1,250 @@
+{
+  "avaliacoes": {
+    "-O_ExemploAvaliacao01": {
+      "dataCadastro": 1793376000000,
+      "pontuacaoTotal": 25,
+      "pontuacaoMaxima": 27,
+      "percentual": 92.59,
+      "classificacao": "Protagonista Digital",
+      "respostas": {
+        "pergunta01": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta02": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta03": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta04": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta05": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta06": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta07": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta08": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta09": {
+          "alternativa": "D",
+          "pontuacao": 3
+        }
+      },
+      "interesseProfissional": {
+        "alternativa": "I",
+        "curso": "Tecnologia da Informação"
+      }
+    },
+    "-O_ExemploAvaliacao02": {
+      "dataCadastro": 1793380000000,
+      "pontuacaoTotal": 18,
+      "pontuacaoMaxima": 27,
+      "percentual": 66.67,
+      "classificacao": "Usuário Digital Conectado",
+      "respostas": {
+        "pergunta01": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta02": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta03": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta04": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta05": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta06": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta07": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta08": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta09": {
+          "alternativa": "D",
+          "pontuacao": 3
+        }
+      },
+      "interesseProfissional": {
+        "alternativa": "C",
+        "curso": "Eletroeletrônica"
+      }
+    },
+    "-O_ExemploAvaliacao03": {
+      "dataCadastro": 1793383000000,
+      "pontuacaoTotal": 11,
+      "pontuacaoMaxima": 27,
+      "percentual": 40.74,
+      "classificacao": "Usuário Digital em Desenvolvimento",
+      "respostas": {
+        "pergunta01": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta02": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta03": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta04": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta05": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta06": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta07": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta08": {
+          "alternativa": "C",
+          "pontuacao": 2
+        },
+        "pergunta09": {
+          "alternativa": "C",
+          "pontuacao": 2
+        }
+      },
+      "interesseProfissional": {
+        "alternativa": "G",
+        "curso": "Metalmecânica"
+      }
+    },
+    "-O_ExemploAvaliacao04": {
+      "dataCadastro": 1793386000000,
+      "pontuacaoTotal": 5,
+      "pontuacaoMaxima": 27,
+      "percentual": 18.52,
+      "classificacao": "Explorador Digital Inicial",
+      "respostas": {
+        "pergunta01": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta02": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta03": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta04": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta05": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta06": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta07": {
+          "alternativa": "A",
+          "pontuacao": 0
+        },
+        "pergunta08": {
+          "alternativa": "B",
+          "pontuacao": 1
+        },
+        "pergunta09": {
+          "alternativa": "C",
+          "pontuacao": 2
+        }
+      },
+      "interesseProfissional": {
+        "alternativa": "B",
+        "curso": "Construção Civil"
+      }
+    },
+    "-O_ExemploAvaliacao05": {
+      "dataCadastro": 1793390000000,
+      "pontuacaoTotal": 27,
+      "pontuacaoMaxima": 27,
+      "percentual": 100.0,
+      "classificacao": "Protagonista Digital",
+      "respostas": {
+        "pergunta01": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta02": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta03": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta04": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta05": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta06": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta07": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta08": {
+          "alternativa": "D",
+          "pontuacao": 3
+        },
+        "pergunta09": {
+          "alternativa": "D",
+          "pontuacao": 3
+        }
+      },
+      "interesseProfissional": {
+        "alternativa": "I",
+        "curso": "Tecnologia da Informação"
+      }
+    }
+  }
+}
+

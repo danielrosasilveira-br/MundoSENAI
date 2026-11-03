@@ -1,0 +1,10 @@
+{
+  "name": "mundo-senai-diagnostico-tecnologia",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website Interativo para o evento Mundo SENAI: Diagnóstico de Conexão com a Tecnologia",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}
+
