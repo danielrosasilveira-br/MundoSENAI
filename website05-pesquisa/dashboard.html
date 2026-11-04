@@ -74,15 +74,20 @@
 
         <!-- CONTROLE DE ROTAÇÃO AUTOMÁTICA (30 SEGUNDOS) -->
         <div class="topbar-centro-rotacao">
-          <div class="controle-rotacao-card">
+          <button type="button" id="btn-pagina-anterior" class="btn-nav-pagina" title="Tela Anterior" aria-label="Ir para a tela anterior">◀</button>
+          
+          <div class="controle-rotacao-card" title="Toque para alternar tela">
             <div class="rotacao-info">
-              <span class="rotacao-tag">ROTAÇÃO AUTOMÁTICA</span>
-              <span class="rotacao-timer-texto">Próxima tela em: <strong id="timer-contagem">30s</strong></span>
+              <span id="rotacao-nome-pagina" class="rotacao-tag">TELA 01 DE 03 • KPIS</span>
+              <span class="rotacao-timer-texto">Gira em: <strong id="timer-contagem">30s</strong></span>
             </div>
             <div class="rotacao-barra-trilho">
               <div id="rotacao-barra-progresso" class="rotacao-barra-preenchimento"></div>
             </div>
           </div>
+
+          <button type="button" id="btn-pagina-proxima" class="btn-nav-pagina" title="Próxima Tela" aria-label="Ir para a próxima tela">▶</button>
+
           <button type="button" id="btn-toggle-rotacao" class="btn-toggle-rotacao" title="Pausar / Retomar rotação de páginas">
             <span id="icone-btn-rotacao">⏸️</span>
             <span id="texto-btn-rotacao">Pausar</span>

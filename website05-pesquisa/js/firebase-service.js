@@ -138,15 +138,22 @@ async function inicializarFirebase() {
     return { db: realtimeDb, isMock: false };
   }
 
-  const estaConfigurado = typeof isFirebaseConfigured === 'function' ? isFirebaseConfigured() : (window.isFirebaseConfigured ? window.isFirebaseConfigured() : false);
   const cfg = window.firebaseConfig || (typeof firebaseConfig !== 'undefined' ? firebaseConfig : null);
 
-  // Se executando via file:// ou sem credenciais reais, utiliza modo local demonstrativo
+  if (!cfg) {
+    throw new Error("[FirebaseService] Objeto firebaseConfig não encontrado.");
+  }
+
+  // Fallback para modo demonstração desativado conforme solicitado:
+  // O aplicativo sempre conecta diretamente ao Firebase Realtime Database oficial.
+  /*
+  const estaConfigurado = typeof isFirebaseConfigured === 'function' ? isFirebaseConfigured() : (window.isFirebaseConfigured ? window.isFirebaseConfigured() : false);
   if (!estaConfigurado || !cfg || (typeof window !== 'undefined' && window.location.protocol === 'file:')) {
     console.warn("[FirebaseService] Modo Demonstração Ativo (Local Storage).");
     inicializarStorageLocal();
     return { db: null, isMock: true };
   }
+  */
 
   try {
     const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js');
@@ -156,12 +163,11 @@ async function inicializarFirebase() {
     realtimeDb = getDatabase(firebaseApp);
     databaseModules = { ref, push, set, serverTimestamp, onValue };
 
-    console.log("[FirebaseService] Conectado ao Firebase Realtime Database:", cfg.projectId);
+    console.log("[FirebaseService] Conectado com sucesso ao Firebase Realtime Database:", cfg.projectId);
     return { db: realtimeDb, isMock: false };
   } catch (erro) {
-    console.error("[FirebaseService] Falha ao conectar ao Firebase (utilizando modo local):", erro);
-    inicializarStorageLocal();
-    return { db: null, isMock: true, erro };
+    console.error("[FirebaseService] Erro ao conectar ao Firebase Realtime Database:", erro);
+    throw erro;
   }
 }
 

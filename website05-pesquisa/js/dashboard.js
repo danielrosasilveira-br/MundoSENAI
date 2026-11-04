@@ -230,6 +230,25 @@ function inicializarRotacaoPaginas() {
     });
   }
 
+  // Botões de navegação direta entre as telas (◀ Anterior / Próxima ▶)
+  const btnAnterior = document.getElementById('btn-pagina-anterior');
+  const btnProxima = document.getElementById('btn-pagina-proxima');
+
+  if (btnAnterior) {
+    btnAnterior.addEventListener('click', () => {
+      const total = GERENCIADOR_ROTACAO.paginas.length;
+      const anteriorIndex = (GERENCIADOR_ROTACAO.paginaIndex - 1 + total) % total;
+      mudarPaginaDashboard(anteriorIndex);
+    });
+  }
+
+  if (btnProxima) {
+    btnProxima.addEventListener('click', () => {
+      const proximoIndex = (GERENCIADOR_ROTACAO.paginaIndex + 1) % GERENCIADOR_ROTACAO.paginas.length;
+      mudarPaginaDashboard(proximoIndex);
+    });
+  }
+
   // Toque/Clique no card de rotação para avançar imediatamente para a próxima tela
   const cardRotacao = document.querySelector('.controle-rotacao-card');
   if (cardRotacao) {
@@ -282,6 +301,17 @@ function mudarPaginaDashboard(novoIndex) {
 
   atualizarBarraProgressoRotacao();
 
+  // Atualiza identificação textual da tela ativa no controle superior
+  const elNomePagina = document.getElementById('rotacao-nome-pagina');
+  if (elNomePagina) {
+    const titulosCurto = [
+      'TELA 01 DE 03 • KPIS',
+      'TELA 02 DE 03 • CURSOS',
+      'TELA 03 DE 03 • MATURIDADE'
+    ];
+    elNomePagina.textContent = titulosCurto[novoIndex] || `TELA 0${novoIndex + 1} DE 03`;
+  }
+
   // Ativa a tela selecionada e oculta as demais
   GERENCIADOR_ROTACAO.paginas.forEach((p, idx) => {
     const el = document.getElementById(p.id);
@@ -304,14 +334,24 @@ function mudarPaginaDashboard(novoIndex) {
     }
   });
 
-  // Notifica o Chart.js para ajustar dimensões do canvas ao entrar em visualização
-  setTimeout(() => {
+  // Notifica e redesenha os gráficos Chart.js com as dimensões reais visíveis da tela
+  const sincronizarGraficos = () => {
     Object.values(estadoDashboard.instanciasGraficos).forEach(chart => {
-      if (chart && typeof chart.resize === 'function') {
-        chart.resize();
+      if (chart) {
+        if (typeof chart.resize === 'function') {
+          chart.resize();
+        }
+        if (typeof chart.update === 'function') {
+          chart.update('none');
+        }
       }
     });
-  }, 60);
+  };
+
+  requestAnimationFrame(sincronizarGraficos);
+  setTimeout(sincronizarGraficos, 80);
+  setTimeout(sincronizarGraficos, 250);
+  setTimeout(sincronizarGraficos, 450);
 }
 
 /**
@@ -584,9 +624,9 @@ function atualizarGraficoClassificacao(avaliacoes) {
           position: 'bottom',
           labels: {
             color: '#FFFFFF',
-            font: { family: 'Inter', size: 10.5, weight: 600 },
-            padding: 8,
-            boxWidth: 12,
+            font: { family: 'Inter', size: (typeof window !== 'undefined' && window.innerWidth < 640) ? 9.5 : 10.5, weight: 600 },
+            padding: (typeof window !== 'undefined' && window.innerWidth < 640) ? 6 : 8,
+            boxWidth: 10,
             usePointStyle: true,
             pointStyle: 'rectRounded'
           }
@@ -739,7 +779,13 @@ function atualizarGraficoPontuacaoPorPergunta(avaliacoes) {
         },
         y: {
           grid: { color: 'rgba(255, 255, 255, 0.06)' },
-          ticks: { color: '#E0E7FF', font: { family: 'Inter', size: 11 } }
+          ticks: { 
+            color: '#E0E7FF', 
+            font: { 
+              family: 'Inter', 
+              size: (typeof window !== 'undefined' && window.innerWidth < 640) ? 9.5 : 11 
+            } 
+          }
         }
       },
       plugins: {

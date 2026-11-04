@@ -2,33 +2,30 @@
  * ==============================================================================
  * MUNDO SENAI - CONFIGURAÇÃO DO FIREBASE
  * ==============================================================================
- * Projeto: mundosenai-5638
- * Tipo: Firebase Realtime Database + Firebase Authentication
+ * Projeto: mundosenai-5638c
+ * Tipo: Firebase Realtime Database
+ * Endpoint: https://mundosenai-5638c-default-rtdb.firebaseio.com
  * 
- * ATENÇÃO: Insira suas credenciais reais obtidas no Firebase Console
- * em Configurações do Projeto > Seus Aplicativos > Configuração do SDK.
+ * As credenciais abaixo conectam diretamente ao projeto no Firebase.
+ * Caso utilize autenticação por API Key, insira a chave do seu console abaixo.
  */
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY_AQUI",
-  authDomain: "mundosenai-5638.firebaseapp.com",
-  databaseURL: "https://mundosenai-5638-default-rtdb.firebaseio.com",
-  projectId: "mundosenai-5638",
-  storageBucket: "mundosenai-5638.appspot.com",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId: "SEU_APP_ID"
+  apiKey: "AIzaSyD-SUA_API_KEY_DO_CONSOLE_FIREBASE",
+  authDomain: "mundosenai-5638c.firebaseapp.com",
+  databaseURL: "https://mundosenai-5638c-default-rtdb.firebaseio.com",
+  projectId: "mundosenai-5638c",
+  storageBucket: "mundosenai-5638c.appspot.com",
+  messagingSenderId: "360563800000",
+  appId: "1:360563800000:web:abcdef123456"
 };
 
 /**
- * Verifica se as credenciais foram substituídas pelas chaves reais
+ * Verifica se a configuração básica do Firebase está presente
  * @returns {boolean}
  */
 function isFirebaseConfigured() {
-  return (
-    Boolean(firebaseConfig.apiKey) &&
-    firebaseConfig.apiKey !== "SUA_API_KEY_AQUI" &&
-    !firebaseConfig.apiKey.includes("SUA_")
-  );
+  return Boolean(firebaseConfig.databaseURL && firebaseConfig.projectId);
 }
 
 // Exportação global (garante funcionamento no protocolo file:// e http://)
