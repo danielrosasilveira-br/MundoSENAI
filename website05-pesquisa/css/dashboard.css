@@ -441,6 +441,89 @@ button.menu-link {
   box-shadow: 0 0 15px rgba(255, 57, 125, 0.4);
 }
 
+/* Crédito do Desenvolvedor no Menu / Topbar */
+.credito-desenvolvedor {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.15rem;
+  background: rgba(7, 89, 217, 0.15);
+  border: 1px solid rgba(56, 217, 255, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 169, 255, 0.15);
+  transition: var(--transicao-rapida);
+}
+
+.credito-desenvolvedor:hover {
+  border-color: var(--ciano-neon);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.credito-rotulo {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.credito-autor {
+  font-family: var(--fonte-titulo);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.credito-autor::before {
+  content: '👨‍🏫';
+  font-size: 0.9rem;
+}
+
+/* Crédito no rodapé da barra lateral */
+.credito-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.2rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  margin-bottom: 0;
+}
+
+.credito-sidebar .credito-rotulo {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.credito-sidebar .credito-autor {
+  font-family: var(--fonte-titulo);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.credito-sidebar .credito-autor::before {
+  content: '👨‍🏫';
+  font-size: 0.9rem;
+}
+
 /* ==============================================================================
    CONTROLE DE ROTAÇÃO AUTOMÁTICA (30 SEGUNDOS - MODO APRESENTAÇÃO/TV)
    ============================================================================== */
@@ -592,6 +675,15 @@ button.menu-link {
   flex-shrink: 0;
 }
 
+.header-pagina-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
 .tag-pagina-apresentacao {
   display: inline-block;
   font-family: var(--fonte-titulo);
@@ -604,7 +696,50 @@ button.menu-link {
   border: 1px solid rgba(0, 169, 255, 0.3);
   padding: 0.15rem 0.65rem;
   border-radius: 999px;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0;
+}
+
+.credito-desenvolvedor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(7, 89, 217, 0.18);
+  border: 1px solid rgba(56, 217, 255, 0.35);
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(0, 169, 255, 0.12);
+  transition: var(--transicao-rapida);
+}
+
+.credito-desenvolvedor-badge:hover {
+  border-color: var(--ciano-neon);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.credito-desenvolvedor-badge .credito-rotulo {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.credito-desenvolvedor-badge .credito-autor {
+  font-family: var(--fonte-titulo);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.credito-desenvolvedor-badge .credito-autor::before {
+  content: '👨‍🏫';
+  font-size: 0.85rem;
 }
 
 .titulo-pagina-apresentacao {
@@ -1688,6 +1823,19 @@ button.menu-link {
     width: 100%;
   }
 
+  .credito-desenvolvedor {
+    padding: 0.25rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .credito-rotulo {
+    font-size: 0.55rem;
+  }
+
+  .credito-autor {
+    font-size: 0.74rem;
+  }
+
   .perfil-admin-info {
     display: flex;
     flex-direction: column;
@@ -1713,6 +1861,24 @@ button.menu-link {
 
   .header-pagina-apresentacao {
     margin-bottom: 0.85rem;
+  }
+
+  .header-pagina-meta {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .credito-desenvolvedor-badge {
+    padding: 0.18rem 0.55rem;
+  }
+
+  .credito-desenvolvedor-badge .credito-rotulo {
+    font-size: 0.55rem;
+  }
+
+  .credito-desenvolvedor-badge .credito-autor {
+    font-size: 0.72rem;
   }
 
   .titulo-pagina-apresentacao {

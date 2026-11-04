@@ -201,6 +201,52 @@ body {
   color: #FFFFFF;
 }
 
+/* Crédito do Desenvolvedor no Menu */
+.credito-desenvolvedor {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.15rem;
+  background: rgba(7, 89, 217, 0.15);
+  border: 1px solid rgba(56, 217, 255, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 169, 255, 0.15);
+  transition: var(--transicao-rapida);
+}
+
+.credito-desenvolvedor:hover {
+  border-color: var(--ciano-neon);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.credito-rotulo {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.credito-autor {
+  font-family: var(--fonte-titulo);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.credito-autor::before {
+  content: '👨‍🏫';
+  font-size: 0.9rem;
+}
+
 /* Container Principal */
 .conteudo-principal {
   flex: 1;
@@ -948,6 +994,19 @@ body {
 
   .subtitulo-evento {
     font-size: 0.65rem;
+  }
+
+  .credito-desenvolvedor {
+    padding: 0.25rem 0.55rem;
+    border-radius: 8px;
+  }
+
+  .credito-rotulo {
+    font-size: 0.55rem;
+  }
+
+  .credito-autor {
+    font-size: 0.74rem;
   }
 
   .link-painel-admin {
